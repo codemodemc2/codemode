@@ -10,11 +10,12 @@
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+	"test": "turbo run test:unit",
+    "format": "prettier --write \"**/*.{ts,tsx,md,js,vue}\""
   },
   "devDependencies": {
     "prettier": "^2.5.1",
-    "turbo": "latest"
+    "turbo": "^1.1.10"
   },
   "engines": {
     "npm": ">=7.0.0",

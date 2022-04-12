@@ -1,12 +1,13 @@
 module.exports = {
-  extends: ["next", "prettier"],
+  extends: ["eslint:recommended", "plugin:vue/vue3-recommended", "prettier"],
   settings: {
     next: {
       rootDir: ["apps/*/", "packages/*/"],
     },
   },
-  rules: {
-    "@next/next/no-html-link-for-pages": "off",
-    "react/jsx-key": "off",
+  env: {
+    browser: true,
+    node: true,
   },
+  rules: {},
 };
