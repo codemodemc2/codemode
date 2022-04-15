@@ -6,7 +6,7 @@ const session = require('express-session');
 const passport = require('passport');
 const requestIp = require('request-ip');
 const express = require("express");
-const { client: redisClient } = require("@/services").RedisService
+const { client: redisClient } = require("@/services").RedisService;
 
 let RedisStore = require('connect-redis')(session);
 let store = new RedisStore({ client: redisClient });
@@ -32,6 +32,8 @@ let sess = {
 
 module.exports = {
 	load(app) {
+
+		require('@/helpers/passport')(passport);
 		app.use(session(sess));
 		app.use(cors(corsOptions));
 		app.use(helmet());
@@ -43,6 +45,7 @@ module.exports = {
 		app.use(requestIp.mw());
 
 		require("@/routes")(app);
+		require("@/helpers/error_handler")(app);
 
 	}
 };

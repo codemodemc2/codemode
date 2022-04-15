@@ -1,8 +1,10 @@
+const { generateHash, checkUser } = require("@/helpers/security");
 const passport = require('passport');
 
 exports.userLoginController = async (req, res) => {
-	res.send('userLoginController');
+	res.send("OK");
 };
+
 
 exports.userRegisterController = async (req, res, next) => {
 	const { email, password, password2, username } = req.body;
@@ -24,6 +26,7 @@ exports.userRegisterController = async (req, res, next) => {
 
 
 	passport.authenticate('local-signup', async (err, user, info) => {
+		console.log(err, user, info);
 		if (err) return next(err);
 		if (info) return next(info);
 		if (!user) return res.status(403).send({ message: 'try_again' });

@@ -1,10 +1,10 @@
 const express = require("express");
 
-const loaders = require("./loaders");
+const { load } = require("./loaders");
 
 const createServer = () => {
 	const app = express();
-	loaders.load(app);
+	load(app);
 	return app;
 };
 

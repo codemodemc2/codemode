@@ -1,8 +1,10 @@
-const User = require('@/models/user.js');
+const User = require('@/models/user.model');
 const LocalStrategy = require('passport-local').Strategy;
-const { checkUser, generateHash, sterilizeGmail } = require('./security.js');
-const { v4: uuidv4 } = require('uuid');
+const { checkUser } = require('./security.js');
 const Mongoose = require('mongoose');
+
+const { UserService } = require('@/services');
+
 module.exports = (passport) => {
 	passport.use('local-signin',
 		new LocalStrategy({ usernameField: 'email', passwordField: 'password' }, async (email, password, done) => {
@@ -24,25 +26,15 @@ module.exports = (passport) => {
 	passport.use('local-signup',
 		new LocalStrategy({ usernameField: 'email', passwordField: 'password' }, async (email, password, done) => {
 			try {
-				let user = await User.findOne({ email: Mongoose.sanitizeFilter(email) });
-				if (user) return done(false, false, { message: 'user_with_that_mail_already_exists', status: 403 });
-				const newUser = new User({
-					email: email,
-					true_email: sterilizeGmail(email),
-					account: {
-						type: 0,
-						premium_expiration_date: null,
-						premium_permanent: false,
-						unique_id: uuidv4()
-					},
-				});
-				const hash = await generateHash(password);
-				newUser.password = hash;
-				await newUser.save();
-				return done(null, newUser);
+				console.log(UserService);
+				let user = await UserService.createUser({ email, password });
+				console.log(user, "USER");
+				return done(null, user);
+
 			} catch (error) {
-				console.log(error);
-				return done({ message: 'something_went_wrong', status: 500 }, false);
+				console.log(error, "ERROR");
+				if (error.name == 'UserExistsError') return done(false, false, { message: 'user_with_that_mail_already_exists', status: 403 });
+				else return done({ message: 'something_went_wrong', status: 500 }, false);
 			}
 		}));
 
