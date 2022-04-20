@@ -17,3 +17,7 @@ app.use(router);
 app.mount("#app");
 
 import "@/helpers/axios_config";
+
+app.component('comment',{
+    template
+})
