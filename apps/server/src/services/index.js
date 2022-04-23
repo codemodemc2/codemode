@@ -1,4 +1,3 @@
 module.exports = {
-	RedisService: require('./redis.service'),
-	UserService: require('./user.service'),
+  RedisService: require("./redis.service"),
 };
