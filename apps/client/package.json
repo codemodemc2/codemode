@@ -9,6 +9,7 @@
 		"lint": "eslint --ext .js,.vue src/"
 	},
 	"dependencies": {
+		"@heroicons/vue": "^1.0.6",
 		"axios": "^0.26.1",
 		"pinia": "^2.0.13",
 		"pinia-plugin-persistedstate": "^1.5.1",
