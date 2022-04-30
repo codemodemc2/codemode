@@ -1,9 +1,9 @@
-import { Appwrite } from 'appwrite';
+import { Appwrite } from "appwrite";
 
 // Init your Web SDK
 const appwrite = new Appwrite();
 
-appwrite.setEndpoint('http://localhost/v1').setProject('6241ab870383db7a19ed');
+appwrite.setEndpoint("http://localhost/v1").setProject("6241ab870383db7a19ed");
 
 appwrite.account.createAnonymousSession().then(
   (response) => {
@@ -15,4 +15,4 @@ appwrite.account.createAnonymousSession().then(
 );
 
 export const db = appwrite.database;
-export const COLLECTION_ID = '6241abb036e351800249';
+export const COLLECTION_ID = "6241abb036e351800249";
