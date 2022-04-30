@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-export const useUserStore = defineStore("admin_onboarding", {
+export const useAdminOnboardingStore = defineStore("admin_onboarding", {
 	state: () => ({
 		currentStep: 1,
 		steps: {

@@ -122,29 +122,5 @@
         </div>
       </div>
     </div>
-    <div class="hidden bg-gradient-to-br from-sky-500 to-sky-900 lg:block">
-      <div class="flex h-full w-full flex-row content-center justify-center">
-        <div
-          class="flex h-3/4 w-3/4 rotate-3 transform content-center justify-center self-center rounded-3xl bg-white shadow-2xl"
-        >
-          <div class="flex flex-col items-center justify-center">
-            <div class="flex flex-row items-center justify-center text-6xl">
-              <p
-                class="bg-gradient-to-r from-sky-500 to-sky-900 bg-clip-text font-extrabold text-transparent"
-              >
-                AutoCode
-              </p>
-              <p class="font-bold text-gray-800">AI</p>
-            </div>
-            <hr class="w-96" />
-            <div>
-              <p class="text-xl font-semibold text-gray-700">
-                Your personal AI programmer
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </template>

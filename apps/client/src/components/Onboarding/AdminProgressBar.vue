@@ -2,26 +2,27 @@
   <Transition name="slide-fade">
     <div
       v-if="show"
-      class="flex flex-col gap-14 relative before:border before:ml-5 before:absolute before:h-full min-w-max before:border-brand-light"
+      class="flex flex-col gap-14 relative before:border before:ml-[19px] before:absolute before:h-full min-w-max before:border-brand-light"
     >
       <div v-for="link in links" :key="link.id" class="flex flex-row gap-3">
         <div
-          class="w-10 h-10 z-10 bg-brand-light rounded-xl flex justify-center items-center relative"
+          class="w-10 h-10 z-1 rounded-xl flex justify-center items-center relative transform transition-all duration-200"
           :class="{
-            'bg-brand-primary after:absolute after:border after:border-brand-primary after:-bottom-16 after:h-16 after:z-50':
-              link.id == 1,
-            'border-brand-primary border-2 bg-white': link.id === 2,
-            
+            'bg-brand-primary': link.id < adminOnboardingStore.currentStep,
+            'after:absolute after:border after:border-brand-primary after:-bottom-14 after:h-16': link.id < adminOnboardingStore.currentStep && link.id < links.length,
+            'border-brand-primary border-2 bg-white':
+              link.id == adminOnboardingStore.currentStep,
+            'bg-brand-light': link.id > adminOnboardingStore.currentStep,
           }"
         >
-          <p
-            v-if="link.id !== 1"
-            class="font-medium z-20 text-brand-dark"
-            :class="{ 'text-brand-light': link.id === 1 }"
-          >
+          <CheckIcon
+            v-if="link.id < adminOnboardingStore.currentStep"
+            class="w-5 h-5 text-brand-light"
+          />
+
+          <p v-else class="font-medium z-20 text-brand-dark">
             {{ link.id }}
           </p>
-          <CheckIcon v-else class="w-5 h-5 text-brand-light"/>
         </div>
         <div class="flex flex-col -space-y-1.5">
           <p class="text-brand-dark font-medium">{{ link.name }}</p>
@@ -35,9 +36,11 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { CheckIcon } from "@heroicons/vue/solid";
+import { useAdminOnboardingStore } from "@/stores/admin_onboarding.js";
+
+const adminOnboardingStore = useAdminOnboardingStore();
 
 let show = ref(false);
-onMounted(() => (show.value = true));
 
 let links = ref([
   {
@@ -66,6 +69,7 @@ let links = ref([
   },
 ]);
 
+onMounted(() => (show.value = true));
 </script>
 
 <style scoped>

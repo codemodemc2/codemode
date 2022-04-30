@@ -15,6 +15,17 @@
             <form class="mb-5 flex flex-col gap-5" @submit.prevent="onSubmit">
               <div class="relative col-span-2 w-full">
                 <input
+                  id="username"
+                  v-model="username"
+                  type="text"
+                  placeholder="Username"
+                  class="form-input-style peer placeholder-transparent"
+                  required
+                />
+                <label for="username" class="input-label">Username</label>
+              </div>
+              <div class="relative col-span-2 w-full">
+                <input
                   id="email"
                   v-model="email"
                   type="email"
@@ -24,26 +35,6 @@
                   required
                 />
                 <label class="input-label" for="email">Email</label>
-              </div>
-
-              <div class="relative col-span-2 w-full">
-                <input
-                  id="password"
-                  v-model="password"
-                  :type="showPassword ? 'text' : 'password'"
-                  name="password"
-                  placeholder="Password"
-                  class="form-input-style peer placeholder-transparent"
-                  required
-                />
-                <label for="password" class="input-label">Password</label>
-                <div
-                  class="absolute top-3 right-5 w-5 text-gray-500"
-                  @click="showPassword = !showPassword"
-                >
-                  <EyeIcon v-if="!showPassword"></EyeIcon>
-                  <EyeOffIcon v-else></EyeOffIcon>
-                </div>
               </div>
               <button class="submit-button mt-5">Continue -></button>
             </form>
@@ -55,11 +46,30 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
-import { EyeIcon, EyeOffIcon } from "@heroicons/vue/solid";
+import { onBeforeUnmount, onMounted, ref } from "vue";
+
+import { useAdminOnboardingStore } from "@/stores/admin_onboarding.js";
+
+import router from "@/router";
+
+const adminOnboardingStore = useAdminOnboardingStore();
+
+adminOnboardingStore.currentStep = 1;
+
+let email = ref("");
+let username = ref("");
+
+let onSubmit = () => {
+  adminOnboardingStore.steps[adminOnboardingStore.currentStep].data.username = username.value;
+  adminOnboardingStore.steps[adminOnboardingStore.currentStep].data.email = email.value;
+  adminOnboardingStore.steps[adminOnboardingStore.currentStep].finished = true;
+
+  router.push("/register/password");
+};
 
 let show = ref(false);
 onMounted(() => (show.value = true));
+onBeforeUnmount(() => (show.value = false));
 </script>
 
 <style scoped>
@@ -71,9 +81,12 @@ onMounted(() => (show.value = true));
   transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
 }
 
-.slide-fade-enter-from,
-.slide-fade-leave-to {
+.slide-fade-enter-from {
   transform: translateX(20px);
   opacity: 0;
+}
+.slide-fade-leave-to {
+  transform: translateX(-20px);
+  opacity: 100;
 }
 </style>
