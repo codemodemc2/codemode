@@ -11,7 +11,7 @@
     leave-to="opacity-0 -translate-x-96"
   >
     <div
-      class="flex flex-col h-full w-1/3 content-center justify-center self-center gap-10 min-w-max"
+      class="flex flex-col h-full w-1/3 content-center justify-center self-center gap-10 max-w-max px-5"
     >
       <p class="text-3xl text-brand-medium self-center font-bold">
         You are all set!

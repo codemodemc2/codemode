@@ -59,8 +59,11 @@
               </div>
             </div>
             <button class="submit-button mt-5">Continue -></button>
-            <button class="secondary-button mt-5" @click="$router.go(-1)">
-              Back
+            <button
+              class="link hover:underline"
+              @click.prevent="$router.push('/register/user')"
+            >
+              &#60;- Back
             </button>
           </form>
         </div>

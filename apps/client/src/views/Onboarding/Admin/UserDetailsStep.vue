@@ -11,7 +11,7 @@
     leave-to="opacity-0 -translate-x-96"
   >
     <div
-      class="flex flex-col h-full w-1/3 content-center justify-center self-center gap-10 min-w-max"
+      class="flex flex-col h-full w-1/3 content-center justify-center self-center gap-10 min-w-max px-5"
     >
       <p class="text-3xl text-brand-medium self-center font-bold">
         Enter Username and Email
@@ -67,12 +67,14 @@ let show = ref(false);
 let email = ref(adminOnboardingStore.steps[1].data.email);
 let username = ref(adminOnboardingStore.steps[1].data.username);
 
+adminOnboardingStore.steps[adminOnboardingStore.currentStep].data.username =
+  username.value;
+adminOnboardingStore.steps[adminOnboardingStore.currentStep].data.email =
+  email.value;
+
 let onSubmit = () => {
   show.value = false;
-  adminOnboardingStore.steps[adminOnboardingStore.currentStep].data.username =
-    username.value;
-  adminOnboardingStore.steps[adminOnboardingStore.currentStep].data.email =
-    email.value;
+
   adminOnboardingStore.steps[adminOnboardingStore.currentStep].finished = true;
 
   setTimeout(() => {

@@ -1,11 +1,11 @@
 <template>
-  <div class="flex flex-row h-screen w-screen">
+  <div class="flex lg:flex-row justify-center flex-col max-h-screen h-full w-screen gap-10">
     <div
-      class="border-r border-gray-300 min-h-screen p-10 flex justify-center items-center"
+      class="lg:border-r border-gray-300 lg:min-h-screen p-10 flex justify-center items-center"
     >
       <AdminProgressBarVue />
     </div>
-    <div class="max-h-screen min-h-screen w-full overflow-hidden">
+    <div class="max-h-screen lg:min-h-screen lg:h-full w-full overflow-clip">
       <router-view />
     </div>
   </div>
@@ -13,5 +13,4 @@
 
 <script setup>
 import AdminProgressBarVue from "@/components/Onboarding/AdminProgressBar.vue";
-
 </script>

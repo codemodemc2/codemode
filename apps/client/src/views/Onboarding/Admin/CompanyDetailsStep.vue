@@ -11,7 +11,7 @@
     leave-to="opacity-0 -translate-x-96"
   >
     <div
-      class="flex flex-col h-full w-1/3 content-center justify-center self-center gap-10 min-w-max"
+      class="flex flex-col h-full content-center justify-center self-center gap-10 max-w-max px-5"
     >
       <p class="text-3xl text-brand-medium self-center font-bold">
         Enter your company's details
@@ -31,6 +31,12 @@
               <label for="username" class="input-label">Company name</label>
             </div>
             <button class="submit-button mt-5">Continue -></button>
+            <button
+              class="link hover:underline"
+              @click.prevent="$router.push('/register/user')"
+            >
+              &#60;- Back
+            </button>
           </form>
         </div>
       </div>
@@ -51,7 +57,9 @@ const adminOnboardingStore = useAdminOnboardingStore();
 
 adminOnboardingStore.currentStep = 3;
 
-let companyName = ref(adminOnboardingStore.steps[adminOnboardingStore.currentStep].data.companyName);
+let companyName = ref(
+  adminOnboardingStore.steps[adminOnboardingStore.currentStep].data.companyName
+);
 
 let onSubmit = () => {
   show.value = false;
