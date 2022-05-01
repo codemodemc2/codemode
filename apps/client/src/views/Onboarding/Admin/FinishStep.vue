@@ -3,7 +3,7 @@
     appear
     :show="show"
     class="flex flex-col h-full w-full content-center justify-center"
-    enter="transition-all duration-1000"
+    enter="transition-all duration-500"
     enter-from="opacity-0 translate-x-96"
     enter-to="opacity-100 translate-y-0"
     leave="transition-all duration-500"
