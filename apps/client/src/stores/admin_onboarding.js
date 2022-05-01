@@ -15,7 +15,7 @@ export const useAdminOnboardingStore = defineStore("admin_onboarding", {
 				finished: false,
 				data: {
 					password: "",
-					confirmPassword: ""
+					repeatPassword: ""
 				}
 			},
 			3: {

@@ -31,7 +31,7 @@ const router = createRouter({
 			},
 			children: [
 				{
-					path: "",
+					path: "user",
 					name: "AdminUserDetailsStep",
 					component: () => import("@/views/Onboarding/Admin/UserDetailsStep.vue"),
 				},

@@ -5,7 +5,7 @@
     >
       <AdminProgressBarVue />
     </div>
-    <div class="max-h-screen min-h-screen w-full">
+    <div class="max-h-screen min-h-screen w-full overflow-hidden">
       <router-view />
     </div>
   </div>

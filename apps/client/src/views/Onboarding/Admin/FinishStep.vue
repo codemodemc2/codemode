@@ -1,18 +1,23 @@
 <template>
-  <Transition name="slide-fade">
+  <TransitionRoot
+    appear
+    :show="show"
+    class="flex flex-col h-full w-full content-center justify-center"
+    enter="transition-all duration-1000"
+    enter-from="opacity-0 translate-x-96"
+    enter-to="opacity-100 translate-y-0"
+    leave="transition-all duration-500"
+    leave-from="opacity-100"
+    leave-to="opacity-0 -translate-x-96"
+  >
     <div
-      v-if="show"
-      class="flex flex-col h-full w-full content-center justify-center"
+      class="flex flex-col h-full w-1/3 content-center justify-center self-center gap-10 min-w-max"
     >
-      <div
-        class="flex flex-col h-full w-1/3 content-center justify-center self-center gap-10 min-w-max"
-      >
-        <p class="text-3xl text-brand-medium self-center font-bold">
-          You have finished setting up your account!
-        </p>
-      </div>
+      <p class="text-3xl text-brand-medium self-center font-bold">
+        You are all set!
+      </p>
     </div>
-  </Transition>
+  </TransitionRoot>
 </template>
 
 <script setup>
@@ -22,6 +27,8 @@ import { useAdminOnboardingStore } from "@/stores/admin_onboarding.js";
 
 import router from "@/router";
 
+import { TransitionRoot } from "@headlessui/vue";
+
 const adminOnboardingStore = useAdminOnboardingStore();
 
 adminOnboardingStore.currentStep = 5;
@@ -30,35 +37,18 @@ let email = ref("");
 let username = ref("");
 
 let onSubmit = () => {
+  show.value = false;
   adminOnboardingStore.steps[adminOnboardingStore.currentStep].data.username =
     username.value;
   adminOnboardingStore.steps[adminOnboardingStore.currentStep].data.email =
     email.value;
   adminOnboardingStore.steps[adminOnboardingStore.currentStep].finished = true;
-
-  router.push("/register/finish");
+  setTimeout(() => {
+    router.push("/register/finish");
+  }, 500);
 };
 
 let show = ref(false);
 onMounted(() => (show.value = true));
 onBeforeUnmount(() => (show.value = false));
 </script>
-
-<style scoped>
-.slide-fade-enter-active {
-  transition: all 1s ease-out;
-}
-
-.slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
-}
-
-.slide-fade-enter-from {
-  transform: translateX(20px);
-  opacity: 0;
-}
-.slide-fade-leave-to {
-  transform: translateX(-20px);
-  opacity: 100;
-}
-</style>
