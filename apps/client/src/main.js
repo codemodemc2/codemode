@@ -5,6 +5,7 @@ import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 import App from "./App.vue";
 import router from "./router";
 import "@/assets/base.css";
+import "@/helpers/axios_config";
 
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);
@@ -16,4 +17,3 @@ app.use(router);
 
 app.mount("#app");
 
-import "@/helpers/axios_config";

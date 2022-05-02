@@ -16,8 +16,10 @@
       <p class="text-3xl text-brand-medium self-center font-bold">
         You are all set!
       </p>
+      <p>Your employes are inviter and your team is ready to start sharing ideas</p>
     </div>
   </TransitionRoot>
+
 </template>
 
 <script setup>

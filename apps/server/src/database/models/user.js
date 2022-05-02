@@ -5,16 +5,7 @@ const AccountDataSchema = new mongoose.Schema({
     required: true,
     default: 0,
   },
-  premium_expiration_date: {
-    type: Date,
-    required: false,
-    default: null,
-  },
-  premium_permanent: {
-    type: Boolean,
-    required: false,
-    default: false,
-  },
+
   unique_id: {
     type: String,
     required: true,
@@ -48,7 +39,6 @@ const UserSchema = new mongoose.Schema(
       required: false,
       unique: false,
     },
-
     email: {
       type: String,
       required: true,
@@ -75,11 +65,6 @@ const UserSchema = new mongoose.Schema(
     banned: {
       type: Boolean,
       default: false,
-      required: false,
-    },
-    alts: {
-      type: [mongoose.Types.ObjectId],
-      default: [],
       required: false,
     },
     account: {

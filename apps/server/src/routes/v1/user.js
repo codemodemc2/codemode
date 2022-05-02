@@ -2,6 +2,8 @@ const passport = require("passport");
 const { generateHash, checkUser } = require("@/helpers/security");
 const User = require("@/database/models/user");
 const { requireAuthenticated } = require("@/helpers/auth");
+const { v4: uuidv4 } = require("uuid");
+const InviteLink = require("@/database/models/invite_link")
 const Mongoose = require("mongoose");
 
 module.exports = (router) => {
@@ -227,6 +229,12 @@ module.exports = (router) => {
 			}
 		}
 	);
+
+	router.get("/invite-link", async (req, res) => {
+		let inviteLink = new InviteLink({ id: uuidv4() })
+		await inviteLink.save()
+		return res.send({ inviteLink: inviteLink.id })
+	})
 
 	router.post("/logout", requireAuthenticated, (req, res) => {
 		req.logout();

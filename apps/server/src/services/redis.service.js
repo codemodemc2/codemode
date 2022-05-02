@@ -2,7 +2,7 @@ const { createClient } = require("redis");
 
 let redisClient = createClient({
   legacyMode: true,
-  password: process.env.REDIS_PASSWORD,
+  //password: process.env.REDIS_PASSWORD,
 });
 
 module.exports = {

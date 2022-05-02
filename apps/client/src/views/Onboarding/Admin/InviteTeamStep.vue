@@ -11,39 +11,25 @@
     leave-to="opacity-0 -translate-x-96"
   >
     <div
-      class="flex flex-col h-full w-1/3 content-center justify-center self-center gap-10 min-w-max px-5"
+      class="
+        flex flex-col
+        h-full
+        w-1/3
+        content-center
+        justify-center
+        self-center
+        gap-10
+        min-w-max
+        px-5
+      "
     >
       <p class="text-3xl text-brand-medium self-center font-bold">
-        Enter Username and Email
+        Generate link to invite your team
       </p>
+      <p>{{ link }}</p>
       <div>
         <div>
-          <form class="mb-5 flex flex-col gap-5" @submit.prevent="onSubmit">
-            <div class="relative col-span-2 w-full">
-              <input
-                id="username"
-                v-model="username"
-                type="text"
-                placeholder="Username"
-                class="form-input-style peer placeholder-transparent"
-                required
-              />
-              <label for="username" class="input-label">Username</label>
-            </div>
-            <div class="relative col-span-2 w-full">
-              <input
-                id="email"
-                v-model="email"
-                type="email"
-                name="email"
-                placeholder="Email"
-                class="form-input-style peer placeholder-transparent"
-                required
-              />
-              <label class="input-label" for="email">Email</label>
-            </div>
-            <button class="submit-button mt-5">Continue -></button>
-          </form>
+          <button @click="generateLink" class="submit-button mt-5">{{ message }}</button>
         </div>
       </div>
     </div>
@@ -59,27 +45,41 @@ import router from "@/router";
 
 import { TransitionRoot } from "@headlessui/vue";
 
+import { generateInviteLink } from "@/helpers/api/user.js";
+
 const adminOnboardingStore = useAdminOnboardingStore();
 
 adminOnboardingStore.currentStep = 4;
 
 let show = ref(false);
-let email = ref(adminOnboardingStore.steps[1].data.email);
-let username = ref(adminOnboardingStore.steps[1].data.username);
-
-adminOnboardingStore.steps[adminOnboardingStore.currentStep].data.username =
-  username.value;
-adminOnboardingStore.steps[adminOnboardingStore.currentStep].data.email =
-  email.value;
+let email = ref(
+  adminOnboardingStore.steps[adminOnboardingStore.currentStep].data.email
+);
+let username = ref(
+  adminOnboardingStore.steps[adminOnboardingStore.currentStep].data.username
+);
 
 let onSubmit = () => {
   show.value = false;
-
-  adminOnboardingStore.steps[adminOnboardingStore.currentStep].finished = true;
-
   setTimeout(() => {
     router.push("/register/finish");
   }, 500);
+};
+
+let message = ref("Generate link");
+let link = ref("");
+let linkGenerated = false;
+
+let generateLink = async () => {
+  if (linkGenerated) {
+    onSubmit();
+    return
+  }
+  let response = await generateInviteLink();
+  let l = response.data.inviteLink;
+  console.log(response)
+  link.value = `http://localhost:3000/invited?id=${l}`;
+  message.value = "Finish ->";
 };
 
 onMounted(() => (show.value = true));
