@@ -3,7 +3,7 @@
     appear
     :show="true"
     class="flex lg:flex-col flex-row gap-14 relative before:border before:lg:ml-[19px] before:absolute before:lg:h-full before:lg:w-0 before:w-full before:mt-[19px] before:lg:mt-0 min-w-max before:border-brand-light"
-    enter="transition-all duration-1000"
+    enter="transition-all duration-500"
     enter-from="opacity-0 translate-x-16"
     enter-to="opacity-100 translate-y-0"
     leave="transition-all duration-500"
@@ -18,7 +18,8 @@
             'bg-brand-primary': adminOnboardingStore.steps[link.id].finished,
             'after:absolute after:border after:border-brand-primary after:lg:-bottom-14 after:lg:left-5 after:-right-14 after:lg:h-14 after:lg:w-0 after:w-14':
               adminOnboardingStore.steps[link.id].finished &&
-              link.id < links.length,
+              link.id < links.length
+			  && link.id < adminOnboardingStore.currentStep,
             'border-brand-primary border-2 bg-white':
               link.id == adminOnboardingStore.currentStep &&
               !adminOnboardingStore.steps[link.id].finished,

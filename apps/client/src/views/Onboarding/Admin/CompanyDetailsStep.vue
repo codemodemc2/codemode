@@ -33,7 +33,7 @@
             <button class="submit-button mt-5">Continue -></button>
             <button
               class="link hover:underline"
-              @click.prevent="$router.push('/register/user')"
+              @click.prevent="$router.push('/register/password')"
             >
               &#60;- Back
             </button>
