@@ -52,12 +52,6 @@ const adminOnboardingStore = useAdminOnboardingStore();
 adminOnboardingStore.currentStep = 4;
 
 let show = ref(false);
-let email = ref(
-  adminOnboardingStore.steps[adminOnboardingStore.currentStep].data.email
-);
-let username = ref(
-  adminOnboardingStore.steps[adminOnboardingStore.currentStep].data.username
-);
 
 let onSubmit = () => {
   show.value = false;
@@ -72,8 +66,7 @@ let linkGenerated = false;
 
 let generateLink = async () => {
   if (linkGenerated) {
-    onSubmit();
-    return
+    return onSubmit();
   }
   let response = await generateInviteLink();
   let l = response.data.inviteLink;
