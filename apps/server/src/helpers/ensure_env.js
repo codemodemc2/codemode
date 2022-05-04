@@ -26,6 +26,11 @@ let requiredEnvs = [
     values: ["password"],
     description: "Password for redis",
   },
+  {
+    name: "GITHUB_SECRET",
+    values: ["github hash password"],
+    description: "Password for hashing github request data",
+  },
 ];
 
 for (let env of requiredEnvs) {
