@@ -75,11 +75,9 @@
 <script setup>
 import { onBeforeUnmount, onMounted, ref } from "vue";
 import { EyeIcon, EyeOffIcon } from "@heroicons/vue/solid";
-
 import { useAdminOnboardingStore } from "@/stores/admin_onboarding.js";
-
 import { TransitionRoot } from "@headlessui/vue";
-
+import { errorToast } from "@/helpers/toast.js";
 import router from "@/router";
 
 const adminOnboardingStore = useAdminOnboardingStore();
@@ -93,11 +91,20 @@ let repeatPassword = ref(
   adminOnboardingStore.steps[adminOnboardingStore.currentStep].data
     .repeatPassword
 );
+
 let showPassword = ref(false);
 
 let showPassword1 = ref(false);
 
 let onSubmit = () => {
+  if (password.value !== repeatPassword.value) {
+    errorToast("Passwords do not match");
+    return;
+  }
+  if (password.value.length < 8) {
+    errorToast("Password must be at least 8 characters long");
+    return;
+  }
   show.value = false;
   adminOnboardingStore.steps[adminOnboardingStore.currentStep].data.password =
     password.value;
@@ -111,6 +118,10 @@ let onSubmit = () => {
 };
 
 let show = ref(false);
-onMounted(() => (show.value = true));
+onMounted(() => {
+  if (adminOnboardingStore.registered)
+    router.push({ path: "/register/finish" });
+  show.value = true;
+});
 onBeforeUnmount(() => (show.value = false));
 </script>

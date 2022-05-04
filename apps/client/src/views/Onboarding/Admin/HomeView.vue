@@ -13,4 +13,12 @@
 
 <script setup>
 import AdminProgressBarVue from "@/components/Onboarding/AdminProgressBar.vue";
+import { useAdminOnboardingStore } from "@/stores/admin_onboarding.js";
+import { onBeforeUnmount } from "vue";
+
+const adminOnboardingStore = useAdminOnboardingStore();
+
+onBeforeUnmount(() => {
+  if (adminOnboardingStore.registered) adminOnboardingStore.$reset();
+});
 </script>

@@ -11,17 +11,7 @@
     leave-to="opacity-0 -translate-x-96"
   >
     <div
-      class="
-        flex flex-col
-        h-full
-        w-1/3
-        content-center
-        justify-center
-        self-center
-        gap-10
-        min-w-max
-        px-5
-      "
+      class="flex flex-col h-full w-1/3 content-center justify-center self-center gap-10 min-w-max px-5"
     >
       <p class="text-3xl text-brand-medium self-center font-bold">
         Enter Username and Email
@@ -62,12 +52,11 @@
 
 <script setup>
 import { onBeforeUnmount, onMounted, ref } from "vue";
-
 import { useAdminOnboardingStore } from "@/stores/admin_onboarding.js";
-
 import router from "@/router";
-
 import { TransitionRoot } from "@headlessui/vue";
+import { checkExistingUser } from "@/helpers/api/user.js";
+import { errorToast } from "@/helpers/toast.js";
 
 const adminOnboardingStore = useAdminOnboardingStore();
 
@@ -77,7 +66,18 @@ let show = ref(false);
 let email = ref(adminOnboardingStore.steps[1].data.email);
 let username = ref(adminOnboardingStore.steps[1].data.username);
 
-let onSubmit = () => {
+let onSubmit = async () => {
+  let response = await checkExistingUser(email.value).catch((error) => {
+    if (error == "email_already_exists") {
+      errorToast("User with that email already exists");
+      return;
+    }
+  });
+  if (!response) return;
+  if (response.data.message != "user_is_available") {
+    errorToast("Please try again");
+    return;
+  }
   show.value = false;
   adminOnboardingStore.steps[adminOnboardingStore.currentStep].data.username =
     username.value;
@@ -91,6 +91,10 @@ let onSubmit = () => {
   }, 500);
 };
 
-onMounted(() => (show.value = true));
+onMounted(() => {
+  if (adminOnboardingStore.registered)
+    router.push({ path: "/register/finish" });
+  show.value = true;
+});
 onBeforeUnmount(() => (show.value = false));
 </script>
