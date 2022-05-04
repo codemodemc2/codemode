@@ -16,13 +16,6 @@ const process = require("process");
 const cluster = require("cluster");
 const numCPUs = require("os").cpus().length;
 
-// const { createClient } = require('redis');
-// let redisClient = createClient({
-// 	legacyMode: true,
-// 	password: process.env.REDIS_PASSWORD,
-// });
-
-// (async () => await redisClient.connect())();
 
 if (cluster.isMaster && process.env.NODE_ENV == "production") {
   for (let i = 0; i < numCPUs; i++) {
