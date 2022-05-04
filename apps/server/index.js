@@ -86,7 +86,6 @@ if (cluster.isMaster && process.env.NODE_ENV == "production") {
 		origin: isProduction
 			? [process.env.FRONTEND_URL]
 			: ["http://localhost:5000", "http://localhost:3000"],
-		exposedHeaders: ["site-object-hash"],
 	};
 
 	app.use(cors(corsOptions));
