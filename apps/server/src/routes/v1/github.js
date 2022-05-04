@@ -10,7 +10,7 @@ module.exports = (router) => {
 
 		let hash = crypto.createHmac("sha256", secret).update(JSON.stringify(req.body)).digest("hex");
 
-		if (hash === sig_hash) exec("sh ./pull_sh", (error, stdout, stderr) => {
+		if (hash === sig_hash) exec("sh ./pull.sh", (error, stdout, stderr) => {
 			if (error) {
 				console.log(`error: ${error.message}`);
 				return;
