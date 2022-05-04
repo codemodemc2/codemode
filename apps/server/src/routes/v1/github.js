@@ -5,11 +5,12 @@ module.exports = (router) => {
 	router.post("/gitpush", (req, res) => {
 
 		let sig_header = req.headers["x-hub-signature-256"];
+		let sig_hash = sig_header.split("=")[1];
 		let secret = process.env.GITHUB_SECRET;
 
 		let hash = crypto.createHmac("sha256", secret).update(JSON.stringify(req.body)).digest("hex");
 
-		if (hash === sig_header) exec("sh ./pull_sh", (error, stdout, stderr) => {
+		if (hash === sig_hash) exec("sh ./pull_sh", (error, stdout, stderr) => {
 			if (error) {
 				console.log(`error: ${error.message}`);
 				return;
