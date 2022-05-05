@@ -34,6 +34,7 @@ export const useAdminOnboardingStore = defineStore("admin_onboarding", {
 			4: {
 				finished: false,
 				data: {
+					inviteLink: "",
 					inviteLinkId: "",
 				}
 			},

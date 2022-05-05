@@ -21,11 +21,11 @@
         class="form-input-style-disabled relative flex flex-row items-center"
       >
         <p class="font-mono pr-6">
-          {{ link }}
+          {{ inviteString() }}
         </p>
         <div
           class="absolute right-1 border-[1px] hover:cursor-pointer hover:border-brand-secondary outline-none decoration-transparent border-transparent rounded-md p-1 ml-1"
-          @copy="copyLink"
+          @click="copyLink"
         >
           <DocumentDuplicateIcon
             v-tippy="{ content: 'Copy link!' }"
@@ -36,7 +36,7 @@
       <div>
         <div>
           <button class="submit-button mt-5" @click="generateLink">
-            {{ message }}
+            {{ link ? "Finish ->" : "Generate link" }}
           </button>
         </div>
       </div>
@@ -56,6 +56,7 @@ import { TransitionRoot } from "@headlessui/vue";
 import { generateInviteLink } from "@/helpers/api/user.js";
 
 import { DocumentDuplicateIcon } from "@heroicons/vue/solid";
+import { errorToast, successToast } from "@/helpers/toast.js";
 
 const adminOnboardingStore = useAdminOnboardingStore();
 
@@ -70,9 +71,11 @@ let onSubmit = () => {
   }, 500);
 };
 
-let message = ref("Generate link");
-let link = ref("");
-let linkGenerated = false;
+let link = ref(adminOnboardingStore.steps[4].data.inviteLink);
+let inviteString = () => {
+  return `${window.location.origin}/invited?id=${link.value}`;
+};
+let linkGenerated = adminOnboardingStore.steps[4].finished;
 
 let generateLink = async () => {
   if (linkGenerated) {
@@ -80,9 +83,9 @@ let generateLink = async () => {
   }
   let response = await generateInviteLink();
   let l = response.data.inviteLink;
-  console.log(response);
-  link.value = `${window.location.origin}/invited?id=${l.id}`;
-  message.value = "Finish ->";
+  link.value = l.id;
+  adminOnboardingStore.steps[adminOnboardingStore.currentStep].data.inviteLink =
+    l.id;
   linkGenerated = true;
   adminOnboardingStore.steps[
     adminOnboardingStore.currentStep
@@ -90,18 +93,15 @@ let generateLink = async () => {
   adminOnboardingStore.steps[adminOnboardingStore.currentStep].finished = true;
 };
 
-let copyLink = () => {
-  console.log("CALLED");
-
+let copyLink = async () => {
   let textArea = document.createElement("textarea");
-  textArea.value = this.link.value;
-  console.log(textArea.value);
+  textArea.value = link.value;
   document.body.appendChild(textArea);
   textArea.select();
   let success = document.execCommand("copy");
   textArea.remove();
-
-  console.log(success);
+  if (!success) return errorToast("Failed to copy link!");
+  await successToast("Link copied!");
 };
 
 onMounted(() => {
