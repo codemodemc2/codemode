@@ -21,7 +21,7 @@ export const errorToast = (error) => {
 };
 
 export const successToast = (error) => {
-	toast.error(error, {
+	toast.success(error, {
 		position: "top-center",
 		timeout: 5000,
 		closeOnClick: false,
