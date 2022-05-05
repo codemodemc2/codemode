@@ -42,6 +42,7 @@ export const useAdminOnboardingStore = defineStore("admin_onboarding", {
 	}),
 	actions: {
 		async register() {
+			console.log(this)
 			let response = await registerAdmin(this, this.steps[1].data.email, this.steps[2].data.password);
 			userStore.session.logged_in = true;
 			userStore.session.session_expires_at = Date.now() + response.expires_in * 1000;

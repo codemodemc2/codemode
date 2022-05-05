@@ -12,6 +12,7 @@ export const login = async (email, password) => {
 
 export const registerAdmin = async (data, email, password) => {
 	try {
+		console.log(data)
 		const response = await axios.post("/register-admin", { data, email, password });
 		return response;
 	} catch (error) {
