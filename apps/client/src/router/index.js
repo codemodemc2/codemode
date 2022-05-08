@@ -52,12 +52,55 @@ const router = createRouter({
 				},
 				{
 					path: "finish",
-					name: "FinishStep",
+					name: "AdminFinishStep",
 					component: () => import("@/views/Onboarding/Admin/FinishStep.vue"),
 				},
 
 			],
 		},
+		{
+			path: "/invited",
+			name: "invited",
+			component: () => import("@/views/Onboarding/User/InvitedScreen.vue"),
+		},
+		{
+			path: "/register-invited",
+			name: "register-invited",
+			component: () => import("@/views/Onboarding/User/HomeView.vue"),
+			redirect: {
+				name: "UserDetailsStep",
+			},
+			children: [
+				{
+					path: "user",
+					name: "UserDetailsStep",
+					component: () => import("@/views/Onboarding/User/UserDetailsStep.vue"),
+				},
+				{
+					path: "password",
+					name: "UserPasswordStep",
+					component: () => import("@/views/Onboarding/User/PasswordStep.vue"),
+				},
+				{
+					path: "finish",
+					name: "UserFinishStep",
+					component: () => import("@/views/Onboarding/User/FinishStep.vue"),
+				},
+
+			],
+		},
+		{
+			path: '/error',
+			name: 'Error',
+			component: () => import('@/views/Errors/DynamicError.vue'),
+			props: true
+		},
+		{
+			path: '/:catchAll(.*)',
+			name: '404',
+			component: () => import('@/views/Errors/DynamicError.vue')
+		}
+
 	],
 });
 

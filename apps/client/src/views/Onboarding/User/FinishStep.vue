@@ -40,10 +40,10 @@
         You are all set!
       </p>
       <p class="">
-        Continue to the Admin panel to start managing your team.
+        Start sharing ideas with the rest of your team and earn rewards!
       </p>
-      <button class="submit-button mt-5" @click="$router.push({ path: '/dashboard' })">
-        Go to dashboard ->
+      <button class="submit-button mt-5" @click="$router.push({ path: '/' })">
+        Go to frontpage ->
       </button>
     </div>
   </TransitionRoot>
@@ -51,18 +51,18 @@
 
 <script setup>
 import { onBeforeUnmount, onMounted, ref } from "vue";
-import { useAdminOnboardingStore } from "@/stores/admin_onboarding.js";
+import { useUserOnboardingStore } from "@/stores/user_onboarding.js";
 import { RefreshIcon } from "@heroicons/vue/outline";
 import { TransitionRoot } from "@headlessui/vue";
 
-const adminOnboardingStore = useAdminOnboardingStore();
+const userOnboardingStore = useUserOnboardingStore();
 
-let registered = ref(adminOnboardingStore.registered);
+let registered = ref(userOnboardingStore.registered);
 let show = ref(false);
 
-let register = async () => {
+let reg = async () => {
   try {
-    await adminOnboardingStore.register();
+    await userOnboardingStore.register();
     show.value = false;
     registered.value = true;
   } catch (error) {
@@ -73,9 +73,10 @@ let register = async () => {
 onMounted(async () => {
   if (!registered.value) {
     show.value = true;
-    await register();
+    await reg();
   }
 });
+
 onBeforeUnmount(() => {
   show.value = false;
 });

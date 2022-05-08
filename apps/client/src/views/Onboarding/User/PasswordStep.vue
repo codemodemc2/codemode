@@ -61,7 +61,7 @@
             <button class="submit-button mt-5">Continue -></button>
             <button
               class="link hover:underline"
-              @click.prevent="$router.push('/register/user')"
+              @click.prevent="$router.push('/register-invited/user')"
             >
               &#60;- Back
             </button>
@@ -75,23 +75,21 @@
 <script setup>
 import { onBeforeUnmount, onMounted, ref } from "vue";
 import { EyeIcon, EyeOffIcon } from "@heroicons/vue/solid";
-import { useAdminOnboardingStore } from "@/stores/admin_onboarding.js";
+import { useUserOnboardingStore } from "@/stores/user_onboarding.js";
 import { TransitionRoot } from "@headlessui/vue";
 import { errorToast } from "@/helpers/toast.js";
 import router from "@/router";
 
-const adminOnboardingStore = useAdminOnboardingStore();
+const userOnboardingStore = useUserOnboardingStore();
 
-adminOnboardingStore.currentStep = 2;
+userOnboardingStore.currentStep = 2;
 
 let password = ref(
-  adminOnboardingStore.steps[adminOnboardingStore.currentStep].data.password
+  userOnboardingStore.steps[userOnboardingStore.currentStep].data.password
 );
 let repeatPassword = ref(
-  adminOnboardingStore.steps[adminOnboardingStore.currentStep].data
-    .repeatPassword
+  userOnboardingStore.steps[userOnboardingStore.currentStep].data.repeatPassword
 );
-
 let showPassword = ref(false);
 
 let showPassword1 = ref(false);
@@ -105,22 +103,23 @@ let onSubmit = () => {
     errorToast("Password must be at least 8 characters long");
     return;
   }
+
   show.value = false;
-  adminOnboardingStore.steps[adminOnboardingStore.currentStep].data.password =
+  userOnboardingStore.steps[userOnboardingStore.currentStep].data.password =
     password.value;
-  adminOnboardingStore.steps[
-    adminOnboardingStore.currentStep
+  userOnboardingStore.steps[
+    userOnboardingStore.currentStep
   ].data.repeatPassword = repeatPassword.value;
-  adminOnboardingStore.steps[adminOnboardingStore.currentStep].finished = true;
+  userOnboardingStore.steps[userOnboardingStore.currentStep].finished = true;
   setTimeout(() => {
-    router.push("/register/company");
+    router.push("/register-invited/finish");
   }, 500);
 };
 
 let show = ref(false);
 onMounted(() => {
-  if (adminOnboardingStore.registered)
-    router.push({ path: "/register/finish" });
+  if (userOnboardingStore.registered)
+    router.push({ path: "/register-invited/finish" });
   show.value = true;
 });
 onBeforeUnmount(() => (show.value = false));

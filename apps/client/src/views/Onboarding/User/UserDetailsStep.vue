@@ -52,19 +52,19 @@
 
 <script setup>
 import { onBeforeUnmount, onMounted, ref } from "vue";
-import { useAdminOnboardingStore } from "@/stores/admin_onboarding.js";
+import { useUserOnboardingStore } from "@/stores/user_onboarding.js";
 import router from "@/router";
 import { TransitionRoot } from "@headlessui/vue";
 import { checkExistingUser } from "@/helpers/api/user.js";
 import { errorToast } from "@/helpers/toast.js";
 
-const adminOnboardingStore = useAdminOnboardingStore();
+const userOnboardingStore = useUserOnboardingStore();
 
-adminOnboardingStore.currentStep = 1;
+userOnboardingStore.currentStep = 1;
 
 let show = ref(false);
-let email = ref(adminOnboardingStore.steps[1].data.email);
-let username = ref(adminOnboardingStore.steps[1].data.username);
+let email = ref(userOnboardingStore.steps[1].data.email);
+let username = ref(userOnboardingStore.steps[1].data.username);
 
 let onSubmit = async () => {
   let response = await checkExistingUser(email.value).catch((error) => {
@@ -78,22 +78,23 @@ let onSubmit = async () => {
     errorToast("Please try again");
     return;
   }
+
   show.value = false;
-  adminOnboardingStore.steps[adminOnboardingStore.currentStep].data.username =
+  userOnboardingStore.steps[userOnboardingStore.currentStep].data.username =
     username.value;
-  adminOnboardingStore.steps[adminOnboardingStore.currentStep].data.email =
+  userOnboardingStore.steps[userOnboardingStore.currentStep].data.email =
     email.value;
 
-  adminOnboardingStore.steps[adminOnboardingStore.currentStep].finished = true;
+  userOnboardingStore.steps[userOnboardingStore.currentStep].finished = true;
 
   setTimeout(() => {
-    router.push("/register/password");
+    router.push("/register-invited/password");
   }, 500);
 };
 
 onMounted(() => {
-  if (adminOnboardingStore.registered)
-    router.push({ path: "/register/finish" });
+  if (userOnboardingStore.registered)
+    router.push({ path: "/register-invited/finish" });
   show.value = true;
 });
 onBeforeUnmount(() => (show.value = false));

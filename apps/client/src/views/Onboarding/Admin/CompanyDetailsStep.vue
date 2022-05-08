@@ -73,6 +73,10 @@ let onSubmit = () => {
 };
 
 let show = ref(false);
-onMounted(() => (show.value = true));
+onMounted(() => {
+  if (adminOnboardingStore.registered)
+    router.push({ path: "/register/finish" });
+  show.value = true;
+});
 onBeforeUnmount(() => (show.value = false));
 </script>
