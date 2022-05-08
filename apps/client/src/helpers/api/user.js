@@ -13,6 +13,7 @@ export const login = async (email, password) => {
 export const registerAdmin = async (data, email, password) => {
 	try {
 		const response = await axios.post("/register-admin", { data, email, password });
+		console.log(response);
 		return response;
 	} catch (error) {
 		console.log(error);
@@ -22,6 +23,7 @@ export const registerAdmin = async (data, email, password) => {
 export const registerUser = async (data, email, password) => {
 	try {
 		const response = await axios.post("/register-user", { data, email, password });
+		console.log(response);
 		return response;
 	} catch (error) {
 		throw error.response.data.message;
