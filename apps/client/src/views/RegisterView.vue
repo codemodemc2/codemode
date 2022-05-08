@@ -112,7 +112,8 @@
         </div>
       </div>
     </div>
-    <div class="hidden bg-gradient-to-br from-sky-500 to-sky-900 lg:block col-span-2">
-    </div>
+    <div
+      class="hidden bg-gradient-to-br from-sky-500 to-sky-900 lg:block col-span-2"
+    ></div>
   </div>
 </template>

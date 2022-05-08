@@ -18,8 +18,8 @@
             'bg-brand-primary': adminOnboardingStore.steps[link.id].finished,
             'after:absolute after:border after:border-brand-primary after:lg:-bottom-14 after:lg:left-5 after:-right-14 after:lg:h-14 after:lg:w-0 after:w-14':
               adminOnboardingStore.steps[link.id].finished &&
-              link.id < links.length
-			  && link.id < adminOnboardingStore.currentStep,
+              link.id < links.length &&
+              link.id < adminOnboardingStore.currentStep,
             'border-brand-primary border-2 bg-white':
               link.id == adminOnboardingStore.currentStep &&
               !adminOnboardingStore.steps[link.id].finished,

@@ -1,3 +1,1 @@
-<template>
-this is frontpage
-</template>
+<template>this is frontpage</template>

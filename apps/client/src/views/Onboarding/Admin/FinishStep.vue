@@ -39,10 +39,11 @@
       <p class="text-3xl text-brand-medium self-center font-bold">
         You are all set!
       </p>
-      <p class="">
-        Continue to the Admin panel to start managing your team.
-      </p>
-      <button class="submit-button mt-5" @click="$router.push({ path: '/dashboard' })">
+      <p class="">Continue to the Admin panel to start managing your team.</p>
+      <button
+        class="submit-button mt-5"
+        @click="$router.push({ path: '/dashboard' })"
+      >
         Go to dashboard ->
       </button>
     </div>

@@ -72,7 +72,8 @@ let checkInvite = async () => {
 };
 
 onMounted(async () => {
-  if (userOnboardingStore.registered) router.push({ path: "/register-invited/finish" });
+  if (userOnboardingStore.registered)
+    router.push({ path: "/register-invited/finish" });
   await checkInvite();
 });
 </script>
