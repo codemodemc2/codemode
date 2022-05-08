@@ -52,8 +52,6 @@ module.exports = (router) => {
 
 
 	router.post("/register-admin", (req, res, next) => {
-		console.log(req.body);
-
 		const d = req.body.data;
 		const username = d.steps[1].data.username;
 		const email = d.steps[1].data.email;
