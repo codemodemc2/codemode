@@ -30,11 +30,15 @@ export const useUserOnboardingStore = defineStore("user_onboarding", {
 
 	actions: {
 		async register() {
-			let response = await registerUser(this, this.steps[1].data.email, this.steps[2].data.password);
-			userStore.session.logged_in = true;
-			userStore.session.session_expires_at = Date.now() + response.expires_in * 1000;
-			userStore.user_data = response.user; 
-			this.registered = true;
+			try {
+				let response = await registerUser(this, this.steps[1].data.email, this.steps[2].data.password);
+				userStore.session.logged_in = true;
+				userStore.session.session_expires_at = Date.now() + response.expires_in * 1000;
+				userStore.user_data = response.user;
+				this.registered = true;
+			} catch (error) {
+				console.log(error);
+			}
 		}
 	},
 
