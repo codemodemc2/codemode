@@ -52,6 +52,7 @@ module.exports = (router) => {
 
 
 	router.post("/register-admin", (req, res, next) => {
+		console.log(req.body);
 
 		const d = req.body.data;
 		const username = d.steps[1].data.username;
@@ -97,7 +98,7 @@ module.exports = (router) => {
 			await user.save();
 
 			if (inviteLinkId) {
-				const inviteLink = await InviteLink.findOne({ _id: inviteLinkId });
+				const inviteLink = await InviteLink.findOne({ _id: Mongoose.Types.ObjectId(inviteLinkId) });
 				inviteLink.created_by = user._id;
 				inviteLink.company_id = company._id;
 				await inviteLink.save();

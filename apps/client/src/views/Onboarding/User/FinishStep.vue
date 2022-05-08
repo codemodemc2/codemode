@@ -76,6 +76,7 @@ onMounted(async () => {
     await register();
   }
 });
+
 onBeforeUnmount(() => {
   show.value = false;
 });
