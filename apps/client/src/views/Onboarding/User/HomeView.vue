@@ -16,7 +16,7 @@
 <script setup>
 import UserProgressBarVue from "@/components/Onboarding/UserProgressBar.vue";
 import { useUserOnboardingStore } from "@/stores/user_onboarding.js";
-import { onBeforeUnmount } from "vue";
+import { onBeforeUnmount, onMounted } from "vue";
 import { useRouter } from "vue-router";
 
 const userOnboardingStore = useUserOnboardingStore();
@@ -37,6 +37,11 @@ if (!userOnboardingStore.invited) {
     },
   });
 }
+
+onMounted(() => {
+  if (userOnboardingStore.registered) userOnboardingStore.$reset();
+});
+
 onBeforeUnmount(() => {
   if (userOnboardingStore.registered) userOnboardingStore.$reset();
 });
