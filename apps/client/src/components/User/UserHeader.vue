@@ -29,6 +29,8 @@
 
 <script setup>
 import { UserIcon } from "@heroicons/vue/outline";
+import { defineProps } from "vue";
+
 const props = defineProps({
   profile: Object,
 });
