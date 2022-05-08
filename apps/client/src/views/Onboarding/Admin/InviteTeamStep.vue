@@ -95,7 +95,7 @@ let generateLink = async () => {
 
 let copyLink = async () => {
   let textArea = document.createElement("textarea");
-  textArea.value = link.value;
+  textArea.value = inviteString();
   document.body.appendChild(textArea);
   textArea.select();
   let success = document.execCommand("copy");
