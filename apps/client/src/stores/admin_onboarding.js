@@ -49,8 +49,10 @@ export const useAdminOnboardingStore = defineStore("admin_onboarding", {
 				userStore.session.session_expires_at = Date.now() + response.expires_in * 1000;
 				userStore.user_data = response.user;
 				this.registered = true;
+				return response;
 			} catch (error) {
 				console.log(error);
+				throw error;
 			}
 		}
 	},
