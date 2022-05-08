@@ -60,7 +60,7 @@ const userOnboardingStore = useUserOnboardingStore();
 let registered = ref(userOnboardingStore.registered);
 let show = ref(false);
 
-let register = async () => {
+let reg = async () => {
   try {
     await userOnboardingStore.register();
     show.value = false;
@@ -73,7 +73,7 @@ let register = async () => {
 onMounted(async () => {
   if (!registered.value) {
     show.value = true;
-    await register();
+    await reg();
   }
 });
 
