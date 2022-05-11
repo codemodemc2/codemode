@@ -16,7 +16,6 @@ export const registerAdmin = async (data, email, password) => {
       email,
       password,
     });
-    console.log(response);
     return response;
   } catch (error) {
     console.log(error);

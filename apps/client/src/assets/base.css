@@ -16,7 +16,7 @@
   }
 
   .form-input-style {
-    @apply w-full rounded-md border-[1px] border-brand-primary bg-transparent px-4 py-2 shadow-sm shadow-brand-primary focus:border-brand-secondary focus:shadow-brand-dark focus:outline-none;
+    @apply w-full rounded-md border-[1px] border-brand-primary bg-transparent px-4 py-2 shadow-sm shadow-brand-primary focus-within:border-brand-secondary focus-within:shadow-brand-dark focus-within:outline-none;
   }
 
   .form-input-style-disabled {

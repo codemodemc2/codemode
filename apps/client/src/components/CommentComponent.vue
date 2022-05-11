@@ -1,5 +1,5 @@
 <template>
-  <div class="border-l-2 border-gray-500">
+  <div class="border-l-2 border-gray-500" v-if="comment">
     <div class="ml-2 flex flex-col gap-2">
       <div class="flex flex-row">
         {{ comment.user.username }} • {{ comment.created_at }}
@@ -17,7 +17,11 @@
 
 <script setup>
 import { ThumbUpIcon, ReplyIcon } from "@heroicons/vue/solid";
+import { onMounted } from 'vue';
 const props = defineProps({
   comment: Object,
+});
+onMounted(() => {
+  console.log(props);
 });
 </script>

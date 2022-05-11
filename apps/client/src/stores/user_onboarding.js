@@ -36,10 +36,11 @@ export const useUserOnboardingStore = defineStore("user_onboarding", {
           this.steps[1].data.email,
           this.steps[2].data.password
         );
-        userStore.session.logged_in = true;
-        userStore.session.session_expires_at =
-          Date.now() + response.expires_in * 1000;
-        userStore.user_data = response.user;
+
+				userStore.session.logged_in = true;
+				userStore.session.session_expires_at = Date.now() + response.data.user.session_expires_in * 1000;
+				userStore.user_data = response.data.user.data;
+				
         this.registered = true;
       } catch (error) {
         console.log(error);

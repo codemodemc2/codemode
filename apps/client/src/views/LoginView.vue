@@ -26,13 +26,13 @@
         </div>
 
         <div>
-          <form class="mb-5 flex flex-col gap-5" @submit.prevent="onSubmit">
+          <form class="mb-5 flex flex-col gap-5" @submit.prevent="login">
             <div class="relative col-span-2 w-full">
               <input
+                id="email"
                 v-model="email"
                 type="email"
                 name="email"
-                id="email"
                 placeholder="Email"
                 class="form-input-style peer placeholder-transparent"
                 required
@@ -43,14 +43,20 @@
             <div class="relative col-span-2 w-full">
               <input
                 id="password"
+                v-model="password"
+                :type="showPassword ? 'text' : 'password'"
                 name="password"
                 placeholder="Password"
                 class="form-input-style peer placeholder-transparent"
                 required
               />
               <label for="password" class="input-label">Password</label>
-              <div class="absolute top-3 right-5 w-5 text-gray-500">
-                <EyeIcon></EyeIcon>
+              <div
+                class="absolute top-3 right-5 w-5 text-gray-500"
+                @click="showPassword = !showPassword"
+              >
+                <EyeIcon v-if="!showPassword"></EyeIcon>
+                <EyeOffIcon v-else></EyeOffIcon>
               </div>
             </div>
             <div class="flex flex-row justify-between">
@@ -63,7 +69,7 @@
                   class="form-checkbox self-center rounded text-sky-500 outline-none ring-0 ring-offset-0"
                 />
                 <p class="self-center text-sm font-medium text-gray-700">
-                  Remeber me
+                  Remember me
                 </p>
               </div>
               <router-link
@@ -76,33 +82,6 @@
             <button class="submit-button">Log in</button>
           </form>
           <div class="flex w-full flex-col content-center justify-center gap-5">
-            <!-- <div class="self-center w-full">
-              <div class="flex flex-row gap-5">
-                <span class="h-0.5 bg-gray-200 w-full self-center"></span>
-                <p class="text-gray-500 font-semibold text-sm">OR</p>
-                <span class="h-0.5 bg-gray-200 w-full self-center"></span>
-              </div>
-            </div>
-            <div class="self-center">
-              <div
-                id="g_id_onload"
-                data-client_id="602478282729-lbjpmv0i730e6oefl8hcc3ch3rpmiegn.apps.googleusercontent.com"
-                data-context="signin"
-                data-ux_mode="popup"
-                :data-callback="onSignIn"
-              ></div>
-
-              <div
-                class="g_id_signin"
-                data-type="standard"
-                data-shape="rectangular"
-                data-theme="outline"
-                data-text="continue_with"
-                data-size="large"
-                data-logo_alignment="center"
-                data-width="320"
-              ></div> 
-            </div> -->
             <div class="flex flex-row">
               <span class="h-0.5 w-full self-center bg-gray-200"></span>
             </div>
@@ -124,3 +103,28 @@
     </div>
   </div>
 </template>
+
+<script setup>
+import { EyeIcon, EyeOffIcon } from "@heroicons/vue/outline";
+import { useUserStore } from "@/stores/user.js";
+import { errorToast } from "@/helpers/toast.js";
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+
+let router = useRouter();
+
+let userStore = useUserStore();
+
+let email = ref("");
+let password = ref("");
+let showPassword = ref(false);
+
+let login = async () => {
+  try {
+    await userStore.login(email.value, password.value);
+    router.push({ path: "/" });
+  } catch (error) {
+    errorToast(error);
+  }
+};
+</script>

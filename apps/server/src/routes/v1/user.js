@@ -97,6 +97,7 @@ module.exports = (router) => {
       user.account.last_login_date = Date.now();
       user.account.registration_ip = req.clientIp;
       user.username = username;
+			user.is_admin = true;
       await user.save();
 
       if (inviteLinkId) {
