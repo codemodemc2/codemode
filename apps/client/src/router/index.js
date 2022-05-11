@@ -86,6 +86,32 @@ const router = createRouter({
 				},
 			],
 		},
+    {
+			path: "/dashboard",
+			name: "DashboardHome",
+			component: () => import("@/views/Dashboard/DashboardHomeView.vue"),
+			redirect: {
+				name: "UserDetailsStep",
+			},
+			children: [
+				{
+					path: "user",
+					name: "UserDetailsStep",
+					component: () =>
+						import("@/views/Onboarding/User/UserDetailsStep.vue"),
+				},
+				{
+					path: "password",
+					name: "UserPasswordStep",
+					component: () => import("@/views/Onboarding/User/PasswordStep.vue"),
+				},
+				{
+					path: "finish",
+					name: "UserFinishStep",
+					component: () => import("@/views/Onboarding/User/FinishStep.vue"),
+				},
+			],
+		},
 		{
 			path: "/",
 			name: "home",
