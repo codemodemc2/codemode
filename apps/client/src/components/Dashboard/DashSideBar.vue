@@ -7,11 +7,11 @@
         <router-link to="/dashboard" class="cursor-pointer select-none">
           <div class="flex flex-row items-center justify-center text-xl">
             <p
-              class="bg-gradient-to-r from-sky-500 to-sky-900 bg-clip-text font-extrabold text-transparent"
+              class="bg-gradient-to-r from-brand-primary to-brand-dark bg-clip-text font-extrabold text-transparent"
             >
-              AutoCode
+              Idea
             </p>
-            <p class="font-bold text-gray-800">AI</p>
+            <p class="font-bold text-gray-800">Storm</p>
           </div>
           <hr class="mt-2" />
         </router-link>
@@ -40,85 +40,9 @@
             >
               {{ link.name }}
             </p>
-            
           </div>
         </router-link>
       </div>
-      <hr />
-      <div class="flex flex-col gap-1">
-        <router-link
-          to="/account/settings"
-          class="mx-2 flex flex-row items-center gap-2 rounded-lg bg-gray-100 px-1 py-3 pl-4 hover:bg-sky-100"
-        >
-          <CogIcon class="w-6 text-sm text-sky-900"></CogIcon>
-          <div class="flex w-full flex-row justify-between pr-2">
-            <p class="text-md font-normal">{{ $t("account_settings") }}</p>
-          </div>
-        </router-link>
-      </div>
-    </div>
-
-    <div class="flex flex-col gap-2">
-      <!-- <hr />
-      <div
-        class="
-          cursor-pointer
-          flex flex-row
-          mx-2
-          px-1
-          py-3
-          pl-4
-          items-center
-          gap-2
-          rounded-lg
-          hover:bg-red-50
-        "
-        @click="lout"
-      >
-        <LogoutIcon class="stroke-red-500 w-5" />
-        <div class="flex flex-row justify-between w-full pr-2">
-          <p class="font-normal text-md">Logout</p>
-        </div>
-      </div>
-      <hr />
-      <div class="flex flex-row items-center gap-2 px-4 pt-2 pb-4">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="text-sm text-gray-600 w-8 stroke-sky-900 stroke-1"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
-        <div class="flex flex-col text-xs">
-          <p class="font-medium text-gray-400">
-            {{ $store.getters["user/getUserData"].email }}
-          </p>
-          <router-link to="/account/settings" class="link"
-            >{{ $store.getters["user/getAccountType"] }} account</router-link
-          >
-        </div>
-      </div> -->
-
-      <div
-        class="flex flex-row flex-wrap items-center justify-center divide-x self-center"
-      >
-        <router-link
-          v-for="link in navigation[1]"
-          :to="link.href"
-          class="px-2 text-xs font-medium text-gray-400"
-        >
-          {{ link.name }}
-        </router-link>
-      </div>
-      <p class="p-2 text-center text-xs text-gray-400">
-        © AutoCodeAI {{ year }}
-      </p>
     </div>
   </div>
 </template>
@@ -128,11 +52,10 @@ import {
   LightBulbIcon,
   HomeIcon,
   CogIcon,
-  CodeIcon,
-  ShieldCheckIcon,
-  SwitchHorizontalIcon,
   UserCircleIcon,
+  UserIcon,
   LogoutIcon,
+  QuestionMarkCircleIcon,
 } from "@heroicons/vue/outline";
 const navigation = [
   [
@@ -142,68 +65,37 @@ const navigation = [
       icon: HomeIcon,
     },
     {
-      name: "AutoCode",
-      href: "/dashboard/autocode",
-      icon: CodeIcon,
+      name: "Users",
+      href: "/dashboard/users",
+      icon: UserIcon,
     },
     {
-      name: "CodeExplain",
-      href: "/dashboard/explain",
+      name: "Problems",
+      href: "/dashboard/problems",
+      icon: QuestionMarkCircleIcon,
+    },
+    {
+      name: "Ideas",
+      href: "/dashboard/ideas",
       icon: LightBulbIcon,
-      standard: true,
     },
     {
-      name: "Bug Fixer",
-      href: "/dashboard/fix",
-      icon: ShieldCheckIcon,
-      pro: true,
-    },
-    {
-      name: "TransCode",
-      href: "/dashboard/translate",
-      icon: SwitchHorizontalIcon,
-      soon: true,
-    },
-  ],
-  [
-    {
-      name: "Terms of Service",
-      href: "/terms",
-    },
-    {
-      name: "Privacy Policy",
-      href: "/privacy",
-    },
-    {
-      name: "Contact",
-      href: "/contact",
-    },
-    {
-      name: "About",
-      href: "/about",
-    },
-    {
-      name: "Pricing",
-      href: "/pricing",
+      name: "Settings",
+      href: "/dashboard/settings",
+      icon: CogIcon,
     },
   ],
 ];
 export default {
-  data() {
-    return {
-      navigation,
-    };
-  },
   components: {
     CogIcon,
     UserCircleIcon,
     LogoutIcon,
   },
-  computed: {
-    year: () => {
-      var d = new Date();
-      return d.getFullYear();
-    },
+  data() {
+    return {
+      navigation,
+    };
   },
 };
 </script>

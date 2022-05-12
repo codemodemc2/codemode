@@ -91,9 +91,16 @@ const router = createRouter({
 			name: "DashboardHome",
 			component: () => import("@/views/Dashboard/DashboardHomeView.vue"),
 			redirect: {
-				name: "UserDetailsStep",
+				name: "DashboardView",
 			},
 			children: [
+				{
+					path: "",
+					meta: { title: "Dashboard overview" },
+					name: "DashboardView",
+					component: () =>
+						import("@/views/Dashboard/DashboardView.vue"),
+				},
 				{
 					path: "user",
 					name: "UserDetailsStep",

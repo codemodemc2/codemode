@@ -22,11 +22,11 @@
               <div class="flex flex-row items-center gap-2 xl:hidden">
                 <div class="flex flex-row items-center justify-center text-xl">
                   <p
-                    class="bg-gradient-to-r from-sky-500 to-sky-900 bg-clip-text font-extrabold text-transparent"
+                    class="bg-gradient-to-r from-brand-primary to-brand-dark bg-clip-text font-extrabold text-transparent"
                   >
-                    AutoCode
+                    Idea
                   </p>
-                  <p class="font-bold text-gray-800">AI</p>
+                  <p class="font-bold text-gray-800">Storm</p>
                 </div>
               </div>
             </router-link>
@@ -34,11 +34,11 @@
               <div class="hidden flex-row items-center gap-2 xl:flex">
                 <div class="flex flex-row items-center justify-center text-xl">
                   <p
-                    class="bg-gradient-to-r from-sky-500 to-sky-900 bg-clip-text font-extrabold text-transparent"
+                    class="bg-gradient-to-r from-brand-primary to-brand-dark bg-clip-text font-extrabold text-transparent"
                   >
-                    AutoCode
+                    Idea
                   </p>
-                  <p class="font-bold text-gray-800">AI</p>
+                  <p class="font-bold text-gray-800">Storm</p>
                 </div>
               </div>
             </router-link>
@@ -73,20 +73,8 @@
             >
               {{ link.name }}
             </p>
-            
           </div>
         </router-link>
-        <div class="flex flex-col gap-1">
-          <router-link
-            to="/account/settings"
-            class="mx-2 flex flex-row items-center gap-2 rounded-lg bg-gray-100 px-1 py-3 pl-4 hover:bg-sky-100"
-          >
-            <CogIcon class="w-6 text-sm text-sky-900"></CogIcon>
-            <div class="flex w-full flex-row justify-between pr-2">
-              <p class="text-md font-normal">{{ $t("account_settings") }}</p>
-            </div>
-          </router-link>
-        </div>
       </div>
     </DisclosurePanel>
   </Disclosure>
@@ -104,17 +92,14 @@ import {
   MenuItems,
 } from "@headlessui/vue";
 import {
-  DocumentTextIcon,
   LightBulbIcon,
   HomeIcon,
   CogIcon,
-  CodeIcon,
-  ShieldCheckIcon,
-  SwitchHorizontalIcon,
   QuestionMarkCircleIcon,
   LogoutIcon,
   MenuIcon,
   XIcon,
+  UserIcon,
 } from "@heroicons/vue/outline";
 
 const navigation = [
@@ -125,62 +110,24 @@ const navigation = [
       icon: HomeIcon,
     },
     {
-      name: "AutoCode",
-      href: "/dashboard/autocode",
-      icon: CodeIcon,
+      name: "Users",
+      href: "/dashboard/users",
+      icon: UserIcon,
     },
     {
-      name: "CodeExplain",
-      href: "/dashboard/explain",
-      icon: LightBulbIcon,
-      standard: true,
-    },
-    {
-      name: "Bug Fixer",
-      href: "/dashboard/fix",
-      icon: ShieldCheckIcon,
-      pro: true,
-    },
-    {
-      name: "TransCode",
-      href: "/dashboard/translate",
-      icon: SwitchHorizontalIcon,
-      pro: true,
-      soon: true,
-    },
-  ],
-  [
-    {
-      name: "Terms of Service",
-      href: "/terms",
-    },
-    {
-      name: "Privacy Policy",
-      href: "/privacy",
-    },
-    {
-      name: "Contact",
-      href: "/contact",
-    },
-    {
-      name: "About",
-      href: "/about",
-    },
-    {
-      name: "Pricing",
-      href: "/pricing",
-    },
-  ],
-  [
-    {
-      name: "Documentation",
-      href: "/documentation",
-      icon: DocumentTextIcon,
-    },
-    {
-      name: "Help",
-      href: "/help",
+      name: "Problems",
+      href: "/dashboard/problems",
       icon: QuestionMarkCircleIcon,
+    },
+    {
+      name: "Ideas",
+      href: "/dashboard/ideas",
+      icon: LightBulbIcon,
+    },
+    {
+      name: "Settings",
+      href: "/dashboard/settings",
+      icon: CogIcon,
     },
   ],
 ];
@@ -200,7 +147,7 @@ export default {
   },
   setup() {
     const open = ref(false);
-    
+
     const doClose = (close) => {
       document.getElementById("closeOpenButton").click();
     };
