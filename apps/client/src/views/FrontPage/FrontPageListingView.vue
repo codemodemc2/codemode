@@ -17,7 +17,7 @@
         <PostsView />
       </div>
       <div
-        class="sticky hidden lg:block max-h-min border border-gray-200 col-span-2 rounded-xl p-4"
+        class="sticky hidden lg:block h-min border border-gray-200 col-span-2 rounded-xl p-4"
       >
         <LeaderboardView />
       </div>
