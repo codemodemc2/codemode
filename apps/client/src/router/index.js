@@ -121,7 +121,7 @@ const router = createRouter({
 					path: "",
 					name: "FrontPage",
 					component: () =>
-						import("@/views/Frontpage/FrontPageListingView.vue"),
+						import("@/views/FrontPage/FrontPageListingView.vue"),
 				},
 				{
 					path: "/new-problem",
