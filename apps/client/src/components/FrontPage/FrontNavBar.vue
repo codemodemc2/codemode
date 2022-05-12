@@ -49,7 +49,11 @@
         <div
           class="absolute inset-y-0 right-0 flex items-center sm:static sm:inset-auto sm:ml-6 sm:pr-0"
         >
-          <PencilIcon class="w-5 h-5 text-brand-secondary link" @click="$router.push({ path: '/new-problem' })" v-if="userStore.user_data.is_admin"/>
+          <PencilIcon
+            class="w-5 h-5 text-brand-secondary link"
+            @click="$router.push({ path: '/new-problem' })"
+            v-if="userStore.user_data.is_admin"
+          />
           <!-- Notification dropdown -->
           <Menu as="div" class="ml-3 relative">
             <div>
@@ -163,6 +167,16 @@
               >
                 <div class="px-4 py-2">{{ userStore.user_data.username }}</div>
                 <MenuItem v-slot="{ active }">
+                  <router-link
+                    :to="{ path: '/dashboard' }"
+                    :class="[
+                      active ? 'bg-gray-100' : '',
+                      'block px-4 py-2 text-sm text-gray-700',
+                    ]"
+                    >Dashboard</router-link
+                  >
+                </MenuItem>
+                <MenuItem v-slot="{ active }">
                   <a
                     href="#"
                     :class="[
@@ -201,20 +215,25 @@
 
     <DisclosurePanel class="sm:hidden">
       <div class="px-2 pt-2 pb-3 space-y-1">
-        <DisclosureButton
-          v-for="item in navigation"
-          :key="item.name"
-          as="a"
-          :href="item.href"
-          :class="[
-            item.current
-              ? 'bg-gray-900 text-white'
-              : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-            'block px-3 py-2 rounded-md text-base font-medium',
-          ]"
-          :aria-current="item.current ? 'page' : undefined"
-          >{{ item.name }}</DisclosureButton
+        <div
+          class="hidden sm:flex self-center w-full sm:ml-6 md:px-[10%] xl:px-[20%]"
         >
+          <div
+            class="border-brand-primary w-full border h-10 rounded-lg flex flex-row items-center px-4 gap-4 focus-within:border-sky-900"
+          >
+            <SearchIcon class="text-brand-secondary h-5" />
+            <input
+              type="text"
+              class="w-full h-full outline-none"
+              placeholder="Search for problems and ideas"
+            />
+            <p
+              class="hover:underline text-brand-secondary font-medium text-md hover:cursor-pointer"
+            >
+              Search
+            </p>
+          </div>
+        </div>
       </div>
     </DisclosurePanel>
   </Disclosure>

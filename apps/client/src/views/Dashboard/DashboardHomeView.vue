@@ -17,9 +17,15 @@
               {{ $route.meta.title }}
             </div>
             <div
-              class="mx-5 flex flex-row items-center justify-center gap-5 lg:mx-10"
+              class="mx-5 flex flex-row items-center justify-center gap-2 lg:mx-10"
             >
-              <Menu as="div" class="ml-3 relative">
+              <router-link :to="{ path: '/' }">
+                <ExternalLinkIcon
+                  class="w-6 h-6 m-1 text-sky-700"
+                ></ExternalLinkIcon>
+              </router-link>
+
+              <Menu as="div" class="relative">
                 <div>
                   <MenuButton
                     class="bg-white border-sky-500 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
@@ -91,7 +97,7 @@
 import DashNavBar from "@/components/Dashboard/DashNavBar.vue";
 import DashSideBar from "@/components/Dashboard/DashSideBar.vue";
 import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
-import { UserIcon } from "@heroicons/vue/outline";
+import { UserIcon, ExternalLinkIcon } from "@heroicons/vue/outline";
 import { useUserStore } from "@/stores/user.js";
 let userStore = useUserStore();
 </script>

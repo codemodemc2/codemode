@@ -47,7 +47,6 @@
         <!-- user acc -->
       </div>
     </div>
-
     <DisclosurePanel class="sm:hidden">
       <div class="space-y-1 px-2 pt-2 pb-3">
         <router-link
