@@ -18,7 +18,7 @@ let post = ref({
   content: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde at itaque iure sit recusandae exercitationem ipsum laboriosam, dolore qui voluptatibus ducimus est aut fugit! Autem earum natus dolor dolorem incidunt? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde at itaque iure sit recusandae exercitationem ipsum laboriosam, dolore qui voluptatibus ducimus est aut fugit! Autem earum natus dolor dolorem incidunt?",
   likes: 0,
   user: {
-    username: "lo",
+    username: "lovro.rogina",
   },
   created_at: 0,
 	idea_count: 1,
