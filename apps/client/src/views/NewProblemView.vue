@@ -23,8 +23,6 @@
         <button class="secondary-button">Cancel</button>
       </div>
     </div>
-		
-		<article v-html="content"></article>
 
   </div>
 </template>
@@ -32,5 +30,5 @@
 import Tiptap from "@/components/Tiptap.vue";
 import { ref } from "vue";
 
-let content = ref("emtpy");
+let content = ref("");
 </script>
