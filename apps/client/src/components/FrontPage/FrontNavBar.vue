@@ -49,11 +49,16 @@
         <div
           class="absolute inset-y-0 right-0 flex items-center sm:static sm:inset-auto sm:ml-6 sm:pr-0"
         >
-          <PencilIcon
-            class="w-5 h-5 text-brand-secondary link"
+          <button
+            class="primary-button flex flex-row gap-2 items-center justify-center text-sm"
             @click="$router.push({ path: '/new-problem' })"
-            v-if="userStore.user_data.is_admin"
-          />
+          >
+            New problem
+            <PencilIcon
+              class="w-5 h-5 text-white link"
+              v-if="userStore.user_data.is_admin"
+            />
+          </button>
           <!-- Notification dropdown -->
           <Menu as="div" class="ml-3 relative">
             <div>

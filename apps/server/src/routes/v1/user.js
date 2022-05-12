@@ -125,11 +125,6 @@ module.exports = (router) => {
               email: user.email,
               is_admin: user.is_admin,
               username: user.username,
-              account: {
-                type: user.account.type,
-                premium_expiration_date: user.account.premium_expiration_date,
-                premium_permanent: user.account.premium_permanent,
-              },
               created_at: user.created_at,
             },
           },
@@ -191,11 +186,6 @@ module.exports = (router) => {
               email: user.email,
               is_admin: user.is_admin,
               username: user.username,
-              account: {
-                type: user.account.type,
-                premium_expiration_date: user.account.premium_expiration_date,
-                premium_permanent: user.account.premium_permanent,
-              },
               created_at: user.created_at,
             },
           },

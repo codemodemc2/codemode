@@ -17,18 +17,88 @@
         <div class="relative col-span-2 w-full">
           <Tiptap v-model="content" />
         </div>
+        <div
+          class="relative col-span-2 w-full flex flex-row content-center gap-4"
+        >
+          <Switch
+            v-model="deadlineEnabled"
+            :class="deadlineEnabled ? 'bg-brand-dark' : 'bg-white'"
+            class="relative inline-flex p-[0.1rem] h-7 w-14 shrink-0 cursor-pointer rounded-full border-2 border-brand-dark transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+          >
+            <span class="sr-only">Use setting</span>
+            <span
+              aria-hidden="true"
+              :class="
+                deadlineEnabled
+                  ? 'translate-x-[1.85rem]'
+                  : 'translate-x-0 bg-brand-dark'
+              "
+              class="pointer-events-none inline-block h-[1.25rem] w-[1.25rem] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out"
+            />
+          </Switch>
+          <p class="text-brand-dark font-medium">Problem has a deadline</p>
+        </div>
+        <div class="relative col-span-2 w-full" v-if="deadlineEnabled">
+          <input
+            id="deadline"
+            v-model="deadline"
+            type="datetime-local"
+            class="form-input-style peer placeholder-transparent w-2/"
+            required
+          />
+          <label class="input-label" for="deadline"
+            >Set deadline for this problem</label
+          >
+        </div>
+        <div class="relative col-span-2 w-full">
+          <input
+            id="prize"
+            v-model="prize"
+            type="text"
+            placeholder="Prize for the solution"
+            class="form-input-style peer placeholder-transparent"
+            required
+          />
+          <label class="input-label" for="prize">Prize for the solution</label>
+        </div>
       </form>
       <div class="flex space-x-2">
-        <button class="primary-button">Publish</button>
+        <button class="primary-button" @click="publish()">Publish</button>
         <button class="secondary-button">Cancel</button>
       </div>
     </div>
-
   </div>
 </template>
 <script setup>
 import Tiptap from "@/components/Tiptap.vue";
 import { ref } from "vue";
+import { Switch } from "@headlessui/vue";
+import { postProblem } from "@/helpers/api/problem.js";
+import { errorToast, successToast } from "@/helpers/toast.js";
 
+let title = ref("");
 let content = ref("");
+let deadlineEnabled = ref(false);
+let deadline = ref("");
+let prize = ref("");
+
+let object = () => {
+  return {
+    title: title.value,
+    content: content.value,
+    deadlineEnabled: deadlineEnabled.value,
+    deadline: deadline.value,
+    prize: prize.value,
+  };
+};
+
+let publish = async () => {
+  let success = await postProblem(object());
+	console.log(success);
+  if (success) {
+    successToast("Problem published successfully");
+  } else {
+    errorToast("Problem publishing failed");
+  }
+};
 </script>

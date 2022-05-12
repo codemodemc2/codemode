@@ -41,9 +41,7 @@
       <p class="font-semibold text-xl text-gray-800">
         {{ post.title }}
       </p>
-      <article class="prose line-clamp-[4]">
-        {{ post.content }}
-      </article>
+      <article v-html="post.content"></article>
       <hr />
       <div class="flex flex-row items-center justify-between">
         <div class="flex flex-row items-center">
@@ -53,8 +51,12 @@
             alt=""
           />
           <p class="font-regular text-sm mr-1 text-gray-700">Posted by:</p>
-          <p class="link mr-4 font-medium text-sm">{{ post.user.username }}</p>
-          <p class="font-regular text-sm mr-1 text-gray-700">{{ post.created_at }} ago</p>
+          <p class="link mr-4 font-medium text-sm">
+            {{ post.created_by.username }}
+          </p>
+          <p class="font-regular text-sm mr-1 text-gray-700">
+            {{ formatDate(post.created_at) }}
+          </p>
         </div>
         <div class="flex flex-row gap-1 items-center">
           <DocumentTextIcon class="w-7 h-7 text-brand-secondary stroke-1" />
@@ -82,10 +84,33 @@ let props = defineProps({
   post: Object,
 });
 
-let showedLikes = () => props.post.likes + liked.value;
+let showedLikes = () => props.post.likes.length + liked.value;
 
 let like = () => {
   liked.value = !liked.value;
+};
+
+// function that conversts Date object to human readable format
+let formatDate = (date) => {
+  // from 2022-05-12T20:20:42.850Z to 10h ago
+	date = new Date(date);
+  let now = new Date();
+  let diff = now.getTime() - date.getTime();
+  let days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  let hours = Math.floor(diff / (1000 * 60 * 60));
+  let minutes = Math.floor(diff / (1000 * 60));
+  let seconds = Math.floor(diff / 1000);
+  if (days > 0) {
+    return days + "d ago";
+  } else if (hours > 0) {
+    return hours + "h ago";
+  } else if (minutes > 0) {
+    return minutes + "m ago";
+  } else if (seconds > 0) {
+    return seconds + "s ago";
+  } else {
+    return "now";
+  }
 };
 
 onMounted(() => {
