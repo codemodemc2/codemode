@@ -3,7 +3,10 @@
     v-if="post"
     class="w-full h-auto flex flex-row rounded-lg lg:p-5 p-2 py-10 border border-gray-200"
   >
-    <div class="xl:pl-4 lg:pl-3 md:pl-2 pl-1 flex flex-col items-center">
+    <router-link
+      :to="{ path: `/problem/${post._id}` }"
+      class="xl:pl-4 lg:pl-3 md:pl-2 pl-1 flex flex-col items-center"
+    >
       <TransitionRoot
         v-if="liked"
         appear
@@ -36,16 +39,13 @@
       </TransitionRoot>
 
       <p class="select-none text-sm text-brand-dark">{{ showedLikes }}</p>
-    </div>
+    </router-link>
     <div class="flex flex-col xl:px-8 lg:px-6 px-2 gap-6 w-full">
-      <router-link
-        :to="{ path: `/problem/${post._id}` }"
-        class="font-semibold text-xl text-gray-800"
-      >
+      <p class="font-semibold text-xl text-gray-800">
         {{ post.title }}
-      </router-link>
+      </p>
       <hr />
-      <article class="prose line-clamp-5 prose-sm">
+      <article class="prose">
         <div v-html="post.content" />
       </article>
       <hr />
@@ -98,7 +98,6 @@ let like = async () => {
   liked.value = !liked.value;
 };
 
-
 let formatDate = (date) => {
   date = new Date(date);
   let now = new Date();
@@ -119,5 +118,4 @@ let formatDate = (date) => {
     return "now";
   }
 };
-
 </script>
