@@ -1,6 +1,5 @@
 const Problem = require("@/database/models/problem.js");
 const User = require("@/database/models/user.js");
-const Company = require("@/database/models/company.js");
 const { requireAuthenticated, requireAdmin } = require("@/helpers/auth.js");
 const Mongoose = require("mongoose");
 
@@ -23,8 +22,6 @@ module.exports = (router) => {
 
 		});
 
-		console.log("problem", problem);
-
 		problem.save((err, problem) => {
 			if (err) {
 				res.status(500).json({
@@ -46,9 +43,57 @@ module.exports = (router) => {
 
 		let problems = await Problem.find({ company: Mongoose.Types.ObjectId(user.account.company_id) }).populate("created_by", "username", User);
 
+		problems = problems.map((problem) => {
+			if (problem.likes.includes(user._id)) {
+				problem.liked = true;
+			} else {
+				problem.liked = false;
+			}
+			return problem;
+		});
+
+
 		res.send({
 			success: true,
 			data: problems,
+		});
+	});
+
+
+	router.get("/problem", requireAuthenticated, async (req, res) => {
+
+		const _id = req.query.id;
+		let problem = await Problem.findOne({ _id: Mongoose.Types.ObjectId(_id) }).populate("created_by", "username", User);
+
+		problem.liked = problem.likes.includes(req.user._id);
+
+		res.send({
+			success: true,
+			problem
+		});
+	});
+
+	router.post("/like-problem", requireAuthenticated, async (req, res) => {
+
+		const { id: _id, state } = req.body;
+
+		let problem = await Problem.findOne({ _id: Mongoose.Types.ObjectId(_id) });
+
+		if (state == 1) {
+			if (!problem.likes.includes(req.user._id)) {
+				problem.likes.push(req.user._id);
+			}
+		} else {
+			if (problem.likes.includes(req.user._id)) {
+				problem.likes.splice(problem.likes.indexOf(req.user._id), 1);
+			}
+		}
+
+		await problem.save();
+
+		res.send({
+			success: true,
+			likes: problem.likes.length,
 		});
 	});
 

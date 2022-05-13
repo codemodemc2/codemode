@@ -10,6 +10,7 @@ const ProblemSchema = new mongoose.Schema(
 		deadline: Date,
 		prize: String,
 		likes: [mongoose.Types.ObjectId],
+		liked: Boolean,
 	},
 	{ timestamps: { createdAt: "created_at", updatedAt: "updated_at" } }
 );
