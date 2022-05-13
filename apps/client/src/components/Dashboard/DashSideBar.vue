@@ -4,7 +4,7 @@
   >
     <div class="flex flex-col gap-2">
       <div class="mt-2">
-        <router-link to="/dashboard" class="cursor-pointer select-none">
+        <router-link :to="{ path: '/' }" class="cursor-pointer select-none">
           <div class="flex flex-row items-center justify-center text-xl">
             <p
               class="bg-gradient-to-r from-brand-primary to-brand-dark bg-clip-text font-extrabold text-transparent"

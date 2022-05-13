@@ -16,7 +16,10 @@
         <div
           class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start"
         >
-          <div class="flex-shrink-0 flex items-center">
+          <router-link
+            :to="{ path: '/' }"
+            class="flex-shrink-0 flex items-center"
+          >
             <div class="flex flex-row items-center justify-center text-xl">
               <p
                 class="bg-gradient-to-r from-brand-primary to-brand-dark bg-clip-text font-extrabold text-transparent"
@@ -25,7 +28,7 @@
               </p>
               <p class="font-bold text-gray-800">Storm</p>
             </div>
-          </div>
+          </router-link>
           <div
             class="hidden sm:flex self-center w-full sm:ml-6 md:px-[10%] xl:px-[20%]"
           >

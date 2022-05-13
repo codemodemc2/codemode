@@ -18,7 +18,7 @@
           class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start"
         >
           <div class="flex flex-shrink-0 items-center">
-            <router-link to="/">
+            <router-link :to="{ path: '/' }">
               <div class="flex flex-row items-center gap-2 xl:hidden">
                 <div class="flex flex-row items-center justify-center text-xl">
                   <p
@@ -30,7 +30,7 @@
                 </div>
               </div>
             </router-link>
-            <router-link to="/">
+            <router-link :to="{ path: '/' }">
               <div class="hidden flex-row items-center gap-2 xl:flex">
                 <div class="flex flex-row items-center justify-center text-xl">
                   <p
