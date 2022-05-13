@@ -86,7 +86,7 @@ const router = createRouter({
 				},
 			],
 		},
-    {
+		{
 			path: "/dashboard",
 			name: "DashboardHome",
 			component: () => import("@/views/Dashboard/DashboardHomeView.vue"),
@@ -135,8 +135,14 @@ const router = createRouter({
 					name: "newProblem",
 					component: () => import("@/views/NewProblemView.vue"),
 				},
+				{
+					path: "/problem/:id",
+					name: "problem",
+					component: () => import("@/views/Posts/ProblemPostView.vue"),
+				},
 			],
 		},
+
 
 		{
 			path: "/error",
