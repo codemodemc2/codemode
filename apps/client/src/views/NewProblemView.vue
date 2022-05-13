@@ -75,6 +75,9 @@ import { ref } from "vue";
 import { Switch } from "@headlessui/vue";
 import { postProblem } from "@/helpers/api/problem.js";
 import { errorToast, successToast } from "@/helpers/toast.js";
+import { useRouter } from "vue-router";
+
+let router = useRouter();
 
 let title = ref("");
 let content = ref("");
@@ -93,10 +96,10 @@ let object = () => {
 };
 
 let publish = async () => {
-  let success = await postProblem(object());
-	console.log(success);
-  if (success) {
+  let res = await postProblem(object());
+  if (res) {
     successToast("Problem published successfully");
+    router.push({ path: `/problem/${res.data.data._id}` });
   } else {
     errorToast("Problem publishing failed");
   }
