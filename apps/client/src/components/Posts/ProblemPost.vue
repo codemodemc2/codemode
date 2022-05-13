@@ -97,7 +97,6 @@ let like = async () => {
   liked.value = !liked.value;
   showedLikes.value += liked.value ? 1 : -1;
   let res = await likeProblem(props.post._id, !temp);
-	showedLikes.value = res.data.likes;
 };
 
 let formatDate = (date) => {
