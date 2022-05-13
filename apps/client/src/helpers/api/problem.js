@@ -3,19 +3,41 @@ import axios from "axios";
 export const postProblem = async (data) => {
 	try {
 		const response = await axios.post("/problem", { data });
-		console.log(response);
 		return response;
 	} catch (error) {
-		throw error.response.data.message;
+		console.log(error);
+		throw error;
 	}
 };
 
 export const getProblems = async () => {
 	try {
 		const response = await axios.get("/problems");
-		console.log(response);
 		return response;
 	} catch (error) {
-		throw error.response.data.message;
+		console.log(error);
+		throw error;
 	}
 };
+
+export const getProblem = async (id) => {
+	try {
+		const response = await axios.get(`/problem/?id=${id}`);
+		return response;
+	} catch (error) {
+		console.log(error);
+		throw error;
+	}
+};
+
+
+export const likeProblem = async (id, state) => {
+	try {
+		const response = await axios.post(`/like-problem`, { id, state });
+		return response;
+	} catch (error) {
+		console.log(error);
+		throw error;
+	}
+};
+

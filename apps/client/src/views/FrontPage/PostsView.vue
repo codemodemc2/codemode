@@ -13,8 +13,6 @@ let problems = ref([]);
 
 (async () => {
   let res = await getProblems();
-	problems.value = res.data.data;
-	console.log(problems.value);
-
+  problems.value = res.data.data;
 })();
 </script>
