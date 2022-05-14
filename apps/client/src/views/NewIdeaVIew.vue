@@ -33,7 +33,9 @@
 <script setup>
 import Tiptap from "@/components/Tiptap.vue";
 import { ref } from "vue";
-import { postProblem as postIdea, getProblem } from "@/helpers/api/problem.js";
+import { getProblem } from "@/helpers/api/problem.js";
+import { postIdea } from "@/helpers/api/idea.js";
+
 import { errorToast, successToast } from "@/helpers/toast.js";
 import { useRoute, useRouter } from "vue-router";
 
