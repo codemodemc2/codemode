@@ -9,12 +9,12 @@ module.exports = (router) => {
 
 		let user = req.user;
 
-		const { title, content, has_deadline, deadline, prize } = req.body.data;
+		const { title, content, deadlineEnabled, deadline, prize } = req.body.data;
 
 		let problem = new Problem({
 			title,
 			content,
-			has_deadline: Boolean(has_deadline),
+			has_deadline: Boolean(deadlineEnabled),
 			deadline,
 			prize,
 			created_by: user._id,
@@ -42,15 +42,21 @@ module.exports = (router) => {
 
 		let user = req.user;
 
-		const { title, content } = req.body.data;
+		const { title, content, problemId } = req.body.data;
 
 		let idea = new Idea({
 			title,
 			content,
 			created_by: user._id,
-			company: Mongoose.Types.ObjectId(user.account.company_id)
-
+			company: Mongoose.Types.ObjectId(user.account.company_id),
+			problem: problemId
 		});
+
+		let problem = await Problem.findById(problemId);
+
+		problem.ideas.push(idea._id);
+
+		await problem.save()
 
 		idea.save((err, problem) => {
 			if (err) {
@@ -120,8 +126,6 @@ module.exports = (router) => {
 
 		// remove likes and ideas from response
 		problem.likes = undefined;
-		problem.ideas = undefined;
-
 
 		res.send({
 			success: true,

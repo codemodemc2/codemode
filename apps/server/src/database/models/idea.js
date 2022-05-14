@@ -10,6 +10,7 @@ const IdeaSchema = new mongoose.Schema(
 		won: Boolean,
 		liked: Boolean,
 		like_count: Number,
+		problem: mongoose.Types.ObjectId
 	},
 	{ timestamps: { createdAt: "created_at", updatedAt: "updated_at" } }
 );
