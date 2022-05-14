@@ -2,8 +2,9 @@ import axios from "axios";
 import router from "@/router";
 import { useUserStore } from '@/stores/user.js';
 
-
 axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
+console.log(import.meta.env)
+console.log(axios.defaults.baseURL)
 axios.defaults.withCredentials = true;
 
 axios.interceptors.response.use(

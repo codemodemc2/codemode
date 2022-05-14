@@ -40,7 +40,7 @@
               Ideas ({{ problem.idea_count }})
             </p>
             <router-link
-              :to="{ path: '/new-idea' }"
+              :to="{ name: 'newIdea', params: { id: problem._id } }"
               class="relative col-span-2 w-full"
             >
               <input
@@ -49,6 +49,9 @@
                 disabled
               />
             </router-link>
+            <div v-for="idea in problem.ideas">
+              {{idea}}
+            </div>
           </div>
         </div>
       </div>
