@@ -145,6 +145,11 @@ const router = createRouter({
 					name: "problem",
 					component: () => import("@/views/Posts/ProblemPostView.vue"),
 				},
+				{
+					path: "/idea/:id",
+					name: "idea",
+					component: () => import("@/views/Posts/IdeaPostView.vue"),
+				},
 			],
 		},
 

@@ -28,8 +28,8 @@
       "
     >
       <div v-if="show" class="lg:col-span-4 gap-7 flex flex-col pb-20">
-        <ProblemPost :post="problem" />
-        <div
+        <IdeaPost :post="idea" />
+        <!-- <div
           class="
             border border-gray-200
             rounded-lg
@@ -78,9 +78,9 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
-      <div class="sticky hidden lg:flex flex-col h-min col-span-2 gap-4">
+      <!-- <div class="sticky hidden lg:flex flex-col h-min col-span-2 gap-4">
         <div
           class="border-brand-primary border rounded-xl px-5 py-6 flex flex-col"
         >
@@ -115,28 +115,28 @@
         >
           <p>empty</p>
         </div>
-      </div>
+      </div> -->
     </div>
   </TransitionRoot>
 </template>
 
 <script setup>
 import { TransitionRoot } from "@headlessui/vue";
-import { getProblem } from "@/helpers/api/problem.js";
+import { getIdea } from "@/helpers/api/idea.js";
 import { useRoute, useRouter } from "vue-router";
-import ProblemPost from "@/components/Posts/ProblemPost.vue";
+import IdeaPost from "@/components/Posts/IdeaPost.vue";
 import { computed, ref } from "vue";
 import IdeaListing from "@/components/Posts/IdeaListing.vue";
 
 let route = useRoute();
 let router = useRouter();
 
-let problem = ref({});
+let idea = ref({});
 let show = ref(false);
 
 let timeLeft = computed(() => {
   let now = new Date();
-  let deadline = new Date(problem.value.deadline);
+  let deadline = new Date(idea.value.deadline);
   let timeDiff = deadline.getTime() - now.getTime();
   let seconds = Math.floor(timeDiff / 1000);
   let minutes = Math.floor(seconds / 60);
@@ -150,8 +150,8 @@ let timeLeft = computed(() => {
 
 (async () => {
   try {
-    let res = await getProblem(route.params.id);
-    problem.value = res.data.problem;
+    let res = await getIdea(route.params.id);
+    idea.value = res.data.idea;
     show.value = true;
   } catch (error) {
     if (error.response.status === 404) {

@@ -134,6 +134,39 @@ module.exports = (router) => {
 
 	});
 
+	router.get("/idea", requireAuthenticated, async (req, res, next) => {
+
+		const _id = req.query.id;
+
+		if (!_id) {
+			return res.status(500).json({
+				success: false,
+				message: "No idea id provided",
+			});
+		}
+
+		let idea = {};
+		try {
+			idea = await Idea.findById(_id).populate("created_by", "username", User);
+		} catch (error) {
+			return next({ status: 404, message: "Error finding idea" });
+		}
+
+		if (!idea) return next({ status: 404, message: "Idea with that id not found" });
+
+		idea.liked = idea.likes.includes(req.user._id);
+		idea.like_count = idea.likes.length;
+
+		// remove likes and ideas from response
+		idea.likes = undefined;
+
+		res.send({
+			success: true,
+			idea
+		});
+
+	});
+
 	router.post("/like-problem", requireAuthenticated, async (req, res) => {
 
 		const { id: _id, state } = req.body;
