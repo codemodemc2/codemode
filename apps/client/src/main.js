@@ -13,6 +13,7 @@ import "vue-toastification/dist/index.css";
 
 let pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);
+import "@/helpers/axios_config.js";
 
 const app = createApp(App);
 
@@ -27,5 +28,3 @@ app.use(Toast, {
 
 
 app.mount("#app");
-
-import "@/helpers/axios_config.js";

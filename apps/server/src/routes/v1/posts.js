@@ -1,4 +1,5 @@
 const Problem = require("@/database/models/problem.js");
+const Idea = require("@/database/models/idea.js");
 const User = require("@/database/models/user.js");
 const { requireAuthenticated, requireAdmin } = require("@/helpers/auth.js");
 const Mongoose = require("mongoose");
@@ -6,15 +7,14 @@ const Mongoose = require("mongoose");
 module.exports = (router) => {
 	router.post("/problem", requireAdmin, async (req, res) => {
 
-		let user = await User.findOne({ _id: req.user._id });
-		console.log("user", user);
+		let user = req.user;
 
 		const { title, content, has_deadline, deadline, prize } = req.body.data;
 
 		let problem = new Problem({
 			title,
 			content,
-			has_deadline,
+			has_deadline: Boolean(has_deadline),
 			deadline,
 			prize,
 			created_by: user._id,
@@ -38,8 +38,39 @@ module.exports = (router) => {
 		});
 	});
 
+	router.post("/idea", requireAuthenticated, async (req, res) => {
+
+		let user = req.user;
+
+		const { title, content } = req.body.data;
+
+		let idea = new Idea({
+			title,
+			content,
+			created_by: user._id,
+			company: Mongoose.Types.ObjectId(user.account.company_id)
+
+		});
+
+		idea.save((err, problem) => {
+			if (err) {
+				res.status(500).json({
+					success: false,
+					message: "Error creating idea",
+				});
+			} else {
+				res.send({
+					success: true,
+					message: "Idea created",
+					data: problem,
+				});
+			}
+		});
+	});
+
+
 	router.get("/problems", requireAuthenticated, async (req, res) => {
-		let user = await User.findOne({ _id: req.user._id });
+		let user = req.user;
 
 		let problems = await Problem.find({ company: Mongoose.Types.ObjectId(user.account.company_id) }).populate("created_by", "username", User);
 
@@ -49,6 +80,9 @@ module.exports = (router) => {
 			} else {
 				problem.liked = false;
 			}
+			problem.like_count = problem.likes.length;
+			problem.idea_count = problem.ideas.length;
+
 			return problem;
 		});
 
@@ -60,22 +94,53 @@ module.exports = (router) => {
 	});
 
 
-	router.get("/problem", requireAuthenticated, async (req, res) => {
+	router.get("/problem", requireAuthenticated, async (req, res, next) => {
 
 		const _id = req.query.id;
-		let problem = await Problem.findOne({ _id: Mongoose.Types.ObjectId(_id) }).populate("created_by", "username", User);
+
+		if (!_id) {
+			return res.status(500).json({
+				success: false,
+				message: "No problem id provided",
+			});
+		}
+
+		let problem = {};
+		try {
+			problem = await Problem.findOne({ _id: Mongoose.Types.ObjectId(_id) }).populate("created_by", "username", User);
+		} catch (error) {
+			return next({ status: 404, message: "Error finding problem" });
+		}
+
+		if (!problem) return next({ status: 404, message: "Problem with that id not found" });
 
 		problem.liked = problem.likes.includes(req.user._id);
+		problem.like_count = problem.likes.length;
+		problem.idea_count = problem.ideas.length;
+
+		// remove likes and ideas from response
+		problem.likes = undefined;
+		problem.ideas = undefined;
+
 
 		res.send({
 			success: true,
 			problem
 		});
+
 	});
 
 	router.post("/like-problem", requireAuthenticated, async (req, res) => {
 
 		const { id: _id, state } = req.body;
+
+		if (!_id || typeof (state) == "undefined") {
+			console.log(_id, state);
+			return res.status(400).json({
+				success: false,
+				message: "Missing required fields",
+			});
+		}
 
 		let problem = await Problem.findOne({ _id: Mongoose.Types.ObjectId(_id) });
 

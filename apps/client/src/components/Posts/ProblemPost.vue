@@ -3,10 +3,7 @@
     v-if="post"
     class="w-full h-auto flex flex-row rounded-lg lg:p-5 p-2 py-10 border border-gray-200"
   >
-    <router-link
-      :to="{ path: `/problem/${post._id}` }"
-      class="xl:pl-4 lg:pl-3 md:pl-2 pl-1 flex flex-col items-center"
-    >
+    <div class="xl:pl-4 lg:pl-3 md:pl-2 pl-1 flex flex-col items-center">
       <TransitionRoot
         v-if="liked"
         appear
@@ -20,7 +17,7 @@
         leave-to="opacity-0 scale-0 rotate-[720deg]"
         @click="like"
       >
-        <LikedIcon class="w-7 h-7 stroke-1 text-brand-secondary" />
+        <LikedIcon class="w-7 h-7 stroke-1 mt-2 text-brand-secondary" />
       </TransitionRoot>
       <TransitionRoot
         v-else
@@ -35,11 +32,11 @@
         leave-to="opacity-0 scale-0 rotate-[-720deg]"
         @click="like"
       >
-        <NotLikedIcon class="w-7 h-7 stroke-1 text-brand-secondary" />
+        <NotLikedIcon class="w-7 h-7 stroke-1 mt-2 text-brand-secondary" />
       </TransitionRoot>
 
       <p class="select-none text-sm text-brand-dark">{{ showedLikes }}</p>
-    </router-link>
+    </div>
     <div class="flex flex-col xl:px-8 lg:px-6 px-2 gap-6 w-full">
       <p class="font-semibold text-xl text-gray-800">
         {{ post.title }}
@@ -90,7 +87,7 @@ let props = defineProps({
 
 let liked = ref(props.post.liked);
 
-let showedLikes = ref(props.post.likes.length);
+let showedLikes = ref(props.post.like_count);
 
 let like = async () => {
   let temp = liked.value;

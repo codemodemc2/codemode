@@ -1,26 +1,22 @@
 const mongoose = require("mongoose");
 
-const ProblemSchema = new mongoose.Schema(
+const IdeaSchema = new mongoose.Schema(
 	{
 		title: String,
 		content: String,
 		created_by: mongoose.Types.ObjectId,
 		company: mongoose.Types.ObjectId,
-		has_deadline: Boolean,
-		deadline: Date,
-		prize: String,
 		likes: [mongoose.Types.ObjectId],
+		won: Boolean,
 		liked: Boolean,
-		ideas: [mongoose.Types.ObjectId],
-		idea_count: Number,
 		like_count: Number,
 	},
 	{ timestamps: { createdAt: "created_at", updatedAt: "updated_at" } }
 );
 
-const Problem = mongoose.model("problems", ProblemSchema);
+const Idea = mongoose.model("ideas", IdeaSchema);
 
-ProblemSchema.index({ '$**': 'text' });
+IdeaSchema.index({ '$**': 'text' });
 
-module.exports = Problem;
+module.exports = Idea;
 
