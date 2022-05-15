@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col gap-5 w-full items-center pt-20 h-screen">
+  <div class="flex flex-col gap-5 w-full items-center pt-20 h-screen bg-white">
     <div class="w-1/2">
       <div class="pb-10">
         <p class="text-4xl font-bold text-sky-800">
@@ -7,7 +7,7 @@
         </p>
         <p v-if="problem" class="text-lg text-gray-400">{{ problem.title }}</p>
       </div>
-      <form class="mb-5 flex flex-col gap-5">
+      <form class="mb-5 flex flex-col gap-5" @submit.prevent>
         <div class="relative col-span-2 w-full">
           <input
             id="title"

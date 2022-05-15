@@ -1,23 +1,28 @@
 <template>
-  <div
-    class="border border-brand-dark px-4 py-2 flex flex-col gap-1 rounded-lg"
+  <router-link
     v-if="i"
+    :to="{ name: 'idea', params: { id: i._id } }"
+    class="border border-gray-200 px-4 py-2 flex flex-col gap-1 rounded-lg"
   >
     <div class="flex flex-row gap-1 text-sm items-center">
-      <p class="text-sm font-thin">Posted by:</p>
-      <div class="flex flex-row items-center text-brand-dark">
+      <p class="text-sm font-light">Posted by:</p>
+      <div class="flex flex-row gap-[0.1rem] items-center text-brand-dark">
         <UserCircleIcon class="h-6 stroke-1" />
         {{ i.created_by.username }}
       </div>
       <p>•</p>
-      <p>{{ formatDate(i.created_at) }}</p>
+      <p>{{ formatDate(i.created_at) }} ago</p>
+      <p>•</p>
+      <p>
+        <span class="link">{{ i.like_count }}</span> likes
+      </p>
     </div>
     <hr />
     <p class="font-medium">{{ i.title }}</p>
     <div class="prose prose-sm line-clamp-3">
       <div v-html="i.content"></div>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script setup>

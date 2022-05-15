@@ -28,7 +28,7 @@
       "
     >
       <div v-if="show" class="lg:col-span-4 gap-7 flex flex-col pb-20">
-        <ProblemPost :post="problem" />
+        <ProblemPost :post="problem" class="bg-white"/>
         <div
           class="
             border border-gray-200
@@ -37,11 +37,13 @@
             p-5
             flex flex-col
             gap-1
+						h-min
+						bg-white
           "
         >
           <div
             v-if="problem.idea_count < 1"
-            class="flex flex-col justify-center items-center py-5"
+            class="flex flex-col justify-center items-center py-5 "
           >
             <p class="text-center text-xl text-brand-dark font-semibold">
               There are no ideas for this problem yet.
@@ -72,7 +74,7 @@
                 disabled
               />
             </router-link>
-            <div class="flex flex-col gap-2 py-4">
+            <div class="flex flex-col gap-2 pt-4">
               <div v-for="idea in problem.ideas">
                 <IdeaListing :idea="idea" />
               </div>
@@ -82,7 +84,7 @@
       </div>
       <div class="sticky hidden lg:flex flex-col h-min col-span-2 gap-4">
         <div
-          class="border-brand-primary border rounded-xl px-5 py-6 flex flex-col"
+          class="border-brand-primary border rounded-xl px-5 py-6 flex flex-col bg-white"
         >
           <p class="text-brand-dark text-xl font-semibold text-center">
             Solve this problem and win
@@ -101,7 +103,7 @@
         </div>
         <div
           v-if="problem.has_deadline"
-          class="border-brand-primary border rounded-xl px-5 py-6 flex flex-col"
+          class="border-brand-primary border rounded-xl px-5 py-6 flex flex-col bg-white"
         >
           <p class="text-brand-dark text-xl font-semibold text-center">
             Time left
@@ -111,7 +113,7 @@
           </p>
         </div>
         <div
-          class="border-brand-dark border rounded-xl px-5 py-6 flex flex-col"
+          class="border-brand-dark border rounded-xl px-5 py-6 flex flex-col bg-white"
         >
           <p>empty</p>
         </div>

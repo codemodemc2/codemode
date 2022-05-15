@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="post"
-    class="w-full h-auto flex flex-row rounded-lg lg:p-5 p-2 py-10 border border-gray-200"
+    class="w-full h-auto flex flex-row rounded-lg lg:p-5 p-2 py-10 border border-gray-200 bg-white"
   >
     <div class="xl:pl-4 lg:pl-3 md:pl-2 pl-1 flex flex-col items-center">
       <TransitionRoot

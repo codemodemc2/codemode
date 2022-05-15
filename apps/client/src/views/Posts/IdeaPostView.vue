@@ -11,24 +11,10 @@
     class="overflow-y-auto justify-center flex"
   >
     <div
-      class="
-        grid grid-flow-col
-        lg:grid-cols-6
-        py-10
-        grid-cols-1
-        gap-7
-        h-screen
-        justify-center
-        snap-parent
-        xl:w-[60%]
-        lg:w-[70%]
-        md:w-[80%]
-        sm:w-[90%]
-        xs:w-[100%]
-      "
+      class="grid grid-flow-col lg:grid-cols-6 py-10 grid-cols-1 gap-7 h-screen justify-center snap-parent xl:w-[60%] lg:w-[70%] md:w-[80%] sm:w-[90%] xs:w-[100%]"
     >
       <div v-if="show" class="lg:col-span-4 gap-7 flex flex-col pb-20">
-        <IdeaPost :post="idea" />
+        <IdeaPost :post="idea"/>
         <!-- <div
           class="
             border border-gray-200
