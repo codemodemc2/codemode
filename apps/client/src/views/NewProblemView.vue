@@ -15,7 +15,7 @@
           <label class="input-label" for="title">Title</label>
         </div>
         <div class="relative col-span-2 w-full">
-          <Tiptap v-model="content" />
+          <Tiptap v-model="content" class="min-h-[20rem]"/>
         </div>
         <div
           class="relative col-span-2 w-full flex flex-row content-center gap-4"

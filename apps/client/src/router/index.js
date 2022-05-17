@@ -101,22 +101,6 @@ const router = createRouter({
 					component: () =>
 						import("@/views/Dashboard/DashboardView.vue"),
 				},
-				{
-					path: "user",
-					name: "UserDetailsStep",
-					component: () =>
-						import("@/views/Onboarding/User/UserDetailsStep.vue"),
-				},
-				{
-					path: "password",
-					name: "UserPasswordStep",
-					component: () => import("@/views/Onboarding/User/PasswordStep.vue"),
-				},
-				{
-					path: "finish",
-					name: "UserFinishStep",
-					component: () => import("@/views/Onboarding/User/FinishStep.vue"),
-				},
 			],
 		},
 		{

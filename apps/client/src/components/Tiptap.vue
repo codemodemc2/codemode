@@ -243,7 +243,7 @@ export default {
 }
 
 .ProseMirror {
-  @apply min-h-[15rem] max-h-[50rem] overflow-y-auto outline-none p-1 pt-2 border-t border-brand-secondary;
+  @apply min-h-[7rem] max-h-[30rem] overflow-y-auto outline-none p-1 pt-2 border-t border-brand-secondary;
 }
 
 h1 {

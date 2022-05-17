@@ -42,7 +42,7 @@
         {{ post.title }}
       </p>
       <hr />
-      <article class="prose">
+      <article class="prose -my-8">
         <div v-html="post.content" />
       </article>
       <hr />
@@ -62,9 +62,9 @@
           </p>
         </div>
         <div class="flex flex-row gap-1 items-center">
-          <DocumentTextIcon class="w-7 h-7 text-brand-secondary stroke-1" />
-          <p class="font-regular text-sm mr-1 text-gray-700">Ideas:</p>
-          <p class="link mr-4 font-medium text-sm">{{ post.idea_count }}</p>
+          <ChatIcon class="w-7 h-7 text-brand-secondary stroke-1" />
+          <p class="font-regular text-sm mr-1 text-gray-700">Comments:</p>
+          <p class="link mr-4 font-medium text-sm">{{ post.comment_count }}</p>
         </div>
       </div>
     </div>
@@ -76,6 +76,7 @@ import { ThumbUpIcon as LikedIcon } from "@heroicons/vue/solid";
 import {
   ThumbUpIcon as NotLikedIcon,
   DocumentTextIcon,
+	ChatIcon
 } from "@heroicons/vue/outline";
 import { onMounted, ref } from "vue";
 import { TransitionRoot } from "@headlessui/vue";

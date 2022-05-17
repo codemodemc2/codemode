@@ -14,68 +14,59 @@
       class="grid grid-flow-col lg:grid-cols-6 py-10 grid-cols-1 gap-7 h-screen justify-center snap-parent xl:w-[60%] lg:w-[70%] md:w-[80%] sm:w-[90%] xs:w-[100%]"
     >
       <div v-if="show" class="lg:col-span-4 gap-7 flex flex-col pb-20">
-        <IdeaPost :post="idea"/>
-        <!-- <div
-          class="
-            border border-gray-200
-            rounded-lg
-            h-full
-            p-5
-            flex flex-col
-            gap-1
-          "
+        <IdeaPost :post="idea" />
+        <div
+          v-if="idea"
+          class="border border-gray-200 bg-white rounded-lg h-min p-5 flex flex-col gap-1"
         >
-          <div
-            v-if="problem.idea_count < 1"
-            class="flex flex-col justify-center items-center py-5"
-          >
-            <p class="text-center text-xl text-brand-dark font-semibold">
-              There are no ideas for this problem yet.
-            </p>
-            <p class="text-center text-xl text-brand-dark font-semibold">
-              Be the first one to post an idea!
-            </p>
-            <button
-              class="primary-button my-4"
-              @click="
-                $router.push({ name: 'newIdea', params: { id: problem._id } })
-              "
-            >
-              Post an idea
-            </button>
-          </div>
-          <div v-else>
+          <div>
             <p class="text-sm text-gray-600">
-              Ideas ({{ problem.idea_count }})
+              Comments ({{ idea.comment_count }})
             </p>
-            <router-link
-              :to="{ name: 'newIdea', params: { id: problem._id } }"
-              class="relative col-span-2 w-full"
-            >
-              <input
-                placeholder="Post your idea"
-                class="form-input-style cursor-pointer"
-                disabled
-              />
-            </router-link>
-            <div class="flex flex-col gap-2 py-4">
-              <div v-for="idea in problem.ideas">
-                <IdeaListing :idea="idea" />
+
+            <div @click="writingComment = true" v-if="!writingComment">
+              <div class="relative col-span-2 w-full">
+                <input
+                  type="text"
+                  placeholder="Write a comment"
+                  class="form-input-style select-none"
+                  maxlength="30"
+                  disabled
+                />
               </div>
             </div>
+
+            <div v-if="writingComment" class="flex flex-col gap-2">
+              <Tiptap v-model="comment" class="min-h-[1rem]" />
+              <div class="flex flex-row gap-2">
+                <button class="primary-button" @click="publishComment()">
+                  Comment
+                </button>
+                <button
+                  class="secondary-button"
+                  @click="writingComment = false"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+
+            <div class="flex flex-col gap-2 py-4">
+              <CommentListing :post-id="idea._id" />
+            </div>
           </div>
-        </div> -->
+        </div>
       </div>
-      <!-- <div class="sticky hidden lg:flex flex-col h-min col-span-2 gap-4">
+      <div class="sticky hidden lg:flex flex-col h-min col-span-2 gap-4">
         <div
           class="border-brand-primary border rounded-xl px-5 py-6 flex flex-col"
         >
           <p class="text-brand-dark text-xl font-semibold text-center">
-            Solve this problem and win
+            Solve this idea and win
           </p>
-          <div v-if="problem.prize">
+          <div v-if="idea.prize">
             <p class="text-brand-primary text-2xl font-semibold text-center">
-              {{ problem.prize }}
+              {{ idea.prize }}
             </p>
             <p class="text-center">+ 100 shop points</p>
           </div>
@@ -86,7 +77,7 @@
           </div>
         </div>
         <div
-          v-if="problem.has_deadline"
+          v-if="idea.has_deadline"
           class="border-brand-primary border rounded-xl px-5 py-6 flex flex-col"
         >
           <p class="text-brand-dark text-xl font-semibold text-center">
@@ -101,7 +92,7 @@
         >
           <p>empty</p>
         </div>
-      </div> -->
+      </div>
     </div>
   </TransitionRoot>
 </template>
@@ -112,13 +103,20 @@ import { getIdea } from "@/helpers/api/idea.js";
 import { useRoute, useRouter } from "vue-router";
 import IdeaPost from "@/components/Posts/IdeaPost.vue";
 import { computed, ref } from "vue";
-import IdeaListing from "@/components/Posts/IdeaListing.vue";
+import Tiptap from "@/components/Tiptap.vue";
+import CommentListing from "@/components/Comments/CommentListing.vue";
+import { postComment } from "@/helpers/api/comment.js";
+import { errorToast, successToast } from "../../helpers/toast.js";
 
 let route = useRoute();
 let router = useRouter();
 
 let idea = ref({});
 let show = ref(false);
+
+let writingComment = ref(false);
+
+let comment = ref("");
 
 let timeLeft = computed(() => {
   let now = new Date();
@@ -151,4 +149,22 @@ let timeLeft = computed(() => {
     }
   }
 })();
+
+let publishComment = async () => {
+  try {
+    if (!comment.value.length > 0) {
+      return errorToast("Please enter a comment");
+    }
+    let res = await postComment({
+      content: comment.value,
+      level: 0,
+      parent: idea.value._id,
+    });
+    comment.value = "";
+    writingComment.value = false;
+    successToast("Comment posted!");
+  } catch (error) {
+    errorToast("Failed to post comment");
+  }
+};
 </script>

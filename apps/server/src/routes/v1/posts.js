@@ -1,6 +1,8 @@
 const Problem = require("@/database/models/problem.js");
 const Idea = require("@/database/models/idea.js");
 const User = require("@/database/models/user.js");
+const Comment = require("@/database/models/comment.js");
+
 const { requireAuthenticated, requireAdmin } = require("@/helpers/auth.js");
 const Mongoose = require("mongoose");
 
@@ -56,7 +58,7 @@ module.exports = (router) => {
 
 		problem.ideas.push(idea._id);
 
-		await problem.save()
+		await problem.save();
 
 		idea.save((err, problem) => {
 			if (err) {
@@ -79,6 +81,7 @@ module.exports = (router) => {
 		let user = req.user;
 
 		let problems = await Problem.find({ company: Mongoose.Types.ObjectId(user.account.company_id) }).populate("created_by", "username", User);
+		console.log(problems);
 
 		problems = problems.map((problem) => {
 			if (problem.likes.includes(user._id)) {
@@ -124,7 +127,6 @@ module.exports = (router) => {
 		problem.like_count = problem.likes.length;
 		problem.idea_count = problem.ideas.length;
 
-		// remove likes and ideas from response
 		problem.likes = undefined;
 
 		res.send({
@@ -147,7 +149,7 @@ module.exports = (router) => {
 
 		let idea = {};
 		try {
-			idea = await Idea.findById(_id).populate("created_by", "username", User);
+			idea = await Idea.findById(_id).populate("created_by", "username", User).populate("problem", Problem);
 		} catch (error) {
 			return next({ status: 404, message: "Error finding idea" });
 		}
@@ -157,8 +159,10 @@ module.exports = (router) => {
 		idea.liked = idea.likes.includes(req.user._id);
 		idea.like_count = idea.likes.length;
 
-		// remove likes and ideas from response
 		idea.likes = undefined;
+
+		let comment_count = await Comment.countDocuments({ parent: idea._id });
+		idea.comment_count = comment_count;
 
 		res.send({
 			success: true,
@@ -196,6 +200,40 @@ module.exports = (router) => {
 		res.send({
 			success: true,
 			likes: problem.likes.length,
+		});
+	});
+
+
+
+	router.post("/like-idea", requireAuthenticated, async (req, res) => {
+
+		const { id: _id, state } = req.body;
+
+		if (!_id || typeof (state) == "undefined") {
+			console.log(_id, state);
+			return res.status(400).json({
+				success: false,
+				message: "Missing required fields",
+			});
+		}
+
+		let idea = await Idea.findOne({ _id: Mongoose.Types.ObjectId(_id) });
+
+		if (state == 1) {
+			if (!idea.likes.includes(req.user._id)) {
+				idea.likes.push(req.user._id);
+			}
+		} else {
+			if (idea.likes.includes(req.user._id)) {
+				idea.likes.splice(idea.likes.indexOf(req.user._id), 1);
+			}
+		}
+
+		await idea.save();
+
+		res.send({
+			success: true,
+			likes: idea.likes.length,
 		});
 	});
 

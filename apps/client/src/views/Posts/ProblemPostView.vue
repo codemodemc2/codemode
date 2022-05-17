@@ -61,7 +61,7 @@
             </button>
           </div>
           <div v-else>
-            <p class="text-sm text-gray-600">
+            <p class="text-sm text-gray-600 pb-1">
               Ideas ({{ problem.idea_count }})
             </p>
             <router-link

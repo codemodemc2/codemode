@@ -9,6 +9,6 @@ const InviteLinkSchema = new mongoose.Schema(
   { timestamps: { createdAt: "created_at", updatedAt: "updated_at" } }
 );
 
-const InviteLink = mongoose.model("invite_link", InviteLinkSchema);
+const InviteLink = mongoose.model("invite_links", InviteLinkSchema);
 
 module.exports = InviteLink;

@@ -45,7 +45,7 @@
         {{ post.title }}
       </router-link>
       <hr />
-      <article class="prose line-clamp-5 prose-sm">
+      <article class="prose line-clamp-5 prose-sm -my-4">
         <div v-html="post.content" />
       </article>
       <hr />
