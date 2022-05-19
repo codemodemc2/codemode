@@ -2,7 +2,7 @@
   <div class="relative grid h-screen grid-cols-1 lg:grid-cols-2">
     <div
       class="absolute top-5 left-5 cursor-pointer"
-      @click="$router.push({ name: 'Home' })"
+      @click="$router.push({ name: 'home' })"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
