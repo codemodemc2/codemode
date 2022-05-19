@@ -4,6 +4,8 @@
 
 Instukcije za instalaciju IdeaStorm stranice na Ubuntu server
 
+## Backend
+
 ### Preduvjeti
 Trebati će vam:
 - Server sa operativnim sustavum Ubuntu 18.04 or Ubuntu 20.04 sa barem 1GM RAM-a
@@ -57,15 +59,15 @@ nano .env
 i ispunite ju sa sljedećim podatcima
 
 ```
-PORT=
-NODE_ENV=
-COOKIE_SECRET=
-DBURL=
-DBNAME=
-NGINX_ENABLED=
-REDIS_PASSWORD=
-GITHUB_SECRET=
-FRONTEND_URL=
+PORT=8080
+NODE_ENV=development ili production
+COOKIE_SECRET=cookie_secret
+DBURL=url za mongodb
+DBNAME=ime mongo baze
+NGINX_ENABLED=true
+REDIS_PASSWORD=redis lozinka
+GITHUB_SECRET=github webhook secret
+FRONTEND_URL=domena
 ```
 
 
@@ -76,4 +78,13 @@ FRONTEND_URL=
 npm install pm2 -g
 ```
 
+### Pokretanje servera
+Promjenite mapu u `~/codemode/apps/server` te instalirajte sve potrebne biblioteke
+```
+npm i
+```
 
+Pokrenite server sa naredbom
+```
+pm2 start process.json  --watch
+```
