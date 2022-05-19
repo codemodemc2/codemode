@@ -42,6 +42,7 @@
     <div class="flex flex-col xl:px-8 lg:px-6 px-2 gap-6 w-full">
       <p class="font-semibold text-2xl text-gray-800">
         {{ post.title }}
+				<span class="bg-brand-dark p-1 text-white rounded-lg text-base">PROBLEM</span>
       </p>
       <hr />
       <article class="prose">
