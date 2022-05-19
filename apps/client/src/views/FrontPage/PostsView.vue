@@ -74,7 +74,11 @@ let problems = ref([]);
 
 const plans = [
   {
-    name: "Newest",
+    name: "Old",
+    id: 0,
+  },
+  {
+    name: "New",
     id: 1,
   },
   {
@@ -94,7 +98,12 @@ const selected = ref(plans[0]);
 })();
 
 let updateSort = (id) => {
-  if (id == 1) {
+  if (id == 0) {
+    // sort problems by oldest by created_at field
+    problems.value = problems.value.sort((a, b) => {
+      return a.created_at > b.created_at ? 1 : -1;
+    });
+  } else if (id == 1) {
     // sort problems by newest by created_at field
     problems.value.sort((a, b) => {
       return new Date(b.created_at) - new Date(a.created_at);
