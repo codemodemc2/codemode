@@ -81,7 +81,6 @@ module.exports = (router) => {
 		let user = req.user;
 
 		let problems = await Problem.find({ company: Mongoose.Types.ObjectId(user.account.company_id) }).populate("created_by", "username", User);
-		console.log(problems);
 
 		problems = problems.map((problem) => {
 			if (problem.likes.includes(user._id)) {

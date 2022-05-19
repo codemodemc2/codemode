@@ -53,13 +53,13 @@
           class="absolute inset-y-0 right-0 flex items-center sm:static sm:inset-auto sm:ml-6 sm:pr-0"
         >
           <button
+              v-if="userStore.user_data.is_admin"
             class="primary-button flex flex-row gap-2 items-center justify-center text-sm"
             @click="$router.push({ path: '/new-problem' })"
           >
             New problem
             <PencilIcon
               class="w-5 h-5 text-white link"
-              v-if="userStore.user_data.is_admin"
             />
           </button>
           <!-- Notification dropdown -->
