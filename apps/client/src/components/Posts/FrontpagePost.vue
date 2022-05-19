@@ -15,7 +15,7 @@
         leave="transition-all transform duration-500"
         leave-from="opacity-100 scale-100 rotate-0"
         leave-to="opacity-0 scale-0 rotate-[720deg]"
-				class="cursor-pointer"
+        class="cursor-pointer"
         @click="like"
       >
         <LikedIcon class="w-7 h-7 stroke-1 mt-2 text-brand-secondary" />
@@ -31,7 +31,7 @@
         leave="transition-all transform duration-500"
         leave-from="opacity-100 scale-100 rotate-0"
         leave-to="opacity-0 scale-0 rotate-[-720deg]"
-				class="cursor-pointer"
+        class="cursor-pointer"
         @click="like"
       >
         <NotLikedIcon class="w-7 h-7 stroke-1 mt-2 text-brand-secondary" />
@@ -50,13 +50,16 @@
       <article class="prose line-clamp-5 prose-sm -my-4">
         <div v-html="post.summary" />
       </article>
-      <hr v-if="post.prize.length > 0" />
-      <div
-        v-if="post.prize.length > 0"
-        class="flex flex-row gap-2 text-xl -my-4"
-      >
+      <hr />
+      <div class="flex flex-row gap-2 text-xl -my-4">
         <p class="text-brand-dark font-bold">Prize:</p>
-        <p class="link">{{ post.prize }}</p>
+        <p v-if="post.prize.length > 0" class="link">
+          {{ post.prize }}
+          <span class="font-normal text-base text-gray-700"
+            >+ 100 shop points</span
+          >
+        </p>
+        <p v-else class="link">100 shop points</p>
       </div>
       <hr />
       <div class="flex flex-row items-center justify-between">
@@ -70,6 +73,14 @@
           </p>
           <p class="font-regular text-sm mr-1 text-gray-700">
             {{ formatDate(post.created_at) }}
+          </p>
+          <p
+            v-if="post.has_deadline"
+            class="font-regular space-x-1 text-sm ml-2"
+          >
+            <span class="text-brand-dark font-bold">Deadline:</span>
+
+            <span class="text-red-400">{{ timeLeft(post.deadline) }}</span>
           </p>
         </div>
         <div class="flex flex-row gap-1 items-center">
@@ -89,7 +100,7 @@ import {
   DocumentTextIcon,
   UserCircleIcon,
 } from "@heroicons/vue/outline";
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 import { TransitionRoot } from "@headlessui/vue";
 import { likeProblem } from "@/helpers/api/problem.js";
 
@@ -127,5 +138,19 @@ let formatDate = (date) => {
   } else {
     return "now";
   }
+};
+
+let timeLeft = (d) => {
+  let now = new Date();
+  let deadline = new Date(d);
+  let timeDiff = deadline.getTime() - now.getTime();
+  let seconds = Math.floor(timeDiff / 1000);
+  let minutes = Math.floor(seconds / 60);
+  let hours = Math.floor(minutes / 60);
+  let days = Math.floor(hours / 24);
+  hours %= 24;
+  minutes %= 60;
+  seconds %= 60;
+  return `${days}d ${hours}h ${minutes}m`;
 };
 </script>

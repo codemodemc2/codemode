@@ -1,7 +1,7 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
   <Disclosure as="nav" v-slot="{ open }" class="bg-white">
-    <div class="max-w-full xl mx-auto px-2 sm:px-6 lg:px-16">
+    <div class="max-w-full xl mx-auto px-2 sm:px-6 lg:px-16 z-50">
       <div class="relative flex items-center justify-between h-16">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
           <!-- Mobile menu button-->
@@ -53,20 +53,18 @@
           class="absolute inset-y-0 right-0 flex items-center sm:static sm:inset-auto sm:ml-6 sm:pr-0"
         >
           <button
-              v-if="userStore.user_data.is_admin"
+            v-if="userStore.user_data.is_admin"
             class="primary-button flex flex-row gap-2 items-center justify-center text-sm"
             @click="$router.push({ path: '/new-problem' })"
           >
             New problem
-            <PencilIcon
-              class="w-5 h-5 text-white link"
-            />
+            <PencilIcon class="w-5 h-5 text-white link" />
           </button>
           <!-- Notification dropdown -->
           <Menu as="div" class="ml-3 relative">
             <div>
               <MenuButton
-                class="bg-white border-sky-500 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                class="bg-white border-sky-500 z-50 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
               >
                 <span class="sr-only">Open user menu</span>
                 <BellIcon
@@ -84,7 +82,7 @@
               leave-to-class="transform opacity-0 scale-95"
             >
               <MenuItems
-                class="origin-top-right absolute flex flex-col right-0 mt-2 w-96 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                class="origin-top-right z-50 absolute flex flex-col right-0 mt-2 w-96 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
               >
                 <div class="px-4 py-2 flex flex-row justify-between">
                   <p class="font-bold text-gray-700">Notifications</p>
@@ -96,7 +94,7 @@
                     href="#"
                     :class="[
                       active ? 'bg-gray-100' : '',
-                      'flex flex-row justify-between items-center text-sm text-gray-700',
+                      'flex flex-row justify-between items-center text-sm text-gray-700 z-50',
                     ]"
                   >
                     <div

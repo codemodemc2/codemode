@@ -237,5 +237,40 @@ module.exports = (router) => {
 		});
 	});
 
+	router.get("/top-ideas", async (req, res, next) => {
+
+		let problemId = req.query.id;
+
+		if (!problemId) {
+			return next({ status: 400, message: "No problem id provided" });
+		}
+
+		let problem = await Problem.findById(problemId);
+
+
+		if (!problem) {
+			return next({ status: 404, message: "Problem with that id not found" });
+		}
+
+		let topIdeas = await Idea.find({ problem: problem._id }).sort({ likes: -1 }).limit(3);
+
+		let ideas = await Idea.find({ _id: { $in: topIdeas.map(i => i._id) } }).populate("created_by", "username", User);
+
+		// map like_count to every idea
+
+		ideas = ideas.map(idea => {
+			idea.like_count = idea.likes.length;
+			idea.likes = undefined;
+			return idea;
+		});
+
+
+
+		res.send({
+			success: true,
+			ideas,
+		});
+	});
+
 	return router;
 };

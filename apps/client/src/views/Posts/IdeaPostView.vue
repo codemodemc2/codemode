@@ -58,40 +58,19 @@
         </div>
       </div>
       <div class="sticky hidden lg:flex flex-col h-min col-span-2 gap-4">
-        <div
-          class="border-brand-primary border rounded-xl px-5 py-6 flex flex-col"
+        <router-link
+          :to="{ path: `/problem/${idea.problem}` }"
+          class="border-brand-primary border rounded-xl px-5 py-6 flex flex-col bg-white"
         >
-          <p class="text-brand-dark text-xl font-semibold text-center">
-            Solve this idea and win
+          <p class="text-brand-dark text-base font-semibold text-center">
+            See the problem this idea was posted for ->
           </p>
           <div v-if="idea.prize">
             <p class="text-brand-primary text-2xl font-semibold text-center">
               {{ idea.prize }}
             </p>
-            <p class="text-center">+ 100 shop points</p>
           </div>
-          <div v-else>
-            <p class="text-brand-primary text-2xl font-semibold text-center">
-              100 shop points
-            </p>
-          </div>
-        </div>
-        <div
-          v-if="idea.has_deadline"
-          class="border-brand-primary border rounded-xl px-5 py-6 flex flex-col"
-        >
-          <p class="text-brand-dark text-xl font-semibold text-center">
-            Time left
-          </p>
-          <p class="text-brand-primary text-2xl font-semibold text-center">
-            {{ timeLeft }}
-          </p>
-        </div>
-        <div
-          class="border-brand-dark border rounded-xl px-5 py-6 flex flex-col"
-        >
-          <p>empty</p>
-        </div>
+        </router-link>
       </div>
     </div>
   </TransitionRoot>

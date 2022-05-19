@@ -1,5 +1,5 @@
 <template>
-  <div v-if="comments">
+  <div v-if="comments.length > 0">
     <div class="flex flex-col">
       <div
         v-for="parent in comments"
@@ -9,6 +9,11 @@
         <CommentComponent :comment="parent" />
       </div>
     </div>
+  </div>
+  <div v-else class="flex flex-col items-center justify-center py-10">
+    <p class="text-brand-dark text-xl">No comments yet.</p>
+    <p class="text-brand-dark text-xl">Be the first one to comment on this idea!</p>
+		
   </div>
 </template>
 <script setup>
@@ -20,7 +25,6 @@ import CommentComponent from "./CommentComponent.vue";
 let props = defineProps(["postId"]);
 
 let comments = ref([]);
-
 
 (async () => {
   try {

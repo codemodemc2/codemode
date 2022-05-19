@@ -31,6 +31,18 @@ export const getProblem = async (id) => {
 };
 
 
+export const getTopIdeas = async (id) => {
+	try {
+		const response = await axios.get(`/top-ideas/?id=${id}`);
+		return response;
+	} catch (error) {
+		console.log(error);
+		throw error;
+	}
+};
+
+
+
 export const likeProblem = async (id, state) => {
 	try {
 		const response = await axios.post(`/like-problem`, { id, state });

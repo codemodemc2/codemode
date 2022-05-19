@@ -92,7 +92,7 @@
         <div
           class="border-brand-primary border rounded-xl px-5 py-6 flex flex-col bg-white"
         >
-          <ProblemLeaderboard />
+          <ProblemLeaderboard :id="$route.params.id" />
         </div>
       </div>
     </div>
@@ -101,7 +101,7 @@
 
 <script setup>
 import { TransitionRoot } from "@headlessui/vue";
-import { getProblem } from "@/helpers/api/problem.js";
+import { getProblem, getTopIdeas } from "@/helpers/api/problem.js";
 import { useRoute, useRouter } from "vue-router";
 import ProblemPost from "@/components/Posts/ProblemPost.vue";
 import { computed, ref } from "vue";
