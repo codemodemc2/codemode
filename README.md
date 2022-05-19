@@ -1,4 +1,4 @@
-# IdeaStorm
+# [IdeaStorm](https://ideastorm.social)
 
 ## Instalacijske instrukcije za IdeaStorm
 
