@@ -4,7 +4,11 @@
       <p class="text-2xl text-brand-dark font-bold">LEADERBOARD</p>
       <p class="text-gray-700 text-sm">Top 3 employees this month</p>
     </div>
-    <div class="flex flex-col justify-center items-center gap-4 py-5 w-full">
+
+    <div
+      v-if="users.length > 0"
+      class="flex flex-col justify-center items-center gap-4 py-5 w-full"
+    >
       <div
         v-for="user in users"
         :key="user._id"
@@ -27,6 +31,9 @@
           <span class="font-medium">pts.</span>
         </p>
       </div>
+    </div>
+    <div v-else class="flex flex-col h-max justify-center items-center p-5">
+      <p class="text-brand-dark text-2xl font-bold">Leaderboard is empty</p>
     </div>
   </div>
 </template>
