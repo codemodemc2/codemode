@@ -38,7 +38,7 @@
               </div>
               <div class="flex w-full flex-col items-center">
                 <button
-                  @click="$router.push({ name: 'Register' })"
+                  @click="$router.push({ name: 'register' })"
                   class="primary-button text-xl"
                 >
                   Get started

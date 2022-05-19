@@ -1,5 +1,5 @@
 <template>
-  <div class="relative grid h-screen grid-cols-1 lg:grid-cols-2">
+  <div class="relative flex-col justify-center h-screen ">
     <div
       class="absolute top-5 left-5 cursor-pointer"
       @click="$router.push({ name: 'home' })"
