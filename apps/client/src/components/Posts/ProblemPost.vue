@@ -15,6 +15,7 @@
         leave="transition-all transform duration-500"
         leave-from="opacity-100 scale-100 rotate-0"
         leave-to="opacity-0 scale-0 rotate-[720deg]"
+				class="cursor-pointer"
         @click="like"
       >
         <LikedIcon class="w-7 h-7 stroke-1 mt-2 text-brand-secondary" />
@@ -30,6 +31,7 @@
         leave="transition-all transform duration-500"
         leave-from="opacity-100 scale-100 rotate-0"
         leave-to="opacity-0 scale-0 rotate-[-720deg]"
+				class="cursor-pointer"
         @click="like"
       >
         <NotLikedIcon class="w-7 h-7 stroke-1 mt-2 text-brand-secondary" />
