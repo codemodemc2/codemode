@@ -47,6 +47,8 @@ let employees = ref([
     position: 3,
     name: "Mihael Panjkrc",
     points: 100,
+    img: "/images/crownbronze.png",
+
   },
 ]);
 </script>
