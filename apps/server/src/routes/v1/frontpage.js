@@ -6,7 +6,7 @@ module.exports = (router) => {
 
 		let ideas = await Idea.find({});
 
-		let users = await User.find({}).select("-password");
+		let users = await User.find({ company: req.user.account.company_id }).select("-password");
 
 		users.forEach(user => {
 			let userIdeas = ideas.filter(idea => String(idea.created_by) == String(user._id));
