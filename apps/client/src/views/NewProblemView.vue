@@ -15,7 +15,7 @@
           <label class="input-label" for="title">Title</label>
         </div>
         <div class="relative col-span-2 w-full">
-          <Tiptap v-model="content" class="min-h-[20rem]"/>
+          <Tiptap v-model="content" class="min-h-[20rem]" />
         </div>
         <div
           class="relative col-span-2 w-full flex flex-row content-center gap-4"
@@ -96,6 +96,12 @@ let object = () => {
 };
 
 let publish = async () => {
+  if (title.value.length == 0) {
+    return errorToast("Title can't be empty");
+  }
+  if (content.value.length == 0) {
+    return errorToast("Content can't be empty");
+  }
   let res = await postProblem(object());
   if (res) {
     successToast("Problem published successfully");

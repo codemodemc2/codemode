@@ -20,7 +20,7 @@
           <label class="input-label" for="title">Title</label>
         </div>
         <div class="relative col-span-2 w-full">
-          <Tiptap v-model="content" class="min-h-[20rem]"/>
+          <Tiptap v-model="content" class="min-h-[20rem]" />
         </div>
       </form>
       <div class="flex space-x-2">
@@ -61,11 +61,22 @@ let problem = ref(null);
     problem.value = res.data.problem;
   } catch (error) {
     console.log(error);
-    router.push({ name: "Error", error_code: error.response.status, error_message: error.response.data.message });
+    router.push({
+      name: "Error",
+      error_code: error.response.status,
+      error_message: error.response.data.message,
+    });
   }
 })();
 
 let publish = async () => {
+  if (!title.value.length == 0) {
+    return errorToast("Title can't be empty");
+  }
+  if (!content.value.length == 0) {
+    return errorToast("Content can't be empty");
+  }
+
   let res = await postIdea(object());
   if (res) {
     successToast("Idea published successfully");
