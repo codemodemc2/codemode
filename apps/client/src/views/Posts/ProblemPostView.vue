@@ -11,39 +11,16 @@
     class="overflow-y-auto justify-center flex"
   >
     <div
-      class="
-        grid grid-flow-col
-        lg:grid-cols-6
-        py-10
-        grid-cols-1
-        gap-7
-        h-screen
-        justify-center
-        snap-parent
-        xl:w-[60%]
-        lg:w-[70%]
-        md:w-[80%]
-        sm:w-[90%]
-        xs:w-[100%]
-      "
+      class="grid grid-flow-col lg:grid-cols-6 py-10 grid-cols-1 gap-7 h-screen justify-center snap-parent xl:w-[60%] lg:w-[70%] md:w-[80%] sm:w-[90%] xs:w-[100%]"
     >
       <div v-if="show" class="lg:col-span-4 gap-7 flex flex-col pb-20">
-        <ProblemPost :post="problem" class="bg-white"/>
+        <ProblemPost :post="problem" class="bg-white" />
         <div
-          class="
-            border border-gray-200
-            rounded-lg
-            h-full
-            p-5
-            flex flex-col
-            gap-1
-						h-min
-						bg-white
-          "
+          class="border border-gray-200 rounded-lg h-full p-5 flex flex-col gap-1 h-min bg-white"
         >
           <div
             v-if="problem.idea_count < 1"
-            class="flex flex-col justify-center items-center py-5 "
+            class="flex flex-col justify-center items-center py-5"
           >
             <p class="text-center text-xl text-brand-dark font-semibold">
               There are no ideas for this problem yet.
@@ -113,9 +90,9 @@
           </p>
         </div>
         <div
-          class="border-brand-dark border rounded-xl px-5 py-6 flex flex-col bg-white"
+          class="border-brand-primary border rounded-xl px-5 py-6 flex flex-col bg-white"
         >
-          <p>empty</p>
+          <ProblemLeaderboard />
         </div>
       </div>
     </div>
@@ -129,6 +106,7 @@ import { useRoute, useRouter } from "vue-router";
 import ProblemPost from "@/components/Posts/ProblemPost.vue";
 import { computed, ref } from "vue";
 import IdeaListing from "@/components/Posts/IdeaListing.vue";
+import ProblemLeaderboard from "@/components/Posts/ProblemLeaderboard.vue";
 
 let route = useRoute();
 let router = useRouter();
