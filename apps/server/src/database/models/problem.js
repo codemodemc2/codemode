@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const ProblemSchema = new mongoose.Schema(
 	{
 		title: String,
+		summary: String,
 		content: String,
 		created_by: mongoose.Types.ObjectId,
 		company: mongoose.Types.ObjectId,

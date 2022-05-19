@@ -40,21 +40,19 @@
     <div class="flex flex-col xl:px-8 lg:px-6 px-2 gap-6 w-full">
       <router-link
         :to="{ path: `/problem/${post._id}` }"
-        class="font-semibold text-xl text-gray-800"
+        class="font-semibold text-2xl text-gray-800"
       >
         {{ post.title }}
       </router-link>
       <hr />
       <article class="prose line-clamp-5 prose-sm -my-4">
-        <div v-html="post.content" />
+        <div v-html="post.summary" />
       </article>
       <hr />
       <div class="flex flex-row items-center justify-between">
         <div class="flex flex-row items-center">
-          <img
-            class="w-8 rounded-full mr-2"
-            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-            alt=""
+          <UserCircleIcon
+            class="w-8 rounded-full mr-2 stroke-1 text-brand-dark	"
           />
           <p class="font-regular text-sm mr-1 text-gray-700">Posted by:</p>
           <p class="link mr-4 font-medium text-sm">
@@ -79,6 +77,7 @@ import { ThumbUpIcon as LikedIcon } from "@heroicons/vue/solid";
 import {
   ThumbUpIcon as NotLikedIcon,
   DocumentTextIcon,
+	UserCircleIcon
 } from "@heroicons/vue/outline";
 import { onMounted, ref } from "vue";
 import { TransitionRoot } from "@headlessui/vue";

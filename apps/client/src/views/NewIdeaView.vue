@@ -70,10 +70,10 @@ let problem = ref(null);
 })();
 
 let publish = async () => {
-  if (!title.value.length == 0) {
+  if (title.value.length == 0) {
     return errorToast("Title can't be empty");
   }
-  if (!content.value.length == 0) {
+  if (content.value.length == 0) {
     return errorToast("Content can't be empty");
   }
 

@@ -38,7 +38,7 @@
       <p class="select-none text-sm text-brand-dark">{{ showedLikes }}</p>
     </div>
     <div class="flex flex-col xl:px-8 lg:px-6 px-2 gap-6 w-full">
-      <p class="font-semibold text-xl text-gray-800">
+      <p class="font-semibold text-2xl text-gray-800">
         {{ post.title }}
       </p>
       <hr />

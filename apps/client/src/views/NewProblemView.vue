@@ -15,6 +15,17 @@
           <label class="input-label" for="title">Title</label>
         </div>
         <div class="relative col-span-2 w-full">
+          <textarea
+            id="title"
+            v-model="summary"
+            type="text"
+            placeholder="Summary"
+            class="form-input-style peer placeholder-transparent"
+            required
+          />
+          <label class="input-label" for="title">Summary</label>
+        </div>
+        <div class="relative col-span-2 w-full">
           <Tiptap v-model="content" class="min-h-[20rem]" />
         </div>
         <div
@@ -84,6 +95,7 @@ let content = ref("");
 let deadlineEnabled = ref(false);
 let deadline = ref("");
 let prize = ref("");
+let summary = ref("");
 
 let object = () => {
   return {
@@ -92,10 +104,14 @@ let object = () => {
     deadlineEnabled: deadlineEnabled.value,
     deadline: deadline.value,
     prize: prize.value,
+    summary: summary.value,
   };
 };
 
 let publish = async () => {
+  if (summary.value.length == 0) {
+    return errorToast("Summary can't be empty");
+  }
   if (title.value.length == 0) {
     return errorToast("Title can't be empty");
   }

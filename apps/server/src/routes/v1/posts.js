@@ -11,16 +11,17 @@ module.exports = (router) => {
 
 		let user = req.user;
 
-		const { title, content, deadlineEnabled, deadline, prize } = req.body.data;
+		const { title, content, deadlineEnabled, deadline, prize, summary } = req.body.data;
 
 		let problem = new Problem({
 			title,
+			summary,
 			content,
 			has_deadline: Boolean(deadlineEnabled),
 			deadline,
 			prize,
 			created_by: user._id,
-			company: Mongoose.Types.ObjectId(user.account.company_id)
+			company: Mongoose.Types.ObjectId(user.account.company_id),
 
 		});
 
