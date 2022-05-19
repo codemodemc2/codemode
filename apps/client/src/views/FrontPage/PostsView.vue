@@ -1,64 +1,44 @@
 <template>
   <div
-    class="w-full h-10 input-form-style bg-white rounded-lg border border-gray flex flex-row"
+    class="w-full h-max min-h-[3rem] input-form-style bg-white rounded-lg border border-gray flex flex-row"
   >
-    sort by
-    <Listbox v-model="selectedPerson">
-      <div class="relative mt-1">
-        <ListboxButton
-          class="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
-        >
-          <span class="block truncate">{{ selectedPerson.name }}</span>
-          <span
-            class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2"
+    <div class="mx-auto w-full flex flex-row gap-10 px-10 items-center">
+      <p class="uppercase text-brand-dark font-bold text-sm">sort by:</p>
+      <RadioGroup v-model="selected">
+        <div class="flex flex-row gap-2">
+          <RadioGroupOption
+            v-for="plan in plans"
+            :key="plan.name"
+            v-slot="{ active, checked }"
+            as="template"
+            :value="plan"
           >
-            <SelectorIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
-          </span>
-        </ListboxButton>
-
-        <transition
-          leave-active-class="transition duration-100 ease-in"
-          leave-from-class="opacity-100"
-          leave-to-class="opacity-0"
-        >
-          <ListboxOptions
-            class="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
-          >
-            <ListboxOption
-              v-slot="{ active, selected }"
-              v-for="person in people"
-              :key="person.name"
-              :value="person"
-              as="template"
+            <div
+              :class="[
+                active
+                  ? 'ring-2 ring-white ring-opacity-60 ring-offset-2 ring-offset-brand-light'
+                  : '',
+                checked
+                  ? 'bg-brand-dark bg-opacity-75 text-white'
+                  : 'bg-white ',
+              ]"
+              class="relative flex cursor-pointer rounded-lg focus:outline-none"
             >
-              <li
-                :class="[
-                  active ? 'bg-amber-100 text-amber-900' : 'text-gray-900',
-                  'relative cursor-default select-none py-2 pl-10 pr-4',
-                ]"
+              <RadioGroupLabel
+                as="p"
+                :class="checked ? 'text-white' : 'text-gray-900'"
+                class="font-medium py-1 px-2"
               >
-                <span
-                  :class="[
-                    selected ? 'font-medium' : 'font-normal',
-                    'block truncate',
-                  ]"
-                  >{{ person.name }}</span
-                >
-                <span
-                  v-if="selected"
-                  class="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600"
-                >
-                  <CheckIcon class="h-5 w-5" aria-hidden="true" />
-                </span>
-              </li>
-            </ListboxOption>
-          </ListboxOptions>
-        </transition>
-      </div>
-    </Listbox>
+                {{ plan.name }}
+              </RadioGroupLabel>
+            </div>
+          </RadioGroupOption>
+        </div>
+      </RadioGroup>
+    </div>
   </div>
-  <div v-if="problems.length > 0">
-    <div v-for="problem in problems" class="flex flex-col gap-4">
+  <div v-if="problems.length > 0" class="flex flex-col gap-6">
+    <div v-for="problem in problems" :key="problem._id">
       <FrontpagePostVue :post="problem" />
     </div>
   </div>
@@ -86,41 +66,51 @@ import { ref, watch } from "vue";
 import { getProblems } from "@/helpers/api/problem.js";
 import { PencilIcon } from "@heroicons/vue/outline";
 import { useUserStore } from "@/stores/user.js";
-import {
-  Listbox,
-  ListboxButton,
-  ListboxOptions,
-  ListboxOption,
-} from "@headlessui/vue";
-import { CheckIcon, SelectorIcon } from "@heroicons/vue/solid";
+import { RadioGroup, RadioGroupLabel, RadioGroupOption } from "@headlessui/vue";
 
 let userStore = useUserStore();
 
 let problems = ref([]);
 
-const people = [
+const plans = [
   {
-    name: "default",
+    name: "Newest",
     id: 1,
   },
-  { name: "Arlene Mccoy" },
-  { name: "Devon Webb" },
-  { name: "Tom Cook" },
-  { name: "Tanya Fox" },
-  { name: "Hellen Schmidt" },
+  {
+    name: "Likes",
+    id: 2,
+  },
+  {
+    name: "Deadline",
+    id: 3,
+  },
 ];
-const selectedPerson = ref(people[0]);
 
+const selected = ref(plans[0]);
 (async () => {
   let res = await getProblems();
   problems.value = res.data.data;
 })();
 
 let updateSort = (id) => {
-  console.log("Ok");
+  if (id == 1) {
+    // sort problems by newest by created_at field
+    problems.value.sort((a, b) => {
+      return new Date(b.created_at) - new Date(a.created_at);
+    });
+  } else if (id == 2) {
+    problems.value.sort((a, b) => {
+      return b.like_count - a.like_count;
+    });
+  } else if (id == 3) {
+    problems.value.sort((a, b) => {
+      return new Date(b.deadline) - new Date(a.deadline);
+    });
+  }
 };
 
-watch(selectedPerson, async (newQuestion, oldQuestion) => {
+watch(selected, async (newQuestion, oldQuestion) => {
   updateSort(newQuestion.id);
 });
 </script>

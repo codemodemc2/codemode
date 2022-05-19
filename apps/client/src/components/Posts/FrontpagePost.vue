@@ -48,11 +48,19 @@
       <article class="prose line-clamp-5 prose-sm -my-4">
         <div v-html="post.summary" />
       </article>
+      <hr v-if="post.prize.length > 0" />
+      <div
+        v-if="post.prize.length > 0"
+        class="flex flex-row gap-2 text-xl -my-4"
+      >
+        <p class="text-brand-dark font-bold">Prize:</p>
+        <p class="link">{{ post.prize }}</p>
+      </div>
       <hr />
       <div class="flex flex-row items-center justify-between">
         <div class="flex flex-row items-center">
           <UserCircleIcon
-            class="w-8 rounded-full mr-2 stroke-1 text-brand-dark	"
+            class="w-8 rounded-full mr-2 stroke-1 text-brand-dark"
           />
           <p class="font-regular text-sm mr-1 text-gray-700">Posted by:</p>
           <p class="link mr-4 font-medium text-sm">
@@ -77,7 +85,7 @@ import { ThumbUpIcon as LikedIcon } from "@heroicons/vue/solid";
 import {
   ThumbUpIcon as NotLikedIcon,
   DocumentTextIcon,
-	UserCircleIcon
+  UserCircleIcon,
 } from "@heroicons/vue/outline";
 import { onMounted, ref } from "vue";
 import { TransitionRoot } from "@headlessui/vue";
