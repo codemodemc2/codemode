@@ -25,7 +25,7 @@
       </form>
       <div class="flex space-x-2">
         <button class="primary-button" @click="publish()">Post</button>
-        <button class="secondary-button">Cancel</button>
+        <button class="secondary-button" @click="$router.go(-1)">Cancel</button>
       </div>
     </div>
   </div>
