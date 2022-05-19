@@ -1,14 +1,14 @@
 <template>
   <div class="relative">
     <div
-      class="home-bg absolute top-0 -z-50 h-full w-full bg-fixed blur-[1px] filter"
+      class="home-bg absolute top-0 h-full z-0 w-full bg-fixed blur-[1px] filter"
     />
     <div
-      class="absolute top-0 -z-10 h-full w-full bg-gradient-to-br from-transparent via-gray-50 to-gray-100 bg-fixed"
+      class="absolute top-0 z-10 h-full w-full bg-gradient-to-br from-transparent via-gray-50 to-gray-100 bg-fixed"
     />
-    <div class="flex min-h-screen flex-col">
+    <div class="flex min-h-screen  flex-col">
       <FrontNav class="top-0 z-50" />
-      <div class="flex flex-col">
+      <div class="flex flex-col z-20">
         <div
           class="relative flex flex-col overflow-visible overflow-x-clip pb-[5rem]"
         >
@@ -30,63 +30,27 @@
               <div class="flex w-full flex-col items-center">
                 <p
                   class="text-center text-base font-medium text-gray-600 lg:text-lg xl:text-xl"
-                >              
+                >
                   <br />
                   Web solution for discovering ideas inside your company
-                  <br />              
+                  <br />
                 </p>
               </div>
               <div class="flex w-full flex-col items-center">
                 <button
-                  @click="$router.push({ name: 'register' })"
                   class="primary-button text-xl"
+                  @click="$router.push({ name: 'register' })"
                 >
                   Get started
                 </button>
               </div>
             </div>
-            
           </div>
           <div
             class="absolute -left-60 top-80 z-10 h-[20vh] w-[200vw] -rotate-[10deg] transform bg-gradient-to-r from-sky-400 to-sky-600"
           ></div>
         </div>
-        <!-- <div class="relative -z-10 flex min-h-[200vh] flex-col overflow-clip">
-          <div class="flex flex-col gap-10">
-<div
-              class="4k:text-9xl flex w-full flex-col items-center pt-14 text-4xl font-extrabold text-gray-800 md:text-5xl lg:text-6xl xl:text-7xl"
-            >
-              <p>
-                Your
-                <span
-                  class="bg-gradient-to-r from-sky-400 to-sky-700 bg-clip-text text-transparent"
-                  >personal</span
-                >
-                AI
-              </p>
-              <p>programmer</p>
-            </div>
-           <div class="flex flex-col gap-[2rem]">
-              <div class="flex w-full flex-col items-center">
-                <p class="text-center text-xl font-medium text-gray-600">
-                  AutoCodeAI will help you write code with the power of AI.
-                  <br />
-                  It can also fix your bugs.
-                </p>
-              </div>
-              <div class="flex w-full flex-col items-center">
-                <button
-                  @click="$router.push({ name: 'Register' })"
-                  class="primary-button text-xl"
-                >
-                  Get started
-                </button>
-              </div>
-            </div>
-          </div>
-        </div> -->
       </div>
-      <!-- <FrontFooter /> -->
     </div>
   </div>
 </template>
