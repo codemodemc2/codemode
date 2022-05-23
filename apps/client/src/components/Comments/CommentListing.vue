@@ -6,7 +6,7 @@
         :key="parent._id"
         class="flex flex-col gap-4"
       >
-        <CommentComponent :comment="parent" @refresh="refreshComments"/>
+        <CommentComponent :comment="parent" @refresh="refreshComments" />
       </div>
     </div>
   </div>
@@ -39,7 +39,5 @@ let refreshComments = async () => {
 
 refreshComments();
 
-defineExpose({
-	refreshComments,
-});
+defineExpose({ refreshComments });
 </script>
