@@ -98,6 +98,8 @@ import { successToast, errorToast } from "@/helpers/toast.js";
 
 import { ref } from "vue";
 
+const emit = defineEmits(["refresh"]);
+
 let props = defineProps(["comment"]);
 
 let formatDate = (date) => {
@@ -146,6 +148,7 @@ let reply = async () => {
     });
     content.value = "";
     writingComment.value = false;
+    emit("refresh");
     successToast("Comment posted!");
   } catch (error) {
     errorToast("Failed to post comment");
