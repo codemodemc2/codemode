@@ -38,38 +38,40 @@
       </TransitionRoot>
 
       <p class="select-none text-sm text-brand-dark">{{ showedLikes }}</p>
-      <TransitionRoot
-        v-if="checked"
-        appear
-        :show="checked"
-        enter="transition-all transform duration-500"
-        enter-from="opacity-0 scale-0 rotate-[720deg]"
-        enter-to="opacity-100 scale-[110%] rotate-0"
-        entered="opacity-100 scale-100"
-        leave="transition-all transform duration-500"
-        leave-from="opacity-100 scale-100 rotate-0"
-        leave-to="opacity-0 scale-0 rotate-[-720deg]"
-        class="cursor-pointer"
-        @click="check"
-      >
-        <CheckSolidIcon class="w-7 h-7 stroke-1 mt-2 text-brand-secondary" />
-      </TransitionRoot>
-      <TransitionRoot
-        v-else
-        appear
-        :show="!checked"
-        enter="transition-all transform duration-500"
-        enter-from="opacity-0 scale-0 rotate-[-720deg]"
-        enter-to="opacity-100 scale-[110%] rotate-0"
-        entered="opacity-100 scale-100"
-        leave="transition-all transform duration-500"
-        leave-from="opacity-100 scale-100 rotate-0"
-        leave-to="opacity-0 scale-0 rotate-[720deg]"
-        class="cursor-pointer"
-        @click="check"
-      >
-        <CheckOutlineIcon class="w-7 h-7 stroke-1 mt-2 text-gray-400" />
-      </TransitionRoot>
+      <div v-if="userStore.user_data.is_admin">
+        <TransitionRoot
+          v-if="checked"
+          appear
+          :show="checked"
+          enter="transition-all transform duration-500"
+          enter-from="opacity-0 scale-0 rotate-[-720deg]"
+          enter-to="opacity-100 scale-[110%] rotate-0"
+          entered="opacity-100 scale-100"
+          leave="transition-all transform duration-500"
+          leave-from="opacity-100 scale-100 rotate-0"
+          leave-to="opacity-0 scale-0 rotate-[720deg]"
+          class="cursor-pointer"
+          @click="check"
+        >
+          <CheckSolidIcon class="w-7 h-7 stroke-1 mt-2 text-brand-secondary" />
+        </TransitionRoot>
+        <TransitionRoot
+          v-else
+          appear
+          :show="!checked"
+          enter="transition-all transform duration-500"
+          enter-from="opacity-0 scale-0 rotate-[720deg]"
+          enter-to="opacity-100 scale-[110%] rotate-0"
+          entered="opacity-100 scale-100"
+          leave="transition-all transform duration-500"
+          leave-from="opacity-100 scale-100 rotate-0"
+          leave-to="opacity-0 scale-0 rotate-[-720deg]"
+          class="cursor-pointer"
+          @click="check"
+        >
+          <CheckOutlineIcon class="w-7 h-7 stroke-1 mt-2 text-gray-400" />
+        </TransitionRoot>
+      </div>
     </div>
     <div class="flex flex-col xl:px-8 lg:px-6 px-2 gap-6 w-full">
       <p class="font-semibold text-xl text-gray-800">
@@ -122,6 +124,9 @@ import {
 import { onMounted, ref } from "vue";
 import { TransitionRoot } from "@headlessui/vue";
 import { likeIdea } from "@/helpers/api/idea.js";
+import { useUserStore } from "@/stores/user.js";
+
+let userStore = useUserStore()
 
 let props = defineProps({
   post: Object,

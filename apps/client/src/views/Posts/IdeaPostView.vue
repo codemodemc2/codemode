@@ -52,7 +52,7 @@
             </div>
 
             <div class="flex flex-col gap-2 py-4">
-              <CommentListing :post-id="idea._id" />
+              <CommentListing ref="comments" :post-id="idea._id" />
             </div>
           </div>
         </div>
@@ -99,6 +99,7 @@ let show = ref(false);
 let writingComment = ref(false);
 
 let comment = ref("");
+let comments = ref(null);
 
 let timeLeft = computed(() => {
   let now = new Date();
@@ -145,6 +146,7 @@ let publishComment = async () => {
     comment.value = "";
     writingComment.value = false;
     successToast("Comment posted!");
+    comments.value.refreshComments();
   } catch (error) {
     errorToast("Failed to post comment");
   }
