@@ -17,7 +17,15 @@ module.exports = (router) => {
 			user.likes = likes;
 		});
 
-		res.send(users);
+		// sort users by likes
+		users.sort((a, b) => {
+			return b.likes - a.likes;
+		});
+
+		// send only first 3 users
+		res.send(users.slice(0, 3));
+
+
 	});
 
 	return router;
