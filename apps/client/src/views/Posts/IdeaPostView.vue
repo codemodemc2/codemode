@@ -90,8 +90,7 @@ import Tiptap from "@/components/Tiptap.vue";
 import CommentListing from "@/components/Comments/CommentListing.vue";
 import { postComment } from "@/helpers/api/comment.js";
 import { errorToast, successToast } from "../../helpers/toast.js";
-let { useUserStore } = require("@/stores/user.js");
-
+import { useUserStore } from "@/stores/user.js";
 let userStore = useUserStore();
 
 let route = useRoute();
