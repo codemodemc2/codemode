@@ -46,9 +46,9 @@
               </div>
             </div>
           </div>
-          <div
+          <!-- <div
             class="absolute -left-60 top-80 z-0 h-[30vh] w-[200vw] -rotate-[10deg] transform bg-gradient-to-r from-sky-400 to-sky-600"
-          ></div>
+          ></div> -->
         </div>
       </div>
     </div>

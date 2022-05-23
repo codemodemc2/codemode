@@ -84,7 +84,11 @@ if (cluster.isMaster && process.env.NODE_ENV == "production") {
 		credentials: true,
 	};
 
-	if (isProduction) { corsOptions.origin = process.env.FRONTEND_URL; }
+	if (isProduction) {
+		let whitelist = process.env.FRONTEND_URL;
+		whitelist = whitelist.split(",");
+		corsOptions.origin = whitelist;
+	}
 	else { corsOptions.origin = ["http://localhost:5050", "http://localhost:3000"]; }
 
 	app.use(cors(corsOptions));
