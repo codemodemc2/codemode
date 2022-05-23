@@ -114,7 +114,7 @@ let updateSort = (id) => {
     });
   } else if (id == 3) {
     problems.value.sort((a, b) => {
-      return new Date(b.deadline) - new Date(a.deadline);
+      return new Date(a.deadline) - new Date(b.deadline);
     });
   }
 };
