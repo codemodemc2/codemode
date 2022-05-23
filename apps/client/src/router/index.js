@@ -119,6 +119,7 @@ const router = createRouter({
 				{
 					path: "/new-problem",
 					name: "newProblem",
+					meta: { requiresAdmin: true },
 					component: () => import("@/views/NewProblemView.vue"),
 				},
 				{
@@ -129,7 +130,6 @@ const router = createRouter({
 				{
 					path: "/problem/:id",
 					name: "problem",
-					meta: { requiresAdmin: true },
 					component: () => import("@/views/Posts/ProblemPostView.vue"),
 				},
 				{
