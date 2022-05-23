@@ -65,12 +65,15 @@
           <p class="text-brand-dark text-base font-semibold text-center">
             See the problem this idea was posted for ->
           </p>
-          <div v-if="idea.prize">
-            <p class="text-brand-primary text-2xl font-semibold text-center">
-              {{ idea.prize }}
-            </p>
-          </div>
         </router-link>
+        <div
+          class="border-brand-primary border rounded-xl px-5 py-6 flex flex-col bg-white"
+        >
+          <p class="text-brand-dark text-base font-semibold text-center">
+            Mark this idea as solution
+          </p>
+          <button></button>
+        </div>
       </div>
     </div>
   </TransitionRoot>

@@ -12,24 +12,31 @@
       <div
         v-for="user in users"
         :key="user._id"
-        class="border border-gray-200 rounded-lg px-4 w-full flex flex-row justify-between items-center"
+        class="border border-gray-200 rounded-lg px-4 w-full"
       >
-        <div class="relative p-3">
-          <img
-            :src="images[users.indexOf(user)]"
-            class="absolute h-14 -rotate-[40deg] -top-4 -left-2"
-          />
-          <UserIcon
-            class="h-24 rounded-full border border-brand-dark stroke-[0.5] p-1 text-brand-dark"
-          />
+        <div class="w-full flex flex-row justify-between items-center">
+          <div class="relative p-3">
+            <img
+              :src="images[users.indexOf(user)]"
+              class="absolute h-14 -rotate-[40deg] -top-4 -left-2"
+            />
+            <UserIcon
+              class="h-20 rounded-full border border-brand-dark stroke-[0.5] p-1 text-brand-dark"
+            />
+          </div>
+          <p class="font-bold text-gray-800 text-center flex-wrap">
+            {{ user.username }}
+          </p>
+          <p class="space-x-1">
+            <span class="link">{{ user.likes }}</span>
+            <span class="font-medium">pts.</span>
+          </p>
         </div>
-        <p class="font-bold text-gray-800 text-center flex-wrap">
-          {{ user.username }}
-        </p>
-        <p class="space-x-1">
-          <span class="link">{{ user.likes }}</span>
-          <span class="font-medium">pts.</span>
-        </p>
+				<hr>
+        <div class="relative p-3 self-center flex flex-col justify-center items-center">
+          <p class="uppercase text-sm font-bold text-brand-dark">reward</p>
+					<p class="link text-2xl">{{rewards[users.indexOf(user)]}}</p>
+        </div>
       </div>
     </div>
     <div v-else class="flex flex-col h-max justify-center items-center p-5">
@@ -47,6 +54,12 @@ let images = ref([
   "/images/crowngold.png",
   "/images/crownsilver.png",
   "/images/crownbronze.png",
+]);
+
+let rewards = ref([
+	"500 shop points",
+	"250 shop points",
+	"100 shop points",
 ]);
 
 let users = ref([]);
