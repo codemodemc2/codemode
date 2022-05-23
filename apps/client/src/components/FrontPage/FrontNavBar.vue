@@ -1,6 +1,6 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
-  <Disclosure as="nav" v-slot="{ open }" class="bg-white">
+  <Disclosure v-slot="{ open }" as="nav" class="bg-white">
     <div class="max-w-full xl mx-auto px-2 sm:px-6 lg:px-16 z-50">
       <div class="relative flex items-center justify-between h-16">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -204,11 +204,11 @@
                 </MenuItem>
                 <MenuItem v-slot="{ active }">
                   <a
-                    href="#"
                     :class="[
                       active ? 'bg-gray-100' : '',
                       'block px-4 py-2 text-sm text-gray-700',
                     ]"
+                    @click="lout()"
                     >Sign out</a
                   >
                 </MenuItem>
@@ -267,6 +267,15 @@ import { SearchIcon } from "@heroicons/vue/solid";
 import { useUserStore } from "@/stores/user.js";
 
 let userStore = useUserStore();
+
+import { useRouter } from "vue-router";
+
+let router = useRouter()
+
+let lout = () => {
+	userStore.logout();
+	router.push("/login");
+};
 
 const navigation = [
   { name: "Dashboard", href: "#", current: true },
