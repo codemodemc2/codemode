@@ -67,6 +67,7 @@
           </p>
         </router-link>
         <div
+          v-if="userStore.user_data.is_admin"
           class="border-brand-primary border rounded-xl px-5 py-6 flex flex-col bg-white"
         >
           <p class="text-brand-dark text-base font-semibold text-center">
@@ -89,6 +90,9 @@ import Tiptap from "@/components/Tiptap.vue";
 import CommentListing from "@/components/Comments/CommentListing.vue";
 import { postComment } from "@/helpers/api/comment.js";
 import { errorToast, successToast } from "../../helpers/toast.js";
+let { useUserStore } = require("@/stores/user.js");
+
+let userStore = useUserStore();
 
 let route = useRoute();
 let router = useRouter();
