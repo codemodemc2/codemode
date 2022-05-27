@@ -29,9 +29,6 @@
         <hr />
         <div class="w-full flex flex-col">
           <p class="font-medium">{{ idea.title }}</p>
-          <div class="prose prose-sm line-clamp-2">
-            <div v-html="idea.content"></div>
-          </div>
         </div>
       </router-link>
     </div>

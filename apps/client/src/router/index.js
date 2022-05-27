@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import { useUserStore } from '@/stores/user.js';
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
@@ -89,6 +90,7 @@ const router = createRouter({
 		{
 			path: "/dashboard",
 			name: "DashboardHome",
+			meta: { requiresAdmin: true },
 			component: () => import("@/views/Dashboard/DashboardHomeView.vue"),
 			redirect: {
 				name: "DashboardView",
@@ -117,6 +119,7 @@ const router = createRouter({
 				{
 					path: "/new-problem",
 					name: "newProblem",
+					meta: { requiresAdmin: true },
 					component: () => import("@/views/NewProblemView.vue"),
 				},
 				{
@@ -150,6 +153,41 @@ const router = createRouter({
 			component: () => import("@/views/Errors/DynamicError.vue"),
 		},
 	],
+});
+
+router.beforeEach((to, from, next) => {
+
+	let store = useUserStore();
+
+	const isLoggedIn = store.session.logged_in;
+	if (!isLoggedIn && to.meta.requiresAuth) {
+
+		store.logout();
+		next({
+			name: "Login",
+			params: {
+				to: to.path
+			}
+		});
+	}
+	else if (to.meta.requiresAdmin && !store.user_data.is_admin) {
+		next({
+			name: "Error",
+			params: {
+				error_code: 403,
+				error_message: "Unauthorized",
+				error_details: "You are not authorized to access this page",
+				from: {
+					path: from.path,
+					name: from.name
+				}
+			}
+		});
+	}
+
+	else {
+		next();
+	}
 });
 
 export default router;

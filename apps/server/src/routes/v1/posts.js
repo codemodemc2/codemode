@@ -252,11 +252,13 @@ module.exports = (router) => {
 			return next({ status: 404, message: "Problem with that id not found" });
 		}
 
-		let topIdeas = await Idea.find({ problem: problem._id }).sort({ likes: -1 }).limit(3);
+		let ideas = await Idea.find({ problem: problem._id });
 
-		let ideas = await Idea.find({ _id: { $in: topIdeas.map(i => i._id) } }).populate("created_by", "username", User);
+		ideas = ideas.sort((a, b) => {
+			return b.likes.length - a.likes.length;
+		}).slice(0, 3);
 
-		// map like_count to every idea
+		
 
 		ideas = ideas.map(idea => {
 			idea.like_count = idea.likes.length;
