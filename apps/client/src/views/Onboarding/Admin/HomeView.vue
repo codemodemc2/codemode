@@ -2,7 +2,7 @@
   <div
     class="flex lg:flex-row justify-center flex-col max-h-screen h-full w-screen gap-10"
   >
-  <div
+    <div
       class="absolute top-5 left-5 cursor-pointer"
       @click="$router.push({ name: 'home' })"
     >

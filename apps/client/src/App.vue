@@ -3,8 +3,7 @@ import { RouterView } from "vue-router";
 </script>
 
 <template>
-  <div class=" h-screen relative overflow-hidden">
-   
+  <div class="h-screen relative overflow-hidden">
     <RouterView />
   </div>
 </template>
