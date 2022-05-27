@@ -126,7 +126,7 @@ import { TransitionRoot } from "@headlessui/vue";
 import { likeIdea } from "@/helpers/api/idea.js";
 import { useUserStore } from "@/stores/user.js";
 
-let userStore = useUserStore()
+let userStore = useUserStore();
 
 let props = defineProps({
   post: Object,

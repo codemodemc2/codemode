@@ -17,7 +17,8 @@
       <img src="/images/confetti.png" class="w-[15rem] self-center" />
       <p class="text-5xl text-brand-medium self-center font-bold">Hooray!</p>
       <p class="text-xl text-gray-800 font-medium">
-        Your employer invited you to join the team {{ userOnboardingStore.company.name }}!
+        Your employer invited you to join the team
+        {{ userOnboardingStore.company.name }}!
       </p>
       <div class="flex flex-col gap-5 mt-5">
         <button
@@ -66,7 +67,7 @@ let checkInvite = async () => {
     show.value = true;
     userOnboardingStore.inviteCode = id;
     userOnboardingStore.invited = true;
-		userOnboardingStore.company = response.data.data.company
+    userOnboardingStore.company = response.data.data.company;
   } else {
     invalid.value = true;
   }
