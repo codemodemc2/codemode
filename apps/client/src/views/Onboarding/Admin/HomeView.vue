@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="flex lg:flex-row justify-center flex-col max-h-screen h-full w-screen gap-10"
-  >
+  <div class="flex justify-center flex-col max-h-screen h-full w-screen gap-10">
     <div
       class="absolute top-5 left-5 cursor-pointer"
       @click="$router.push({ name: 'home' })"
@@ -21,12 +19,10 @@
         />
       </svg>
     </div>
-    <div
-      class="lg:border-r border-gray-300 lg:min-h-screen p-10 flex justify-center items-center"
-    >
+    <div class="border-gray-300 p-10 flex justify-center items-center">
       <AdminProgressBarVue />
     </div>
-    <div class="max-h-screen lg:min-h-screen lg:h-full w-full overflow-clip">
+    <div class="max-h-screen w-full overflow-clip">
       <router-view />
     </div>
   </div>

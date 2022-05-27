@@ -56,7 +56,8 @@
             id="deadline"
             v-model="deadline"
             type="datetime-local"
-            class="form-input-style peer placeholder-transparent w-2/"
+            class="form-input-style peer placeholder-transparent"
+            min="2022-05-27"
             required
           />
           <label class="input-label" for="deadline"
