@@ -28,10 +28,7 @@
         </div>
         <hr />
         <div class="w-full flex flex-col">
-          <p class="font-medium">{{ idea.title }}</p>
-          <div class="prose prose-sm line-clamp-2">
-            <div v-html="idea.content"></div>
-          </div>
+          <p class="font-medium xl:text-base lg:text-base md:text-sm">{{ idea.title }}</p>
         </div>
       </router-link>
     </div>

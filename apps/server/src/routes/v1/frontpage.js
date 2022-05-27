@@ -1,5 +1,7 @@
 let User = require("@/database/models/user");
 let Idea = require("@/database/models/idea");
+let Comment = require("@/database/models/idea");
+
 
 module.exports = (router) => {
 	router.get("/frontpage-leaderboard", async (req, res) => {
@@ -7,6 +9,11 @@ module.exports = (router) => {
 		let ideas = await Idea.find({});
 
 		let users = await User.find({ company: req.user.account.company_id }).select("-password");
+
+
+		let comments = await Comment.find({ created_by: req.user._id })
+
+
 
 		users.forEach(user => {
 			let userIdeas = ideas.filter(idea => String(idea.created_by) == String(user._id));
@@ -17,7 +24,13 @@ module.exports = (router) => {
 			user.likes = likes;
 		});
 
-		res.send(users);
+		users.sort((a, b) => {
+			return b.likes - a.likes;
+		});
+
+		res.send(users.slice(0, 3));
+
+
 	});
 
 	return router;
