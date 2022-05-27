@@ -23,10 +23,9 @@ app.use(router);
 app.use(VueTippy);
 app.use(veProgress);
 app.use(Toast, {
-	transition: "Vue-Toastification__fade",
-	maxToasts: 3,
-	newestOnTop: true,
+  transition: "Vue-Toastification__fade",
+  maxToasts: 3,
+  newestOnTop: true,
 });
-
 
 app.mount("#app");

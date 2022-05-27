@@ -270,11 +270,11 @@ let userStore = useUserStore();
 
 import { useRouter } from "vue-router";
 
-let router = useRouter()
+let router = useRouter();
 
 let lout = () => {
-	userStore.logout();
-	router.push("/login");
+  userStore.logout();
+  router.push("/login");
 };
 
 const navigation = [

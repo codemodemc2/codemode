@@ -15,7 +15,7 @@
         leave="transition-all transform duration-500"
         leave-from="opacity-100 scale-100 rotate-0"
         leave-to="opacity-0 scale-0 rotate-[720deg]"
-				class="cursor-pointer"
+        class="cursor-pointer"
         @click="like"
       >
         <LikedIcon class="w-7 h-7 stroke-1 mt-2 text-brand-secondary" />
@@ -31,7 +31,7 @@
         leave="transition-all transform duration-500"
         leave-from="opacity-100 scale-100 rotate-0"
         leave-to="opacity-0 scale-0 rotate-[-720deg]"
-				class="cursor-pointer"
+        class="cursor-pointer"
         @click="like"
       >
         <NotLikedIcon class="w-7 h-7 stroke-1 mt-2 text-brand-secondary" />
@@ -42,7 +42,9 @@
     <div class="flex flex-col xl:px-8 lg:px-6 px-2 gap-6 w-full">
       <p class="font-semibold text-2xl text-gray-800">
         {{ post.title }}
-				<span class="bg-brand-dark p-1 text-white rounded-lg text-base">PROBLEM</span>
+        <span class="bg-brand-dark p-1 text-white rounded-lg text-base"
+          >PROBLEM</span
+        >
       </p>
       <hr />
       <article class="prose">

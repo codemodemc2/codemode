@@ -32,10 +32,12 @@
             <span class="font-medium">pts.</span>
           </p>
         </div>
-				<hr>
-        <div class="relative p-3 self-center flex flex-col justify-center items-center">
+        <hr />
+        <div
+          class="relative p-3 self-center flex flex-col justify-center items-center"
+        >
           <p class="uppercase text-sm font-bold text-brand-dark">reward</p>
-					<p class="link text-2xl">{{rewards[users.indexOf(user)]}}</p>
+          <p class="link text-2xl">{{ rewards[users.indexOf(user)] }}</p>
         </div>
       </div>
     </div>
@@ -56,11 +58,7 @@ let images = ref([
   "/images/crownbronze.png",
 ]);
 
-let rewards = ref([
-	"500 shop points",
-	"250 shop points",
-	"100 shop points",
-]);
+let rewards = ref(["500 shop points", "250 shop points", "100 shop points"]);
 
 let users = ref([]);
 (async () => {
