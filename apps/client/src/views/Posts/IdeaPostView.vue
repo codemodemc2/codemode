@@ -52,7 +52,7 @@
             </div>
 
             <div class="flex flex-col gap-2 py-4">
-              <CommentListing :post-id="idea._id" />
+              <CommentListing ref="comments" :post-id="idea._id" />
             </div>
           </div>
         </div>
@@ -65,12 +65,16 @@
           <p class="text-brand-dark text-base font-semibold text-center">
             See the problem this idea was posted for ->
           </p>
-          <div v-if="idea.prize">
-            <p class="text-brand-primary text-2xl font-semibold text-center">
-              {{ idea.prize }}
-            </p>
-          </div>
         </router-link>
+        <div
+          v-if="userStore.user_data.is_admin"
+          class="border-brand-primary border rounded-xl px-5 py-6 flex flex-col bg-white"
+        >
+          <p class="text-brand-dark text-base font-semibold text-center">
+            Mark this idea as solution
+          </p>
+          <button></button>
+        </div>
       </div>
     </div>
   </TransitionRoot>
@@ -86,6 +90,8 @@ import Tiptap from "@/components/Tiptap.vue";
 import CommentListing from "@/components/Comments/CommentListing.vue";
 import { postComment } from "@/helpers/api/comment.js";
 import { errorToast, successToast } from "../../helpers/toast.js";
+import { useUserStore } from "@/stores/user.js";
+let userStore = useUserStore();
 
 let route = useRoute();
 let router = useRouter();
@@ -96,6 +102,7 @@ let show = ref(false);
 let writingComment = ref(false);
 
 let comment = ref("");
+let comments = ref(null);
 
 let timeLeft = computed(() => {
   let now = new Date();
@@ -142,6 +149,7 @@ let publishComment = async () => {
     comment.value = "";
     writingComment.value = false;
     successToast("Comment posted!");
+    comments.value.refreshComments();
   } catch (error) {
     errorToast("Failed to post comment");
   }

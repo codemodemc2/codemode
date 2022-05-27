@@ -33,7 +33,7 @@ export const useUserOnboardingStore = defineStore("user_onboarding", {
 		async register() {
 			try {
 				let response = await registerUser(
-					this,
+					this.$state,
 					this.steps[1].data.email,
 					this.steps[2].data.password
 				);

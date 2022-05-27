@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col gap-5 w-full items-center pt-20 h-screen bg-white">
-    <div class="w-1/2">
+  <div class="flex flex-col gap-5 w-full items-center pt-20 h-screen overflow-y-auto pb-20 bg-white">
+    <div class="lg:w-1/2 w-full">
       <div class="pb-10">
         <p class="text-4xl font-bold text-sky-800">
           Post a new idea for problem:
