@@ -22,7 +22,7 @@
     <div class="flex h-full w-full flex-col content-center justify-center">
       <div class="flex w-80 flex-col gap-5 self-center">
         <div class="flex flex-row justify-start text-3xl">
-          <p class="font-bold text-gray-800">Login</p>
+          <p class="font-bold text-gray-800 text-3xl">Login</p>
         </div>
 
         <div>

@@ -42,16 +42,16 @@
     <div class="flex flex-col xl:px-8 lg:px-6 px-2 gap-6 w-full">
       <router-link
         :to="{ path: `/problem/${post._id}` }"
-        class="font-semibold text-2xl text-gray-800"
+        class="font-semibold 2xl:text-3xl xl:text-2xl md:text-lg sm:text-xs text-gray-800 mb-[-1rem]"
       >
         {{ post.title }}
       </router-link>
-      <hr />
-      <article class="prose line-clamp-5 prose-sm -my-4">
+      <!--<hr /> -->
+      <article class="prose line-clamp-5 xl:prose-xl md:text-md sm:prose-sm -mb-4">
         <div v-html="post.summary" />
       </article>
       <hr />
-      <div class="flex flex-row gap-2 text-xl -my-4">
+      <div class="flex flex-row gap-2 2xl:text-3xl xl:text-2xl md:text-lg sm:text-xs -my-4">
         <p class="text-brand-dark font-bold">Prize:</p>
         <p v-if="post.prize.length > 0" class="link">
           {{ post.prize }}
@@ -62,7 +62,7 @@
         <p v-else class="link">100 shop points</p>
       </div>
       <hr />
-      <div class="flex flex-row items-center justify-between">
+      <div class="flex flex-row items-center justify-between -my-2">
         <div class="flex flex-row items-center">
           <UserCircleIcon
             class="w-8 rounded-full mr-2 stroke-1 text-brand-dark"

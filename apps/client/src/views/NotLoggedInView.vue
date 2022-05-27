@@ -29,7 +29,7 @@
             <div class="flex flex-col gap-[2rem]">
               <div class="flex w-full flex-col items-center">
                 <p
-                  class="text-center text-base font-medium text-gray-600 lg:text-lg xl:text-xl"
+                  class="text-center text-base font-medium text-gray-600 lg:text-2xl xl:text-3xl"
                 >
                   <br />
                   Web solution for discovering ideas inside your company

@@ -39,14 +39,14 @@
 
       <p class="select-none text-sm text-brand-dark">{{ showedLikes }}</p>
     </div>
-    <div class="flex flex-col xl:px-8 lg:px-6 px-2 gap-6 w-full">
-      <p class="font-semibold text-2xl text-gray-800">
+    <div class="flex flex-col xl:px-8 lg:px-6 px-2 gap-2 w-full">
+      <p class="font-semibold 2xl:text-3xl xl:text-2xl md:text-lg sm:text-sm text-gray-800">
         {{ post.title }}
 				<span class="bg-brand-dark p-1 text-white rounded-lg text-base">PROBLEM</span>
       </p>
       <hr />
-      <article class="prose">
-        <div v-html="post.content" />
+      <article class="prose xl:prose-xl md:text-md sm:prose-sm">
+        <div class="xl:my-[-2rem] sm:my-[-1.5rem] my-[-1.5rem]" v-html="post.content" />
       </article>
       <hr />
       <div class="flex flex-row items-center justify-between">
@@ -56,11 +56,11 @@
             src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
             alt=""
           />
-          <p class="font-regular text-sm mr-1 text-gray-700">Posted by:</p>
-          <p class="link mr-4 font-medium text-sm">
+          <p class="font-regular text-sm mr-1 text-gray-700 text-lg">Posted by:</p>
+          <p class="link mr-4 font-medium text-sm text-lg">
             {{ post.created_by.username }}
           </p>
-          <p class="font-regular text-sm mr-1 text-gray-700">
+          <p class="font-regular text-sm mr-1 text-gray-700 text-lg">
             {{ formatDate(post.created_at) }}
           </p>
         </div>
