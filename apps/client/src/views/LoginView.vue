@@ -1,5 +1,5 @@
 <template>
-  <div class="relative grid h-screen grid-cols-1 lg:grid-cols-2">
+  <div class="relative grid h-screen grid-cols-1 xl:grid-cols-2">
     <div
       class="absolute top-5 left-5 cursor-pointer"
       @click="$router.push({ name: 'home' })"
@@ -122,7 +122,7 @@
     </div>
 
     <svg
-      class="absolute h-screen right-0 -z-10 lg:block hidden"
+      class="absolute h-screen right-0 -z-10 xl:block hidden"
       viewBox="0 0 1920 1080"
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
