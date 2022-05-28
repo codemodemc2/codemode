@@ -100,7 +100,7 @@
             </div>
             <div class="flex flex-row gap-2">
               <p class="text-sm font-medium text-gray-700">
-                Dont have an account
+                Dont have an account?
               </p>
               <router-link to="/register">
                 <p
