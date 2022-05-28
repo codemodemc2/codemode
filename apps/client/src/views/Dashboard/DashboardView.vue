@@ -7,8 +7,9 @@
       <hr />
       <div class="flex flex-row flex-wrap gap-14">
         <router-link
-          :to="product.href"
           v-for="product in products"
+          :key="product.name"
+          :to="product.href"
           class="flex h-auto w-full flex-col gap-5 rounded-xl lg:w-72"
         >
           <div
