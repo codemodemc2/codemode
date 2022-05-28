@@ -73,15 +73,15 @@
         </TransitionRoot>
       </div>
     </div>
-    <div class="flex flex-col xl:px-8 lg:px-6 px-2 gap-6 w-full">
-      <p class="font-semibold text-xl text-gray-800">
+    <div class="flex flex-col xl:px-8 lg:px-6 px-2 gap-2 w-full">
+      <p class="font-semibold text-gray-800 2xl:text-2xl xl:text-xl md:text-lg text-lg">
         {{ post.title }}
         <span class="bg-brand-dark p-1 text-white rounded-lg text-base"
           >IDEA</span
         >
       </p>
       <hr />
-      <article class="prose -my-8">
+      <article class="prose text-xs xl:prose-md md:prose-sm sm:prose-xs md:-my-6 -my-5">
         <div v-html="post.content" />
       </article>
       <hr />
@@ -92,11 +92,11 @@
             src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
             alt=""
           />
-          <p class="font-regular text-sm mr-1 text-gray-700">Posted by:</p>
-          <p class="link mr-4 font-medium text-sm">
+          <p class="font-regular 2xl:text-md md:text-sm text-xs mr-1 text-gray-700">Posted by:</p>
+          <p class="link mr-4 font-medium 2xl:text-md md:text-sm text-xs">
             {{ post.created_by.username }}
           </p>
-          <p class="font-regular text-sm mr-1 text-gray-700">
+          <p class="font-regular 2xl:text-md md:text-sm text-xs mr-1 text-gray-700">
             {{ formatDate(post.created_at) }}
           </p>
         </div>

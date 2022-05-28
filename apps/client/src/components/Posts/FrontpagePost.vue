@@ -42,16 +42,16 @@
     <div class="flex flex-col xl:px-8 lg:px-6 px-2 gap-6 w-full">
       <router-link
         :to="{ path: `/problem/${post._id}` }"
-        class="font-semibold 2xl:text-3xl xl:text-2xl md:text-lg sm:text-xs text-gray-800 mb-[-1rem]"
+        class="font-semibold 2xl:text-2xl xl:text-xl md:text-lg sm:text-sm text-sm text-gray-800 mb-[-1rem]"
       >
         {{ post.title }}
       </router-link>
       <!--<hr /> -->
-      <article class="prose line-clamp-5 xl:prose-xl md:text-md sm:prose-sm -mb-4">
+      <article class="line-clamp-5 prose text-xs xl:prose-lg md:prose-sm sm:prose-xs  -mb-4">
         <div v-html="post.summary" />
       </article>
       <hr />
-      <div class="flex flex-row gap-2 2xl:text-3xl xl:text-2xl md:text-lg sm:text-xs -my-4">
+      <div class="flex flex-row gap-2 2xl:text-xl xl:text-lg md:text-md -my-4">
         <p class="text-brand-dark font-bold">Prize:</p>
         <p v-if="post.prize.length > 0" class="link">
           {{ post.prize }}

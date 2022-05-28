@@ -18,8 +18,8 @@
       </p>
     </div>
     <hr />
-    <p class="font-medium">{{ i.title }}</p>
-    <div class="prose prose-sm line-clamp-3">
+    <p class="font-medium xl:text-lg md:text-md text-sm">{{ i.title }}</p>
+    <div class="text-xs xl:prose-md md:prose-sm sm:prose-xs line-clamp-3">
       <div v-html="i.content"></div>
     </div>
   </router-link>
