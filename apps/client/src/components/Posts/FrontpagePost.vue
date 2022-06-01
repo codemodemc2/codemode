@@ -153,6 +153,11 @@ let timeLeft = (d) => {
   hours %= 24;
   minutes %= 60;
   seconds %= 60;
-  return `${days}d ${hours}h ${minutes}m`;
+  if (seconds > 0) {
+    return `${days}d ${hours}h ${minutes}m`;
+  }
+  else {
+    return "Expired";
+  }
 };
 </script>
