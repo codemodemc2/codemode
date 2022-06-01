@@ -1,13 +1,13 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
-  <Disclosure as="nav" class="bg-white" v-slot="{ open }">
+  <Disclosure v-slot="{ open }" as="nav" class="bg-white">
     <div class="px-2 sm:px-6">
       <div class="relative flex h-12 items-center justify-between">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
           <!-- Mobile menu button-->
           <DisclosureButton
-            class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-sky-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
             id="closeOpenButton"
+            class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-sky-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
           >
             <span class="sr-only">Open main menu</span>
             <MenuIcon v-if="!open" class="block h-6 w-6" aria-hidden="true" />
@@ -51,23 +51,26 @@
       <div class="space-y-1 px-2 pt-2 pb-3">
         <router-link
           v-for="link in navigation[0]"
+          :key="link.href"
           :to="link.href"
           class="mx-2 flex flex-row items-center gap-2 rounded-lg px-1 py-3 pl-4 hover:bg-gray-100"
-          :class="{ 'bg-sky-100 font-medium': link.href === $route.path }"
+          :class="{ 'bg-sky-100 font-medium': link.href == $route.path }"
           @click="doClose(close)"
         >
           <component
             :is="link.icon"
             class="w-6 text-sm"
             :class="[
-              link.href === $route.path ? 'text-sky-900' : 'text-sky-600',
+              link.href == $route.path ? 'text-sky-900' : 'text-sky-600',
             ]"
           ></component>
           <div class="flex w-full flex-row justify-between pr-2">
             <p
               class="text-md font-normal"
               :class="[
-                link.href === $route.path ? 'text-sky-900' : 'text-gray-700',
+                link.href == $route.path
+                  ? 'text-sky-900'
+                  : 'text-gray-700',
               ]"
             >
               {{ link.name }}

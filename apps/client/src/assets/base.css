@@ -6,7 +6,7 @@
 
 @layer base {
   html {
-    @apply font-inter;
+    @apply font-inter text-gray-900;
   }
 }
 

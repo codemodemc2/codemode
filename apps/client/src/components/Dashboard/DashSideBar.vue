@@ -20,22 +20,25 @@
       <div class="flex flex-col gap-[3px]">
         <router-link
           v-for="link in navigation[0]"
+          :key="link.href"
           :to="link.href"
           class="mx-2 flex flex-row items-center gap-2 rounded-lg px-1 py-3 pl-4 hover:bg-gray-100"
-          :class="{ 'bg-sky-100 font-medium': link.href === $route.path }"
+          :class="{ 'bg-sky-100 font-medium': link.href == $route.path }"
         >
           <component
             :is="link.icon"
             class="w-6 text-sm"
             :class="[
-              link.href === $route.path ? 'text-sky-900' : 'text-sky-600',
+              link.href == $route.path ? 'text-sky-900' : 'text-sky-600',
             ]"
           ></component>
           <div class="flex w-full flex-row justify-between pr-2">
             <p
               class="text-md font-normal"
               :class="[
-                link.href === $route.path ? 'text-sky-900' : 'text-gray-700',
+                link.href == $route.path
+                  ? 'text-sky-900'
+                  : 'text-gray-700',
               ]"
             >
               {{ link.name }}

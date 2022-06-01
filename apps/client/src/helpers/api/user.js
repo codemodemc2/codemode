@@ -62,3 +62,13 @@ export const checkInviteLink = async (id) => {
     throw error.response.data.message;
   }
 };
+
+export const getUser = async (id) => {
+	try {
+		const response = await axios.get('/user', { params: { id } });
+		return response;
+	} catch (error) {
+		console.log(error);
+		throw error;
+	}
+};

@@ -104,7 +104,9 @@ import { ref } from "vue";
 import { TransitionRoot } from "@headlessui/vue";
 import { likeProblem } from "@/helpers/api/problem.js";
 
+// eslint-disable-next-line no-undef
 let props = defineProps({
+  // eslint-disable-next-line vue/require-default-prop
   post: Object,
 });
 
@@ -116,7 +118,7 @@ let like = async () => {
   let temp = liked.value;
   liked.value = !liked.value;
   showedLikes.value += liked.value ? 1 : -1;
-  let res = await likeProblem(props.post._id, !temp);
+	await likeProblem(props.post._id, !temp);
 };
 
 let formatDate = (date) => {

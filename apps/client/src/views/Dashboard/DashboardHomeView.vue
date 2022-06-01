@@ -1,13 +1,13 @@
 <template>
   <div class="flex h-screen flex-col">
-    <div class="sticky top-0 z-50 block w-screen sm:hidden">
+    <div class="sticky top-0 z-10 block w-screen sm:hidden">
       <DashNavBar />
       <hr />
     </div>
     <div class="flex h-full flex-row overflow-y-auto">
       <DashSideBar />
       <div class="w-full overflow-y-auto bg-white">
-        <div class="sticky top-0 z-50 bg-white">
+        <div class="sticky top-0 z-10 bg-white">
           <div
             class="flex h-11 flex-row content-center items-center justify-between"
           >
