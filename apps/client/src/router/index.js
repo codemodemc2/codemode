@@ -135,7 +135,7 @@ const router = createRouter({
 					path: "user/:userId",
 					meta: { title: "User details" },
 					name: "ManageUserView",
-					component: () => import("@/views/Dashboard/users/ManageUserView.vue"),
+					component: () => import("@/views/Dashboard/Users/ManageUserView.vue"),
 				}
 			],
 		},
