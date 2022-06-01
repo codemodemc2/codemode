@@ -14,11 +14,33 @@
       class="flex flex-col h-full w-1/3 content-center justify-center self-center gap-10 min-w-max px-5"
     >
       <p class="text-3xl text-brand-medium self-center font-bold">
-        Enter Username and Email
+        Enter your details
       </p>
       <div>
         <div>
           <form class="mb-5 flex flex-col gap-5" @submit.prevent="onSubmit">
+            <div class="relative col-span-2 w-full">
+              <input
+                id="first_name"
+                v-model="first_name"
+                type="text"
+                placeholder="First name"
+                class="form-input-style peer placeholder-transparent"
+                required
+              />
+              <label for="first_name" class="input-label">First name</label>
+            </div>
+            <div class="relative col-span-2 w-full">
+              <input
+                id="last_name"
+                v-model="last_name"
+                type="text"
+                placeholder="Last name"
+                class="form-input-style peer placeholder-transparent"
+                required
+              />
+              <label for="last_name" class="input-label">Last name</label>
+            </div>
             <div class="relative col-span-2 w-full">
               <input
                 id="username"
@@ -65,6 +87,8 @@ userOnboardingStore.currentStep = 1;
 let show = ref(false);
 let email = ref(userOnboardingStore.steps[1].data.email);
 let username = ref(userOnboardingStore.steps[1].data.username);
+let first_name = ref(userOnboardingStore.steps[1].data.first_name);
+let last_name = ref(userOnboardingStore.steps[1].data.last_name);
 
 let onSubmit = async () => {
   let response = await checkExistingUser(email.value).catch((error) => {
@@ -84,6 +108,10 @@ let onSubmit = async () => {
     username.value;
   userOnboardingStore.steps[userOnboardingStore.currentStep].data.email =
     email.value;
+  userOnboardingStore.steps[userOnboardingStore.currentStep].data.first_name =
+    first_name.value;
+  userOnboardingStore.steps[userOnboardingStore.currentStep].data.last_name =
+    last_name.value;
 
   userOnboardingStore.steps[userOnboardingStore.currentStep].finished = true;
 

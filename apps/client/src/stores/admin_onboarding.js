@@ -14,6 +14,8 @@ export const useAdminOnboardingStore = defineStore("admin_onboarding", {
         data: {
           username: "",
           email: "",
+					first_name: "",
+					last_name: "",
         },
       },
       2: {

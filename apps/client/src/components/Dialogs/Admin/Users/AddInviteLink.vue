@@ -332,7 +332,7 @@ const createLink = async () => {
     usages: unlimitedUsages.value ? -1 : usages.value,
     expires: expires.value,
     expiration: expiration.value,
-    role: selectedRole.value.type,
+    selectedRole: selectedRole.value.type,
   };
   try {
     let res = await generateInviteLink(data);

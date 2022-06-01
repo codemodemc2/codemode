@@ -102,9 +102,10 @@ module.exports = (router) => {
 
 	router.post('/admin/generate-invite-link', requireAdmin, async (req, res, next) => {
 		let { unlimitedUsages, usages, expires, expiration, selectedRole } = req.body.data;
+
+		console.log(selectedRole);
+		
 		try {
-
-
 			let inviteLink = new InviteLink({
 				id: uuidv4(),
 				created_by: req.user._id,

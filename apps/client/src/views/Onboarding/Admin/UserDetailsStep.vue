@@ -21,6 +21,28 @@
           <form class="mb-5 flex flex-col gap-5" @submit.prevent="onSubmit">
             <div class="relative col-span-2 w-full">
               <input
+                id="first_name"
+                v-model="first_name"
+                type="text"
+                placeholder="First name"
+                class="form-input-style peer placeholder-transparent"
+                required
+              />
+              <label for="first_name" class="input-label">First name</label>
+            </div>
+            <div class="relative col-span-2 w-full">
+              <input
+                id="last_name"
+                v-model="last_name"
+                type="text"
+                placeholder="Last name"
+                class="form-input-style peer placeholder-transparent"
+                required
+              />
+              <label for="last_name" class="input-label">Last name</label>
+            </div>
+            <div class="relative col-span-2 w-full">
+              <input
                 id="username"
                 v-model="username"
                 type="text"
@@ -65,6 +87,8 @@ adminOnboardingStore.currentStep = 1;
 let show = ref(false);
 let email = ref(adminOnboardingStore.steps[1].data.email);
 let username = ref(adminOnboardingStore.steps[1].data.username);
+let first_name = ref(adminOnboardingStore.steps[1].data.first_name);
+let last_name = ref(adminOnboardingStore.steps[1].data.last_name);
 
 let onSubmit = async () => {
   let response = await checkExistingUser(email.value).catch((error) => {
@@ -83,6 +107,10 @@ let onSubmit = async () => {
     username.value;
   adminOnboardingStore.steps[adminOnboardingStore.currentStep].data.email =
     email.value;
+  adminOnboardingStore.steps[adminOnboardingStore.currentStep].data.first_name =
+    first_name.value;
+  adminOnboardingStore.steps[adminOnboardingStore.currentStep].data.last_name =
+    last_name.value;
 
   adminOnboardingStore.steps[adminOnboardingStore.currentStep].finished = true;
 

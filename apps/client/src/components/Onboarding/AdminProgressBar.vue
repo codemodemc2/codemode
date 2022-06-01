@@ -19,7 +19,7 @@
             class="w-10 h-10 z-1 rounded-xl flex justify-center items-center relative transform transition-all duration-500"
             :class="{
               'bg-brand-primary': adminOnboardingStore.steps[link.id].finished,
-              'after:absolute after:border after:border-brand-primary after:lg:-bottom-14 after:lg:left-5 after:-right-14 after:lg:h-14 after:lg:w-0 after:w-14':
+              'after:absolute after:border after:border-brand-primary after:-right-14 after:w-14':
                 adminOnboardingStore.steps[link.id].finished &&
                 link.id < links.length &&
                 link.id < adminOnboardingStore.currentStep,

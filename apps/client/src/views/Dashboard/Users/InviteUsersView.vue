@@ -95,6 +95,12 @@
               scope="col"
               class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
             >
+              For
+            </th>
+            <th
+              scope="col"
+              class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
+            >
               Manage
             </th>
           </tr>
@@ -138,6 +144,11 @@
               </p>
             </td>
             <td class="whitespace-nowrap px-6 py-4">
+              <p class="text-sm text-gray-500">
+                {{ link.type == 1 ? "Admins" : "Employees" }}
+              </p>
+            </td>
+            <td class="whitespace-nowrap px-6 py-4">
               <div class="truncate text-sm text-gray-900">
                 <p class="link underline">Manage</p>
               </div>
@@ -146,7 +157,7 @@
         </tbody>
       </table>
     </div>
-    <AddInviteLink ref="add_invite_link_dialog" @refresh="updateLinks"/>
+    <AddInviteLink ref="add_invite_link_dialog" @refresh="updateLinks" />
   </div>
 </template>
 

@@ -53,6 +53,8 @@ module.exports = (router) => {
 	router.post("/register-admin", (req, res, next) => {
 		const d = req.body.data;
 		const username = d.steps[1].data.username;
+		const first_name = d.steps[1].data.first_name;
+		const last_name = d.steps[1].data.last_name;
 		const email = d.steps[1].data.email;
 		const password = d.steps[2].data.password;
 		const password2 = d.steps[2].data.repeatPassword;
@@ -97,6 +99,8 @@ module.exports = (router) => {
 			user.account.last_login_date = Date.now();
 			user.account.registration_ip = req.clientIp;
 			user.username = username;
+			user.first_name = first_name;
+			user.last_name = last_name;
 			user.is_admin = true;
 			await user.save();
 
@@ -136,12 +140,15 @@ module.exports = (router) => {
 	router.post("/register-user", (req, res, next) => {
 		const d = req.body.data;
 		const username = d.steps[1].data.username;
+		const first_name = d.steps[1].data.first_name;
+		const last_name = d.steps[1].data.last_name;
 		const email = d.steps[1].data.email;
 		const password = d.steps[2].data.password;
 		const password2 = d.steps[2].data.repeatPassword;
 		const company_id = d.company._id;
+		const inviteCode = d.inviteCode;
 
-		if (!email || !password || !password2 || !username) {
+		if (!email || !password || !password2 || !username || !first_name || !last_name) {
 			res
 				.status(403)
 				.send(JSON.stringify({ message: "you_didnt_fill_all_fields" }));
@@ -167,10 +174,21 @@ module.exports = (router) => {
 			if (info) return next(info);
 			if (!user) return res.status(403).send({ message: "try_again" });
 
+			try {
+				const inviteLink = await InviteLink.findOne({ id: inviteCode });
+				if (inviteLink.type == 1) user.is_admin = true;
+				inviteLink.usages += 1;
+				await inviteLink.save();
+			} catch (error) {
+				console.log(error);
+			}
+
 			user.account.last_login_date = Date.now();
 			user.account.registration_ip = req.clientIp;
 			user.account.company_id = company_id;
 			user.username = username;
+			user.first_name = first_name;
+			user.last_name = last_name;
 
 			await user.save();
 
@@ -344,6 +362,7 @@ module.exports = (router) => {
 			"name _id"
 		);
 		if (!inviteLink) return next({ message: "invite_not_found" });
+		if ((inviteLink.usages >= inviteLink.max_usages) && inviteLink.max_usages != -1) return next({ message: "Invite link is invalid", status: 500 });
 		return res.send({ message: "invite_link_found", data: { company } });
 	});
 
