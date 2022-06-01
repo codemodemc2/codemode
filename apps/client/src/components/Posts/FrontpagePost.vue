@@ -47,7 +47,9 @@
         {{ post.title }}
       </router-link>
       <!--<hr /> -->
-      <article class="line-clamp-5 prose text-xs xl:prose-lg md:prose-sm sm:prose-xs  -mb-4">
+      <article
+        class="line-clamp-5 prose text-xs xl:prose-lg md:prose-sm sm:prose-xs -mb-4"
+      >
         <div v-html="post.summary" />
       </article>
       <hr />
@@ -118,7 +120,7 @@ let like = async () => {
   let temp = liked.value;
   liked.value = !liked.value;
   showedLikes.value += liked.value ? 1 : -1;
-	await likeProblem(props.post._id, !temp);
+  await likeProblem(props.post._id, !temp);
 };
 
 let formatDate = (date) => {
@@ -146,6 +148,9 @@ let timeLeft = (d) => {
   let now = new Date();
   let deadline = new Date(d);
   let timeDiff = deadline.getTime() - now.getTime();
+  if (timeDiff < 0) {
+    return "Deadline passed";
+  }
   let seconds = Math.floor(timeDiff / 1000);
   let minutes = Math.floor(seconds / 60);
   let hours = Math.floor(minutes / 60);

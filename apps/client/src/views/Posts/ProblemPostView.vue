@@ -118,6 +118,9 @@ let timeLeft = computed(() => {
   let now = new Date();
   let deadline = new Date(problem.value.deadline);
   let timeDiff = deadline.getTime() - now.getTime();
+  if (timeDiff < 0) {
+    return "Deadline passed";
+  }
   let seconds = Math.floor(timeDiff / 1000);
   let minutes = Math.floor(seconds / 60);
   let hours = Math.floor(minutes / 60);
