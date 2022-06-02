@@ -152,7 +152,7 @@ let timeLeft = (d) => {
   let deadline = new Date(d);
   let timeDiff = deadline.getTime() - now.getTime();
   if (timeDiff < 0) {
-    return "Deadline passed";
+    return "Expired";
   }
   let seconds = Math.floor(timeDiff / 1000);
   let minutes = Math.floor(seconds / 60);
@@ -161,10 +161,5 @@ let timeLeft = (d) => {
   hours %= 24;
   minutes %= 60;
   seconds %= 60;
-  if (seconds > 0) {
-    return `${days}d ${hours}h ${minutes}m`;
-  } else {
-    return "Expired";
-  }
 };
 </script>

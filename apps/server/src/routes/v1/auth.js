@@ -4,7 +4,7 @@ const { requireAuthenticated } = require("@/helpers/auth");
 const InviteLink = require("@/database/models/invite_link");
 const Mongoose = require("mongoose");
 const Company = require("@/database/models/company.js");
-
+const { v4: uuidv4 } = require("uuid");
 
 module.exports = (router) => {
 	router.post("/login", (req, res, next) => {
