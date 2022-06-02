@@ -1,97 +1,121 @@
 <template>
-  <div
-    v-if="post"
-    class="w-full h-auto flex flex-row rounded-lg lg:p-5 p-2 py-10 border border-gray-200 bg-white"
-  >
-    <div class="xl:pl-4 lg:pl-3 md:pl-2 pl-1 flex flex-col items-center">
-      <TransitionRoot
-        v-if="liked"
-        appear
-        :show="liked"
-        enter="transition-all transform duration-500"
-        enter-from="opacity-0 scale-0 rotate-[-720deg]"
-        enter-to="opacity-100 scale-[110%] rotate-0"
-        entered="opacity-100 scale-100"
-        leave="transition-all transform duration-500"
-        leave-from="opacity-100 scale-100 rotate-0"
-        leave-to="opacity-0 scale-0 rotate-[720deg]"
-        class="cursor-pointer"
-        @click="like"
-      >
-        <LikedIcon class="w-7 h-7 stroke-1 mt-2 text-brand-secondary" />
-      </TransitionRoot>
-      <TransitionRoot
-        v-else
-        appear
-        :show="!liked"
-        enter="transition-all transform duration-500"
-        enter-from="opacity-0 scale-0 rotate-[720deg]"
-        enter-to="opacity-100 scale-[110%] rotate-0"
-        entered="opacity-100 scale-100"
-        leave="transition-all transform duration-500"
-        leave-from="opacity-100 scale-100 rotate-0"
-        leave-to="opacity-0 scale-0 rotate-[-720deg]"
-        class="cursor-pointer"
-        @click="like"
-      >
-        <NotLikedIcon class="w-7 h-7 stroke-1 mt-2 text-brand-secondary" />
-      </TransitionRoot>
-
-      <p class="select-none text-sm text-brand-dark">{{ showedLikes }}</p>
-    </div>
-    <div class="flex flex-col xl:px-8 lg:px-6 px-2 gap-6 w-full">
-      <router-link
-        :to="{ path: `/problem/${post._id}` }"
-        class="font-semibold 2xl:text-2xl xl:text-xl md:text-lg sm:text-sm text-sm text-gray-800 mb-[-1rem]"
-      >
-        {{ post.title }}
-      </router-link>
-      <!--<hr /> -->
-      <article
-        class="line-clamp-5 prose text-xs xl:prose-lg md:prose-sm sm:prose-xs -mb-4"
-      >
-        <div v-html="post.summary" />
-      </article>
-      <hr />
-      <div class="flex flex-row gap-2 2xl:text-xl xl:text-lg md:text-md -my-4">
-        <p class="text-brand-dark font-bold">Prize:</p>
-        <p v-if="post.prize.length > 0" class="link">
-          {{ post.prize }}
-          <span class="font-normal text-base text-gray-700"
-            >+ 100 shop points</span
-          >
-        </p>
-        <p v-else class="link">100 shop points</p>
-      </div>
-      <hr />
-      <div class="flex flex-row items-center justify-between -my-2">
-        <div class="flex flex-row items-center">
-          <UserCircleIcon
-            class="w-8 rounded-full mr-2 stroke-1 text-brand-dark"
-          />
-          <p class="font-regular text-sm mr-1 text-gray-700">Posted by:</p>
-          <router-link
-            :to="{ name: 'UserProfile', params: { id: post.created_by._id } }"
-            class="link mr-4 font-medium text-sm"
-          >
-            {{ post.created_by.username }}
-          </router-link>
-          <p class="font-regular text-sm mr-1 text-gray-700">
-            {{ formatDate(post.created_at) }}
-          </p>
-          <p
-            v-if="post.has_deadline"
-            class="font-regular space-x-1 text-sm ml-2"
-          >
-            <span class="text-brand-dark font-bold">Deadline:</span>
-
-            <span class="text-red-400">{{ timeLeft(post.deadline) }}</span>
-          </p>
+  <div>
+    <div>
+      <div v-if="post.prize_image" class="relative">
+        <img
+          :src="post.prize_image"
+          class="object-cover max-h-52 w-full border border-gray-200 rounded-t-lg"
+        />
+        <div
+          class="absolute h-10 backdrop-blur-sm bottom-5 left-5 bg-brand-dark text-brand-light rounded-lg flex items-center px-5"
+        >
+          <p class="font-medium uppercase">Win {{ post.prize }}</p>
         </div>
-        <div class="flex flex-row gap-1 items-center">
-          <DocumentTextIcon class="w-7 h-7 text-brand-secondary stroke-1" />
-          <p class="font-regular text-sm mr-1 text-gray-700">Ideas:</p>
-          <p class="link mr-4 font-medium text-sm">{{ post.idea_count }}</p>
+      </div>
+    </div>
+    <div
+      v-if="post"
+      class="w-full h-auto flex flex-row rounded-lg lg:p-5 p-2 py-10 border border-gray-200 bg-white"
+      :class="[
+        post.prize_image && post.prize_image.length > 0
+          ? 'border-t-none rounded-t-none'
+          : '',
+      ]"
+    >
+      <div class="xl:pl-4 lg:pl-3 md:pl-2 pl-1 flex flex-col items-center">
+        <TransitionRoot
+          v-if="liked"
+          appear
+          :show="liked"
+          enter="transition-all transform duration-500"
+          enter-from="opacity-0 scale-0 rotate-[-720deg]"
+          enter-to="opacity-100 scale-[110%] rotate-0"
+          entered="opacity-100 scale-100"
+          leave="transition-all transform duration-500"
+          leave-from="opacity-100 scale-100 rotate-0"
+          leave-to="opacity-0 scale-0 rotate-[720deg]"
+          class="cursor-pointer"
+          @click="like"
+        >
+          <LikedIcon class="w-7 h-7 stroke-1 mt-2 text-brand-secondary" />
+        </TransitionRoot>
+        <TransitionRoot
+          v-else
+          appear
+          :show="!liked"
+          enter="transition-all transform duration-500"
+          enter-from="opacity-0 scale-0 rotate-[720deg]"
+          enter-to="opacity-100 scale-[110%] rotate-0"
+          entered="opacity-100 scale-100"
+          leave="transition-all transform duration-500"
+          leave-from="opacity-100 scale-100 rotate-0"
+          leave-to="opacity-0 scale-0 rotate-[-720deg]"
+          class="cursor-pointer"
+          @click="like"
+        >
+          <NotLikedIcon class="w-7 h-7 stroke-1 mt-2 text-brand-secondary" />
+        </TransitionRoot>
+
+        <p class="select-none text-sm text-brand-dark">{{ showedLikes }}</p>
+      </div>
+      <div class="flex flex-col xl:px-8 lg:px-6 px-2 gap-6 w-full">
+        <router-link
+          :to="{ path: `/problem/${post._id}` }"
+          class="font-semibold 2xl:text-2xl xl:text-xl md:text-lg sm:text-sm text-sm text-gray-800 mb-[-1rem]"
+        >
+          {{ post.title }}
+        </router-link>
+        <!--<hr /> -->
+        <article
+          class="line-clamp-5 prose text-xs xl:prose-lg md:prose-sm sm:prose-xs -mb-4"
+        >
+          <div v-html="post.summary" />
+        </article>
+        <div v-if="!post.prize_image" class="flex flex-col gap-6">
+          <hr />
+          <div
+            class="flex flex-row gap-2 2xl:text-xl xl:text-lg md:text-md -my-4"
+          >
+            <p class="text-brand-dark font-bold">Prize:</p>
+            <p v-if="post.prize.length > 0" class="link">
+              {{ post.prize }}
+              <span class="font-normal text-base text-gray-700"
+                >+ 100 shop points</span
+              >
+            </p>
+            <p v-else class="link">100 shop points</p>
+          </div>
+        </div>
+        <hr />
+        <div class="flex flex-row items-center justify-between -my-2">
+          <div class="flex flex-row items-center">
+            <UserCircleIcon
+              class="w-8 rounded-full mr-2 stroke-1 text-brand-dark"
+            />
+            <p class="font-regular text-sm mr-1 text-gray-700">Posted by:</p>
+            <router-link
+              :to="{ name: 'UserProfile', params: { id: post.created_by._id } }"
+              class="link mr-4 font-medium text-sm"
+            >
+              {{ post.created_by.username }}
+            </router-link>
+            <p class="font-regular text-sm mr-1 text-gray-700">
+              {{ formatDate(post.created_at) }}
+            </p>
+            <p
+              v-if="post.has_deadline"
+              class="font-regular space-x-1 text-sm ml-2"
+            >
+              <span class="text-brand-dark font-bold">Deadline:</span>
+
+              <span class="text-red-400">{{ timeLeft(post.deadline) }}</span>
+            </p>
+          </div>
+          <div class="flex flex-row gap-1 items-center">
+            <DocumentTextIcon class="w-7 h-7 text-brand-secondary stroke-1" />
+            <p class="font-regular text-sm mr-1 text-gray-700">Ideas:</p>
+            <p class="link mr-4 font-medium text-sm">{{ post.idea_count }}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -161,6 +185,6 @@ let timeLeft = (d) => {
   hours %= 24;
   minutes %= 60;
   seconds %= 60;
-	return `${days}d ${hours}h ${minutes}m`;
+  return `${days}d ${hours}h ${minutes}m`;
 };
 </script>
