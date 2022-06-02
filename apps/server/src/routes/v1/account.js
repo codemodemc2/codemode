@@ -12,12 +12,12 @@ module.exports = (router) => {
 			if (!oldPass || !newPass1 || !newPass2) {
 				return res
 					.status(401)
-					.send(JSON.stringify({ message: "you_didnt_fill_all_fields" }));
+					.send(JSON.stringify({ message: "You didn't fill all fields" }));
 			}
 			if (newPass1 !== newPass2) {
 				return res
 					.status(401)
-					.send(JSON.stringify({ message: "passwords_dont_match" }));
+					.send(JSON.stringify({ message: "Passwords don't match" }));
 			}
 
 			if (newPass1.length < 6) {
@@ -42,7 +42,7 @@ module.exports = (router) => {
 				return res.status(500).send({ message: "password_change_fail" });
 
 			try {
-				let match = await checkUser(oldPass, req.user.password);
+				let match = await checkUser(oldPass, user.password);
 				if (!match)
 					return res.status(401).send({ message: "old_password_wrong" });
 			} catch (error) {
@@ -54,7 +54,7 @@ module.exports = (router) => {
 				let hash = await generateHash(newPass1);
 				user.password = hash;
 				await user.save();
-				return res.send({ message: "password_change_sucess" });
+				return res.send({ message: "Successfully changed password" });
 			} catch (error) {
 				console.log(error);
 				return res.status(500).send({ message: "password_change_fail" });
@@ -66,6 +66,8 @@ module.exports = (router) => {
 		"/account/change-email",
 		requireAuthenticated,
 		async (req, res) => {
+			console.log(req.body);
+
 			const { newEmail } = req.body;
 			if (!newEmail) {
 				return res
@@ -81,7 +83,7 @@ module.exports = (router) => {
 					return res.status(401).send({ message: "email_change_fail" });
 				user.email = newEmail;
 				await user.save();
-				return res.send({ message: "email_change_sucess", email: newEmail });
+				return res.send({ message: "Successfully changed email", email: newEmail });
 			} catch (error) {
 				console.log(error);
 				return res.status(500).send({ message: "something_went_wrong" });
@@ -93,6 +95,8 @@ module.exports = (router) => {
 		"/account/change-username",
 		requireAuthenticated,
 		async (req, res) => {
+			console.log(req.body);
+
 			const { newUsername } = req.body;
 			if (!newUsername) {
 				return res
@@ -109,7 +113,7 @@ module.exports = (router) => {
 				user.username = newUsername;
 				await user.save();
 				return res.send({
-					message: "username_change_sucess",
+					message: "Successfully changed username",
 					username: newUsername,
 				});
 			} catch (error) {

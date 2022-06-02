@@ -32,7 +32,7 @@
     <svg class="bottom-0 absolute z-10 w-screen">
       <rect x="0" y="69" width="100%" height="90" fill="#075985" />
     </svg>
-    <router-view class="z-30"> </router-view>
+    <router-view class="z-30 w-full"></router-view>
   </div>
 </template>
 

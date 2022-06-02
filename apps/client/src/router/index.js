@@ -174,10 +174,54 @@ const router = createRouter({
 					path: "/user/:id",
 					name: "UserProfile",
 					component: () => import("@/views/Profiles/UserProfileView.vue"),
+					redirect: { name: "userIdeas" },
+					children: [
+						{
+							path: "ideas",
+							name: "userIdeas",
+							component: () => import("@/views/Profiles/UserIdeasView.vue"),
+						},
+						{
+							path: "comments",
+							name: "userComments",
+							component: () => import("@/views/Profiles/UserCommentsView.vue"),
+						},
+					],
 				},
 			],
 		},
 
+		{
+			path: '/account',
+			name: 'Account',
+			component: () => import('@/views/Account/AccountHome.vue'),
+			meta: { requiresAuth: true },
+			redirect: {
+				name: 'AccSettings'
+			},
+
+			children: [
+				{
+					path: 'settings',
+					meta: { title: 'Settings' },
+					name: 'AccSettings',
+					component: () => import('@/views/Account/AccSettings.vue')
+				},
+				{
+					path: 'security',
+					meta: { title: 'Security' },
+					name: 'AccSecurity',
+					component: () => import('@/views/Account/Security.vue')
+				},
+				{
+					path: 'security/2fa',
+					meta: { title: 'Two-Factor Authentication' },
+					name: 'AccSecurity2FA',
+					component: () => import('@/views/Account/2fa.vue')
+				}
+
+			]
+		},
 		{
 			path: "/error",
 			name: "Error",
