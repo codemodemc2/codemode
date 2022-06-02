@@ -20,7 +20,7 @@
         >
           <div class="relative p-3">
             <img
-              src="images/laurelgold.png"
+              src="/images/laurelgold.png"
               class="absolute h-24 top-1 left-0"
             />
             <img
