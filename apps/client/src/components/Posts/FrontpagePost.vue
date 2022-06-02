@@ -161,5 +161,6 @@ let timeLeft = (d) => {
   hours %= 24;
   minutes %= 60;
   seconds %= 60;
+	return `${days}d ${hours}h ${minutes}m`;
 };
 </script>

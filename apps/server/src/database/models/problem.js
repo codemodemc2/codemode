@@ -15,6 +15,7 @@ const ProblemSchema = new mongoose.Schema(
     ideas: [mongoose.Types.ObjectId],
     idea_count: Number,
     like_count: Number,
+		prize_image: String,
   },
   { timestamps: { createdAt: "created_at", updatedAt: "updated_at" } }
 );

@@ -10,7 +10,7 @@ module.exports = (router) => {
   router.post("/problem", requireAdmin, async (req, res) => {
     let user = req.user;
 
-    const { title, content, deadlineEnabled, deadline, prize, summary } =
+    const { title, content, deadlineEnabled, deadline, prize, summary, prize_image } =
       req.body.data;
 
     let problem = new Problem({
@@ -22,6 +22,7 @@ module.exports = (router) => {
       prize,
       created_by: user._id,
       company: Mongoose.Types.ObjectId(user.account.company_id),
+			prize_image
     });
 
     problem.save((err, problem) => {
