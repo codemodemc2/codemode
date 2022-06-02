@@ -51,7 +51,7 @@
           </Switch>
           <p class="text-brand-dark font-medium">Problem has a deadline</p>
         </div>
-        <div class="relative col-span-2 w-full" v-if="deadlineEnabled">
+        <div v-if="deadlineEnabled" class="relative col-span-2 w-full">
           <input
             id="deadline"
             v-model="deadline"
@@ -74,6 +74,18 @@
             required
           />
           <label class="input-label" for="prize">Prize for the solution</label>
+        </div>
+        <div class="relative col-span-2 w-full">
+          <input
+            id="prize"
+            v-model="prize_image"
+            type="text"
+            placeholder="Prize graphics URL"
+            class="form-input-style peer placeholder-transparent"
+            required
+          />
+          <label class="input-label" for="prize">Prize graphics URL</label>
+					<p class="text-sm font-medium text-gray-400">Images of format 3:1</p>
         </div>
       </form>
       <div class="flex space-x-2">
@@ -99,6 +111,7 @@ let deadlineEnabled = ref(false);
 let deadline = ref("");
 let prize = ref("");
 let summary = ref("");
+let prize_image = ref("");
 
 let object = () => {
   return {
@@ -108,6 +121,7 @@ let object = () => {
     deadline: deadline.value,
     prize: prize.value,
     summary: summary.value,
+		prize_image: prize_image.value
   };
 };
 

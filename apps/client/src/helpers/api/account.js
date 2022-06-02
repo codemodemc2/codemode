@@ -29,3 +29,12 @@ export const changeUsername = async (username) => {
 		console.log(error);
 	}
 };
+
+export const changeProfileImage = async (profile_image) => {
+	try {
+		const response = await axios.post('/account/change-profile-image', { profile_image });
+		return response.data;
+	} catch (error) {
+		console.log(error);
+	}
+};

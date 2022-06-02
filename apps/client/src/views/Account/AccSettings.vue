@@ -84,6 +84,45 @@
         </div>
       </div>
     </div>
+
+    <div class="flex flex-col gap-5">
+      <div class="px-3">
+        <p class="text-2xl font-semibold text-sky-900">Profile image</p>
+        <p class="text-sm text-gray-400">
+          You can change your profile image anytime.
+        </p>
+      </div>
+
+      <div
+        class="h-auto w-full rounded-xl border-[1px] border-gray-200 p-2 md:w-3/4 md:p-3 lg:w-3/5 lg:p-5"
+      >
+        <div>
+          <form
+            class="flex flex-col gap-5 p-2 lg:p-0"
+            @submit.prevent="chngImage"
+          >
+            <div class="col-span-2 w-full relative">
+              <input
+                v-model="profile_image"
+                type="text"
+                placeholder="Profile image URL"
+                class="form-input-style peer placeholder-transparent"
+                maxlength="30"
+                required
+                id="profile_image"
+              />
+              <label for="profile_image" class="input-label">
+                Profile image URL
+              </label>
+            </div>
+            <button class="primary-button">Change your profile image</button>
+          </form>
+          <div
+            class="flex w-full flex-col content-center justify-center gap-5"
+          ></div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -96,6 +135,7 @@ let store = useUserStore();
 
 let new_email = ref("");
 let username = ref(store.user_data.username);
+let profile_image = ref(store.user_data.profile_image);
 
 let chngEmail = async () => {
   try {
@@ -110,7 +150,21 @@ let chngUsername = async () => {
   try {
     let res = await store.changeUsername(username.value);
     successToast(res);
-    username.value = store.user_data.username
+    username.value = store.user_data.username;
+  } catch (error) {
+    console.log(error);
+    errorToast(error);
+  }
+};
+let chngImage = async () => {
+  // check if profile_image is url
+	if (!profile_image.value.match(/^(http|https):\/\//)) {
+		return errorToast("Profile image URL is not valid");
+	}
+  try {
+    let res = await store.changeProfileImage(profile_image.value);
+    successToast(res);
+    profile_image.value = store.user_data.profile_image;
   } catch (error) {
     console.log(error);
     errorToast(error);
