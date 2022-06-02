@@ -66,7 +66,6 @@ module.exports = (router) => {
 		"/account/change-email",
 		requireAuthenticated,
 		async (req, res) => {
-			console.log(req.body);
 
 			const { newEmail } = req.body;
 			if (!newEmail) {
@@ -95,7 +94,6 @@ module.exports = (router) => {
 		"/account/change-username",
 		requireAuthenticated,
 		async (req, res) => {
-			console.log(req.body);
 
 			const { newUsername } = req.body;
 			if (!newUsername) {
@@ -123,6 +121,36 @@ module.exports = (router) => {
 		}
 	);
 
+	router.post(
+		"/account/change-profile-image",
+		requireAuthenticated,
+		async (req, res) => {
+
+			const { profile_image } = req.body;
+			if (!profile_image) {
+				return res
+					.status(401)
+					.send(JSON.stringify({ message: "you_didnt_fill_all_fields" }));
+			}
+
+			try {
+				let user = await User.findOne({
+					email: Mongoose.sanitizeFilter(req.user.email),
+				}).exec();
+				if (!user)
+					return res.status(401).send({ message: "username_change_fail" });
+				user.profile_image = profile_image;
+				await user.save();
+				return res.send({
+					message: "Successfully changed profile image",
+					profile_image: profile_image,
+				});
+			} catch (error) {
+				console.log(error);
+				return res.status(500).send({ message: "something_went_wrong" });
+			}
+		}
+	);
 
 	return router;
 };

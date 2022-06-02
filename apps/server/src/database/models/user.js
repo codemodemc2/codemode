@@ -91,6 +91,11 @@ const UserSchema = new mongoose.Schema(
 			type: Number,
 			default: 0,
 		},
+		profile_image: {
+			type: String,
+			default: "",
+			required: false,
+		},
 	},
 	{ timestamps: { createdAt: "created_at", updatedAt: "updated_at" } }
 );
