@@ -14,14 +14,43 @@
         :key="user._id"
         class="border border-gray-200 rounded-lg px-4 w-full"
       >
-        <div class="w-full flex flex-row justify-between items-center">
+        <div 
+          v-if="users.indexOf(user) == 0" 
+          class="w-full flex flex-col justify-between items-center"
+        >
           <div class="relative p-3">
             <img
+              src="images/laurelgold.png"
+              class="absolute h-24 top-1 left-0"
+            />
+            <img
               :src="images[users.indexOf(user)]"
-              class="absolute h-14 -rotate-[40deg] -top-4 -left-2"
+              class="absolute h-14 -top-7 left-[1.32rem]"
             />
             <UserIcon
               class="h-20 rounded-full border border-brand-dark stroke-[0.5] p-1 text-brand-dark"
+            />
+          </div>
+          <p class="font-bold text-gray-800 text-center text-2xl flex-wrap">
+            {{ user.username }}
+          </p>
+          <p class="space-x-1">
+            <span class="link">{{ user.likes }}</span>
+            <span v-if="user.likes == 1"  class="font-medium">pt.</span>
+            <span v-else class="font-medium">pts.</span>
+          </p>
+        </div>
+        <div 
+          v-else
+          class="w-full flex flex-row justify-between items-center"
+        >
+          <div class="relative p-3">
+            <img
+              :src="images[users.indexOf(user)]"
+              class="absolute h-50 top-0.5 left-0 bg-none"
+            />
+            <UserIcon
+              class="h-8 rounded-full border border-brand-dark stroke-[0.5] p-1 text-brand-dark"
             />
           </div>
           <p class="font-bold text-gray-800 text-center flex-wrap">
@@ -29,14 +58,15 @@
           </p>
           <p class="space-x-1">
             <span class="link">{{ user.likes }}</span>
-            <span class="font-medium">pts.</span>
+            <span v-if="user.likes == 1"  class="font-medium">pt.</span>
+            <span v-else class="font-medium">pts.</span>
           </p>
         </div>
         <hr />
         <div
           class="relative p-3 self-center flex flex-col justify-center items-center"
         >
-          <p class="uppercase text-sm font-bold text-brand-dark">reward</p>
+          <p class="uppercase text-lg font-bold text-brand-dark">reward</p>
           <p class="link text-2xl">{{ rewards[users.indexOf(user)] }}</p>
         </div>
       </div>
@@ -54,8 +84,9 @@ import { getFrontPageLeaderboard } from "@/helpers/api/frontpage.js";
 
 let images = ref([
   "/images/crowngold.png",
-  "/images/crownsilver.png",
-  "/images/crownbronze.png",
+  "/images/laurelsilver.png",
+  "/images/laurelbronze.png",
+  "/images/laurelgold.png",
 ]);
 
 let rewards = ref(["500 shop points", "250 shop points", "100 shop points"]);
