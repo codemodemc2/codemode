@@ -70,9 +70,12 @@
             class="w-8 rounded-full mr-2 stroke-1 text-brand-dark"
           />
           <p class="font-regular text-sm mr-1 text-gray-700">Posted by:</p>
-          <p class="link mr-4 font-medium text-sm">
+          <router-link
+            :to="{ name: 'UserProfile', params: { id: post.created_by._id } }"
+            class="link mr-4 font-medium text-sm"
+          >
             {{ post.created_by.username }}
-          </p>
+          </router-link>
           <p class="font-regular text-sm mr-1 text-gray-700">
             {{ formatDate(post.created_at) }}
           </p>
@@ -160,8 +163,7 @@ let timeLeft = (d) => {
   seconds %= 60;
   if (seconds > 0) {
     return `${days}d ${hours}h ${minutes}m`;
-  }
-  else {
+  } else {
     return "Expired";
   }
 };
