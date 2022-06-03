@@ -119,9 +119,9 @@ import {
 } from "@headlessui/vue";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/vue/outline";
 const navigation = [
-  { name: "Support", href: "/products" },
-  { name: "Pricing", href: "/pricing" },
-  { name: "Community", href: "/community" },
+  { name: "Sign Up", href: "/register" },
+  { name: "Log In", href: "/login" },
+  { name: "Support", href: "/support" },
 ];
 export default {
   data() {

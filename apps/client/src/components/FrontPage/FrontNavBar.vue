@@ -265,10 +265,8 @@ import {
 } from "@heroicons/vue/outline";
 import { SearchIcon } from "@heroicons/vue/solid";
 import { useUserStore } from "@/stores/user.js";
-
-let userStore = useUserStore();
-
 import { useRouter } from "vue-router";
+let userStore = useUserStore();
 
 let router = useRouter();
 
