@@ -122,6 +122,33 @@ module.exports = (router) => {
 	);
 
 	router.post(
+		"/account/change-first-last-name",
+		requireAuthenticated,
+		async (req, res) => {
+			const { first_name, last_name } = req.body;
+		
+			try {
+				let user = await User.findOne({
+					email: Mongoose.sanitizeFilter(req.user.email),
+				}).exec();
+				if (!user)
+					return res.status(400).send({ message: "username_change_fail" });
+				user.first_name = first_name;
+				user.last_name = last_name;
+				await user.save();
+				return res.send({
+					message: "Successfully changed first & last name",
+					first_name,
+					last_name,
+				});
+			} catch (error) {
+				console.log(error);
+				return res.status(500).send({ message: "something_went_wrong" });
+			}
+		}
+	);
+
+	router.post(
 		"/account/change-profile-image",
 		requireAuthenticated,
 		async (req, res, next) => {

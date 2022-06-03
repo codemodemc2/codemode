@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { login } from "@/helpers/api/user.js";
-import { changeUsername, changeEmail, changeProfileImage } from "@/helpers/api/account.js";
+import { changeUsername, changeEmail, changeProfileImage, changeFirstLastName } from "@/helpers/api/account.js";
 
 export const useUserStore = defineStore("user", {
 	state: () => ({
@@ -42,6 +42,17 @@ export const useUserStore = defineStore("user", {
 			try {
 				const response = await changeUsername(username);
 				this.user_data.username = username;
+				return response;
+			} catch (error) {
+				console.log(error);
+				throw error;
+			}
+		},
+		async changeFirstLastName(first_name, last_name) {
+			try {
+				const response = await changeFirstLastName(first_name, last_name);
+				this.user_data.first_name = first_name;
+				this.user_data.last_name = last_name;
 				return response;
 			} catch (error) {
 				console.log(error);

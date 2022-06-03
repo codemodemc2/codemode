@@ -86,6 +86,53 @@
 
     <div class="flex flex-col gap-5">
       <div class="px-3">
+        <p class="text-2xl font-semibold text-sky-900">First & last name</p>
+        <p class="text-sm text-gray-400">
+          Add your first and last name to your profile.
+        </p>
+      </div>
+
+      <div
+        class="h-auto w-full rounded-xl border-[1px] border-gray-200 p-2 md:w-3/4 md:p-3 lg:w-3/5 lg:p-5"
+      >
+        <div>
+          <form
+            class="flex flex-col gap-5 p-2 lg:p-0"
+            @submit.prevent="chngFirstLastName"
+          >
+            <div class="col-span-2 w-full relative">
+              <input
+                id="first_name"
+                v-model="first_name"
+                type="text"
+                placeholder="First name"
+                class="form-input-style peer placeholder-transparent"
+                required
+              />
+              <label for="first_name" class="input-label"> First name </label>
+            </div>
+            <div class="col-span-2 w-full relative">
+              <input
+                id="last_name"
+                v-model="last_name"
+                type="text"
+                placeholder="Last name"
+                class="form-input-style peer placeholder-transparent"
+                required
+              />
+              <label for="last_name" class="input-label"> Last name </label>
+            </div>
+            <button class="primary-button">Change first & last name</button>
+          </form>
+          <div
+            class="flex w-full flex-col content-center justify-center gap-5"
+          ></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-5">
+      <div class="px-3">
         <p class="text-2xl font-semibold text-sky-900">Profile image</p>
         <p class="text-sm text-gray-400">
           You can change your profile image anytime.
@@ -134,6 +181,8 @@ let store = useUserStore();
 let new_email = ref("");
 let username = ref(store.user_data.username);
 let profile_image = ref(store.user_data.profile_image);
+let first_name = ref(store.user_data.first_name);
+let last_name = ref(store.user_data.last_name);
 
 let chngEmail = async () => {
   try {
@@ -154,6 +203,19 @@ let chngUsername = async () => {
     errorToast(error);
   }
 };
+
+let chngFirstLastName = async () => {
+  try {
+    let res = await store.changeFirstLastName(first_name.value, last_name.value);
+    successToast(res.message);
+    first_name.value = store.user_data.first_name;
+		last_name.value = store.user_data.last_name
+  } catch (error) {
+    console.log(error);
+    errorToast(error.message);
+  }
+};
+
 let chngImage = async () => {
   // check if profile_image is url
   if (!profile_image.value.match(/^(http|https):\/\//)) {
