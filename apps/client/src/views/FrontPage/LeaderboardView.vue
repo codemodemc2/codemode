@@ -64,10 +64,18 @@
         </div>
         <hr />
         <div
+          v-if="users.indexOf(user) == 0" 
           class="relative p-3 self-center flex flex-col justify-center items-center"
         >
-          <p class="uppercase text-lg font-bold text-brand-dark">reward</p>
+          <p class="uppercase text-2xl font-bold text-brand-dark">reward</p>
           <p class="link text-2xl">{{ rewards[users.indexOf(user)] }}</p>
+        </div>
+        <div
+          v-else
+          class="relative p-3 self-center flex flex-row justify-center items-center"
+        >
+          <p class="uppercase text-lg font-bold text-brand-dark">reward: &nbsp;</p>
+          <p class="link text-lg">{{ rewards[users.indexOf(user)] }}</p>
         </div>
       </div>
     </div>
