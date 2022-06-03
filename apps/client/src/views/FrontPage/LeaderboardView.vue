@@ -99,7 +99,6 @@ let images = ref([
   "/images/crowngold.png",
   "/images/laurelsilver.png",
   "/images/laurelbronze.png",
-  "/images/laurelgold.png",
 ]);
 
 let rewards = ref(["500 shop points", "250 shop points", "100 shop points"]);
