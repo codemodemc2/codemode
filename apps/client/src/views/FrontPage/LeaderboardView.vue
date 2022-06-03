@@ -14,8 +14,8 @@
         :key="user._id"
         class="border border-gray-200 rounded-lg px-4 w-full"
       >
-        <div 
-          v-if="users.indexOf(user) == 0" 
+        <div
+          v-if="users.indexOf(user) == 0"
           class="w-full flex flex-col justify-between items-center"
         >
           <div class="relative p-3">
@@ -28,37 +28,42 @@
               class="absolute h-14 -top-7 left-[1.32rem]"
             />
             <UserIcon
+              v-if="!user.profile_image"
               class="h-20 rounded-full border border-brand-dark stroke-[0.5] p-1 text-brand-dark"
+            />
+            <img
+              v-else
+              :src="user.profile_image"
+              class="h-20 rounded-full border border-brand-dark stroke-[0.5]"
             />
           </div>
           <p class="font-bold text-gray-800 text-center text-2xl flex-wrap">
-            {{ user.username }}
+            {{ user.first_name }} {{ user.last_name }}
           </p>
           <p class="space-x-1">
             <span class="link">{{ user.likes }}</span>
-            <span v-if="user.likes == 1"  class="font-medium">pt.</span>
+            <span v-if="user.likes == 1" class="font-medium">pt.</span>
             <span v-else class="font-medium">pts.</span>
           </p>
         </div>
-        <div 
-          v-else
-          class="w-full flex flex-row justify-between items-center"
-        >
+        <div v-else class="w-full flex flex-row justify-between items-center">
           <div class="relative p-3">
             <img
               :src="images[users.indexOf(user)]"
               class="absolute h-50 top-0.5 left-0 bg-none"
             />
             <UserIcon
-              class="h-8 rounded-full border border-brand-dark stroke-[0.5] p-1 text-brand-dark"
+              v-if="!user.profile_image"
+              class="h-14 rounded-full border border-brand-dark stroke-[0.5] p-1 text-brand-dark"
             />
+            <img v-else :src="user.profile_image" class="h-14 rounded-full" />
           </div>
           <p class="font-bold text-gray-800 text-center flex-wrap">
-            {{ user.username }}
+            {{ user.first_name }} {{ user.last_name }}
           </p>
           <p class="space-x-1">
             <span class="link">{{ user.likes }}</span>
-            <span v-if="user.likes == 1"  class="font-medium">pt.</span>
+            <span v-if="user.likes == 1" class="font-medium">pt.</span>
             <span v-else class="font-medium">pts.</span>
           </p>
         </div>

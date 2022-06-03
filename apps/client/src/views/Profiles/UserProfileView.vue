@@ -9,8 +9,10 @@
             class="rounded-full h-20 w-20 border flex justify-center items-center border-brand-dark"
           >
             <UserIcon
+						v-if="!user.profile_image"
               class="h-14 stroke-[0.4] fill-gray-200 stroke-brand-dark"
             />
+						<img v-else :src="user.profile_image" class="rounded-full h-20"/>
           </div>
           <div class="flex flex-col">
             <div class="flex flex-row gap-2 items-center">

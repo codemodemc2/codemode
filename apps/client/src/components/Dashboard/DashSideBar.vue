@@ -36,9 +36,7 @@
             <p
               class="text-md font-normal"
               :class="[
-                link.href == $route.path
-                  ? 'text-sky-900'
-                  : 'text-gray-700',
+                link.href == $route.path ? 'text-sky-900' : 'text-gray-700',
               ]"
             >
               {{ link.name }}
@@ -47,10 +45,13 @@
         </router-link>
       </div>
     </div>
+    <p class="p-2 text-center text-xs text-gray-400">
+      © IdeaStorm {{ year() }}
+    </p>
   </div>
 </template>
 
-<script>
+<script setup>
 import {
   LightBulbIcon,
   HomeIcon,
@@ -89,18 +90,8 @@ const navigation = [
     },
   ],
 ];
-export default {
-  components: {
-    CogIcon,
-    UserCircleIcon,
-    LogoutIcon,
-  },
-  data() {
-    return {
-      navigation,
-    };
-  },
-};
+
+let year = () => new Date().getFullYear();
 </script>
 
 <style></style>

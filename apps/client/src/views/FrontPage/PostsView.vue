@@ -91,10 +91,11 @@ const plans = [
   },
 ];
 
-const selected = ref(plans[0]);
+const selected = ref(plans[1]);
 (async () => {
   let res = await getProblems();
   problems.value = res.data.data;
+  updateSort(selected.value.id);
 })();
 
 let updateSort = (id) => {

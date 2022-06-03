@@ -7,11 +7,11 @@
         <router-link to="/dashboard" class="cursor-pointer select-none">
           <div class="flex flex-row items-center justify-center text-xl">
             <p
-              class="bg-gradient-to-r from-sky-500 to-sky-900 bg-clip-text font-extrabold text-transparent"
+              class="bg-gradient-to-r from-brand-primary to-brand-dark bg-clip-text font-extrabold text-transparent"
             >
-              AutoCode
+              Idea
             </p>
-            <p class="font-bold text-gray-800">AI</p>
+            <p class="font-bold text-gray-800">Storm</p>
           </div>
           <hr class="mt-2" />
         </router-link>
@@ -143,31 +143,15 @@
         </div>
       </div> -->
 
-      <div
-        class="flex flex-row flex-wrap items-center justify-center divide-x self-center"
-      >
-        <router-link
-          v-for="link in navigation[1]"
-          :key="link.href"
-          :to="link.href"
-          class="px-2 text-xs font-medium text-gray-400"
-        >
-          {{ link.name }}
-        </router-link>
-      </div>
       <p class="p-2 text-center text-xs text-gray-400">
-        © AutoCodeAI {{ year }}
+        © IdeaStorm {{ year() }}
       </p>
     </div>
   </div>
 </template>
 
 <script setup>
-import {
-  CogIcon,
-  HomeIcon,
-  LockClosedIcon,
-} from "@heroicons/vue/outline";
+import { CogIcon, HomeIcon, LockClosedIcon } from "@heroicons/vue/outline";
 
 const navigation = [
   [

@@ -7,7 +7,16 @@
     <div class="flex flex-row gap-1 text-sm items-center">
       <p class="text-sm font-light">Posted by:</p>
       <div class="flex flex-row gap-[0.1rem] items-center text-brand-dark">
-        <UserCircleIcon class="h-6 stroke-1" />
+        <UserCircleIcon
+          v-if="!i.created_by.profile_image"
+          class="h-6 stroke-1"
+        />
+        <img
+          v-else
+          :src="i.created_by.profile_image"
+          alt=""
+          class="h-6 rounded-full border border-brand-dark"
+        />
         {{ i.created_by.username }}
       </div>
       <p>•</p>

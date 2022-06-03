@@ -32,30 +32,30 @@ export const useUserStore = defineStore("user", {
 			try {
 				const response = await changeEmail(email);
 				this.user_data.email = email;
-				return response.message;
+				return response;
 			} catch (error) {
 				console.log(error);
-				throw error.message;
+				throw error;
 			}
 		},
 		async changeUsername(username) {
 			try {
 				const response = await changeUsername(username);
 				this.user_data.username = username;
-				return response.message;
+				return response;
 			} catch (error) {
 				console.log(error);
-				throw error.message;
+				throw error;
 			}
 		},
 		async changeProfileImage(profile_image) {
 			try {
 				const response = await changeProfileImage(profile_image);
 				this.user_data.profile_image = profile_image;
-				return response.message;
+				return response;
 			} catch (error) {
 				console.log(error);
-				throw error.message;
+				throw error;
 			}
 		}
 	},

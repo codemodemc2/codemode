@@ -81,7 +81,7 @@ module.exports = (router) => {
 
     let problems = await Problem.find({
       company: Mongoose.Types.ObjectId(user.account.company_id),
-    }).populate("created_by", "username", User);
+    }).populate("created_by", "username profile_image", User);
 
     problems = problems.map((problem) => {
       if (problem.likes.includes(user._id)) {
@@ -148,7 +148,7 @@ module.exports = (router) => {
     let idea = {};
     try {
       idea = await Idea.findById(_id)
-        .populate("created_by", "username", User)
+        .populate("created_by", "username profile_image", User)
         .populate("problem", Problem);
     } catch (error) {
       return next({ status: 404, message: "Error finding idea" });

@@ -22,11 +22,11 @@
               <div class="flex flex-row items-center gap-2 xl:hidden">
                 <div class="flex flex-row items-center justify-center text-xl">
                   <p
-                    class="bg-gradient-to-r from-sky-500 to-sky-900 bg-clip-text font-extrabold text-transparent"
+                    class="bg-gradient-to-r from-brand-primary to-brand-dark bg-clip-text font-extrabold text-transparent"
                   >
-                    AutoCode
+                    Idea
                   </p>
-                  <p class="font-bold text-gray-800">AI</p>
+                  <p class="font-bold text-gray-800">Storm</p>
                 </div>
               </div>
             </router-link>
@@ -34,11 +34,11 @@
               <div class="hidden flex-row items-center gap-2 xl:flex">
                 <div class="flex flex-row items-center justify-center text-xl">
                   <p
-                    class="bg-gradient-to-r from-sky-500 to-sky-900 bg-clip-text font-extrabold text-transparent"
+                    class="bg-gradient-to-r from-brand-primary to-brand-dark bg-clip-text font-extrabold text-transparent"
                   >
-                    AutoCode
+                    Idea
                   </p>
-                  <p class="font-bold text-gray-800">AI</p>
+                  <p class="font-bold text-gray-800">Storm</p>
                 </div>
               </div>
             </router-link>

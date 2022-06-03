@@ -90,7 +90,13 @@
         <div class="flex flex-row items-center justify-between -my-2">
           <div class="flex flex-row items-center">
             <UserCircleIcon
+              v-if="!post.created_by.profile_image"
               class="w-8 rounded-full mr-2 stroke-1 text-brand-dark"
+            />
+            <img
+              v-else
+              :src="post.created_by.profile_image"
+              class="w-8 rounded-full mr-2 stroke-1"
             />
             <p class="font-regular text-sm mr-1 text-gray-700">Posted by:</p>
             <router-link

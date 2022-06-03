@@ -124,13 +124,17 @@ module.exports = (router) => {
 	router.post(
 		"/account/change-profile-image",
 		requireAuthenticated,
-		async (req, res) => {
+		async (req, res, next) => {
 
 			const { profile_image } = req.body;
 			if (!profile_image) {
-				return res
-					.status(401)
-					.send(JSON.stringify({ message: "you_didnt_fill_all_fields" }));
+				return next({ message: "you_didnt_fill_all_fields", status: 400 });
+			}
+
+			const url = profile_image;
+			const urlRegex = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/;
+			if (!urlRegex.test(url)) {
+				return next({ message: "invalid_url", status: 400 });
 			}
 
 			try {
@@ -138,7 +142,7 @@ module.exports = (router) => {
 					email: Mongoose.sanitizeFilter(req.user.email),
 				}).exec();
 				if (!user)
-					return res.status(401).send({ message: "username_change_fail" });
+					return next({ message: "username_change_fail" });
 				user.profile_image = profile_image;
 				await user.save();
 				return res.send({
@@ -147,7 +151,7 @@ module.exports = (router) => {
 				});
 			} catch (error) {
 				console.log(error);
-				return res.status(500).send({ message: "something_went_wrong" });
+				return next({ message: "something_went_wrong", status: 500 });
 			}
 		}
 	);

@@ -28,12 +28,12 @@
 
             <div class="relative col-span-2 w-full">
               <input
+                id="new_email"
                 v-model="new_email"
                 type="email"
                 placeholder="New email"
                 class="form-input-style peer placeholder-transparent"
                 required
-                id="new_email"
               />
               <label for="new_email" class="input-label"> New email </label>
             </div>
@@ -66,13 +66,12 @@
           >
             <div class="col-span-2 w-full relative">
               <input
+                id="username"
                 v-model="username"
                 type="text"
                 placeholder="Username"
                 class="form-input-style peer placeholder-transparent"
-                maxlength="30"
                 required
-                id="username"
               />
               <label for="username" class="input-label"> Username </label>
             </div>
@@ -103,13 +102,12 @@
           >
             <div class="col-span-2 w-full relative">
               <input
+                id="profile_image"
                 v-model="profile_image"
                 type="text"
                 placeholder="Profile image URL"
                 class="form-input-style peer placeholder-transparent"
-                maxlength="30"
                 required
-                id="profile_image"
               />
               <label for="profile_image" class="input-label">
                 Profile image URL
@@ -158,12 +156,12 @@ let chngUsername = async () => {
 };
 let chngImage = async () => {
   // check if profile_image is url
-	if (!profile_image.value.match(/^(http|https):\/\//)) {
-		return errorToast("Profile image URL is not valid");
-	}
+  if (!profile_image.value.match(/^(http|https):\/\//)) {
+    return errorToast("Profile image URL is not valid");
+  }
   try {
     let res = await store.changeProfileImage(profile_image.value);
-    successToast(res);
+    successToast(res.message);
     profile_image.value = store.user_data.profile_image;
   } catch (error) {
     console.log(error);
