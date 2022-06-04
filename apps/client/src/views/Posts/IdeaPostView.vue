@@ -14,6 +14,18 @@
       class="grid grid-flow-col lg:grid-cols-6 py-10 grid-cols-1 gap-7 h-screen justify-center snap-parent xl:w-[60%] lg:w-[70%] md:w-[80%] sm:w-[90%] xs:w-[100%]"
     >
       <div v-if="show" class="lg:col-span-4 gap-7 flex flex-col pb-20">
+        <div v-if="problem" class="flex flex-col bg-white py-2 px-4 rounded-lg border">
+          <div class="flex flex-col gap-5">
+            <p
+              class="link"
+              @click="
+                $router.push({ name: 'problem', params: { id: idea.problem } })
+              "
+            >
+              &lt;- {{ problem.title }}
+            </p>
+          </div>
+        </div>
         <IdeaPost :post="idea" />
         <div
           v-if="idea"
@@ -24,7 +36,7 @@
               Comments ({{ idea.comment_count }})
             </p>
 
-            <div @click="writingComment = true" v-if="!writingComment">
+            <div v-if="!writingComment" @click="writingComment = true">
               <div class="relative col-span-2 w-full">
                 <input
                   type="text"
@@ -83,6 +95,7 @@
 <script setup>
 import { TransitionRoot } from "@headlessui/vue";
 import { getIdea } from "@/helpers/api/idea.js";
+import { getProblem } from "@/helpers/api/problem.js";
 import { useRoute, useRouter } from "vue-router";
 import IdeaPost from "@/components/Posts/IdeaPost.vue";
 import { computed, ref } from "vue";
@@ -97,6 +110,8 @@ let route = useRoute();
 let router = useRouter();
 
 let idea = ref({});
+let problem = ref({});
+
 let show = ref(false);
 
 let writingComment = ref(false);
@@ -123,6 +138,20 @@ let timeLeft = computed(() => {
     let res = await getIdea(route.params.id);
     idea.value = res.data.idea;
     show.value = true;
+  } catch (error) {
+    if (error.response.status === 404) {
+      router.push({
+        name: "Error",
+        params: {
+          error_code: error.response.status,
+          error_message: error.response.data.message,
+        },
+      });
+    }
+  }
+  try {
+    let res = await getProblem(idea.value.problem);
+    problem.value = res.data.problem;
   } catch (error) {
     if (error.response.status === 404) {
       router.push({

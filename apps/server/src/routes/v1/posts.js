@@ -246,7 +246,7 @@ module.exports = (router) => {
       return next({ status: 404, message: "Problem with that id not found" });
     }
 
-    let ideas = await Idea.find({ problem: problem._id });
+    let ideas = await Idea.find({ problem: problem._id }).populate("created_by", "username profile_image", User);
 
     ideas = ideas
       .sort((a, b) => {

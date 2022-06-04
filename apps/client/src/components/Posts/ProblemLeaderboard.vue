@@ -1,7 +1,7 @@
 <template>
   <div
-    class="flex flex-col h-max justify-center items-center pt-5"
     v-if="topIdeas"
+    class="flex flex-col h-max justify-center items-center pt-5"
   >
     <div class="flex flex-col justify-center items-center">
       <p class="text-2xl text-brand-dark font-bold">LEADERBOARD</p>
@@ -16,7 +16,12 @@
       >
         <div class="flex flex-row gap-1 text-sm">
           <div class="flex flex-row gap-[0.1rem] text-brand-dark">
-            <UserCircleIcon class="h-6 stroke-1" />
+            <UserCircleIcon
+              v-if="!idea.created_by.profile_image"
+              class="h-6 stroke-1"
+            />
+            <img v-else :src="idea.created_by.profile_image" class="rounded-full h-6 border border-brand-dark" />
+
             {{ idea.created_by.username }}
           </div>
           <p>•</p>
@@ -37,8 +42,7 @@
 
 <script setup>
 import { ref } from "vue";
-import { UserIcon } from "@heroicons/vue/outline";
-import IdeaListing from "@/components/Posts/IdeaListing.vue";
+import { UserCircleIcon } from "@heroicons/vue/outline";
 import { getTopIdeas } from "@/helpers/api/problem.js";
 
 let props = defineProps({

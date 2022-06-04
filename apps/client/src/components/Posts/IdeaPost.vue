@@ -1,16 +1,7 @@
 <template>
-  <div  
-    v-if="post"
-    class="w-full h-auto flex flex-row rounded-lg lg:p-5 p-2 py-10 border border-sky-500 bg-yellow-100"
-    >
-    <button
-      @click="$router.push({ path: '/Problem' })"
-      >Tu ide naslov problema {{  }}
-      </button>
-  </div>
   <div
     v-if="post"
-    class="w-full h-auto flex flex-row rounded-lg lg:p-5 p-2 py-10 border border-sky-500 bg-yellow-100"
+    class="w-full h-auto flex flex-row rounded-lg lg:p-5 p-2 pb-10 border border-yellow-500 bg-white"
   >
     <div class="xl:pl-4 lg:pl-3 md:pl-2 pl-1 flex flex-col items-center">
       <TransitionRoot
@@ -87,7 +78,7 @@
         class="font-semibold text-gray-800 2xl:text-2xl xl:text-xl md:text-lg text-lg"
       >
         {{ post.title }}
-        <span class="bg-brand-dark p-1 text-white rounded-lg text-base"
+        <span class="bg-yellow-200 text-yellow-900 p-1 text-white rounded-lg text-sm "
           >IDEA</span
         >
       </p>
@@ -143,7 +134,7 @@ import {
   ThumbUpIcon as NotLikedIcon,
   DocumentTextIcon,
   ChatIcon,
-	UserCircleIcon,
+  UserCircleIcon,
   CheckIcon as CheckOutlineIcon,
 } from "@heroicons/vue/outline";
 import { onMounted, ref } from "vue";
