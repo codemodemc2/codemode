@@ -24,6 +24,16 @@
               <p
                 class="bg-gradient-to-r from-brand-primary to-brand-dark bg-clip-text font-extrabold text-transparent"
               >
+                Code
+              </p>
+              <p class="font-bold text-gray-800">Mode</p>
+            </div>
+            <div class="flex flex-row items-center justify-center text-sm">
+              <p 
+              >&nbsp;powered by&nbsp;</p>
+              <p
+                class="bg-gradient-to-r from-brand-primary to-brand-dark bg-clip-text font-extrabold text-transparent"
+              >
                 Idea
               </p>
               <p class="font-bold text-gray-800">Storm</p>
@@ -154,10 +164,11 @@
           <Menu as="div" class="ml-3 relative">
             <div>
               <MenuButton
-                class="bg-white border-sky-500 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                class="bg-white outline-none border-sky-500 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
               >
                 <span class="sr-only">Open user menu</span>
-                <UserIcon class="w-6 h-6 m-1 text-sky-700"></UserIcon>
+                <UserIcon v-if="!userStore.user_data.profile_image" class="w-6 h-6 m-1 text-sky-700"></UserIcon>
+                <img v-else :src="userStore.user_data.profile_image" class="h-8 rounded-full" />
               </MenuButton>
             </div>
             <transition
