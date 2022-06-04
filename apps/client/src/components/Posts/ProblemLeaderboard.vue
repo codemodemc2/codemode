@@ -7,14 +7,16 @@
       <p class="text-2xl text-brand-dark font-bold">LEADERBOARD</p>
       <p class="text-gray-700 text-sm">Top 3 ideas for this problem</p>
     </div>
-    <div class="flex flex-col justify-center items-center gap-4 py-5 w-full">
+    <div class="flex flex-col justify-center items-center gap-4 py-5 w-full ">
       <router-link
         v-for="idea in topIdeas"
         :key="idea._id"
         :to="{ name: 'idea', params: { id: idea._id } }"
+         :class="{'border-amber-300 shadow-sm shadow-amber-300': topIdeas.indexOf(idea) == 0}"
         class="border border-gray-200 rounded-lg px-4 w-full flex flex-col py-4 justify-between gap-2"
+       
       >
-        <div class="flex flex-row gap-1 text-sm">
+        <div class="flex flex-row gap-1 text-sm ">
           <div class="flex flex-row gap-[0.2rem] text-brand-dark">
             <UserCircleIcon
               v-if="!idea.created_by.profile_image"
