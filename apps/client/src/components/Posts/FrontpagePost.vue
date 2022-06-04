@@ -4,7 +4,7 @@
       <div v-if="post.prize_image" class="relative">
         <img
           :src="post.prize_image"
-          class="object-cover aspect-[3/1] w-full rounded-t-lg shadow-md shadow-yellow-300 border-2 border-yellow-300 "
+          class="object-cover aspect-[3/1] w-full rounded-t-lg border-2 border-yellow-300 "
         />
         <div
           class="absolute h-10 shadow-md shadow-yellow-500 border border-yellow-500 backdrop-blur-lg bottom-5 left-5 bg-yellow-300 text-yellow-800 font-bold rounded-lg flex items-center px-5 gap-2"
