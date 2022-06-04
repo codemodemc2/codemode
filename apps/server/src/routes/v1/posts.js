@@ -115,7 +115,7 @@ module.exports = (router) => {
     try {
       problem = await Problem.findOne({
         _id: Mongoose.Types.ObjectId(_id),
-      }).populate("created_by", "username", User);
+      }).populate("created_by", "username profile_image", User);
     } catch (error) {
       return next({ status: 404, message: "Error finding problem" });
     }

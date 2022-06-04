@@ -53,7 +53,9 @@
           class="cursor-pointer"
           @click="check"
         >
-          <CheckSolidIcon class="w-7 h-7 stroke-1 mt-2 text-brand-secondary" />
+          <CheckSolidIcon
+            class="w-8 h-8 stroke-[0.5] mt-2 text-brand-secondary fill-brand-dark stroke-brand-dark"
+          />
         </TransitionRoot>
         <TransitionRoot
           v-else
@@ -69,7 +71,10 @@
           class="cursor-pointer"
           @click="check"
         >
-          <CheckOutlineIcon class="w-7 h-7 stroke-1 mt-2 text-gray-400" />
+          <CheckSolidIcon
+            class="w-8 h-8 stroke-[0.5] mt-2 text-brand-secondary fill-white stroke-brand-dark"
+            v-tippy="{ content: 'Mark as solution' }"
+          />
         </TransitionRoot>
       </div>
     </div>
@@ -78,7 +83,7 @@
         class="font-semibold text-gray-800 2xl:text-2xl xl:text-xl md:text-lg text-lg"
       >
         {{ post.title }}
-        <span class="bg-yellow-200 text-yellow-900 p-1 text-white rounded-lg text-sm "
+        <span class="bg-yellow-200 text-yellow-900 p-1 rounded-lg text-sm"
           >IDEA</span
         >
       </p>

@@ -14,7 +14,10 @@
       class="grid grid-flow-col lg:grid-cols-6 py-10 grid-cols-1 gap-7 h-screen justify-center snap-parent xl:w-[60%] lg:w-[70%] md:w-[80%] sm:w-[90%] xs:w-[100%]"
     >
       <div v-if="show" class="lg:col-span-4 gap-7 flex flex-col pb-20">
-        <div v-if="problem" class="flex flex-col bg-white py-2 px-4 rounded-lg border">
+        <div
+          v-if="problem"
+          class="flex flex-col bg-white py-2 px-4 rounded-lg border"
+        >
           <div class="flex flex-col gap-5">
             <p
               class="link"
@@ -69,15 +72,7 @@
           </div>
         </div>
       </div>
-      <div class="sticky hidden lg:flex flex-col h-min col-span-2 gap-4">
-        <router-link
-          :to="{ path: `/problem/${idea.problem}` }"
-          class="border-brand-primary border rounded-xl px-5 py-6 flex flex-col bg-white"
-        >
-          <p class="text-brand-dark text-base font-semibold text-center">
-            See the problem this idea was posted for ->
-          </p>
-        </router-link>
+      <!-- <div class="sticky hidden lg:flex flex-col h-min col-span-2 gap-4">
         <div
           v-if="userStore.user_data.is_admin"
           class="border-brand-primary border rounded-xl px-5 py-6 flex flex-col bg-white"
@@ -87,7 +82,7 @@
           </p>
           <button></button>
         </div>
-      </div>
+      </div> -->
     </div>
   </TransitionRoot>
 </template>

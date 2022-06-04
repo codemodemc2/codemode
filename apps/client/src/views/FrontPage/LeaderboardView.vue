@@ -12,7 +12,14 @@
       <div
         v-for="user in users"
         :key="user._id"
-        class="border border-gray-200 rounded-lg px-4 w-full"
+        class="border rounded-lg w-full"
+        :class="
+          [
+            'border-amber-300 shadow-sm shadow-amber-300',
+            'border-zinc-300 shadow-sm shadow-zinc-300',
+            'border-amber-700 shadow-sm shadow-amber-700',
+          ][users.indexOf(user)]
+        "
       >
         <div
           v-if="users.indexOf(user) == 0"
@@ -40,13 +47,16 @@
           <p class="font-bold text-gray-800 text-center text-2xl flex-wrap">
             {{ user.first_name }} {{ user.last_name }}
           </p>
-          <p class="space-x-1">
+          <p class="space-x-1 pb-4">
             <span class="link">{{ user.likes }}</span>
             <span v-if="user.likes == 1" class="font-medium">pt.</span>
             <span v-else class="font-medium">pts.</span>
           </p>
         </div>
-        <div v-else class="w-full flex flex-row justify-between items-center">
+        <div
+          v-else
+          class="w-full flex flex-row justify-between items-center px-5"
+        >
           <div class="relative p-3">
             <img
               :src="images[users.indexOf(user)]"
@@ -67,20 +77,41 @@
             <span v-else class="font-medium">pts.</span>
           </p>
         </div>
-        <hr />
         <div
-          v-if="users.indexOf(user) == 0" 
-          class="relative p-3 self-center flex flex-col justify-center items-center"
+          v-if="users.indexOf(user) == 0"
+          class="relative py-3 self-center flex flex-col justify-center items-center bg-gradient-to-tl from-amber-200 to-amber-300 rounded-b-lg"
         >
-          <p class="uppercase text-2xl font-bold text-brand-dark">reward</p>
-          <p class="link text-2xl">{{ rewards[users.indexOf(user)] }}</p>
+          <p class="uppercase text-2xl font-bold text-amber-700">reward</p>
+          <p class="link text-2xl text-amber-900">
+            {{ rewards[users.indexOf(user)] }}
+          </p>
         </div>
         <div
           v-else
-          class="relative p-3 self-center flex flex-row justify-center items-center"
+          class="relative py-3 self-center flex flex-row justify-center items-center rounded-b-lg"
+          :class="
+            [
+              'bg-gradient-to-tl from-zinc-200 to-zinc-300',
+              ' bg-gradient-to-tl from-amber-600 to-amber-700',
+            ][users.indexOf(user) - 1]
+          "
         >
-          <p class="uppercase text-lg font-bold text-brand-dark">reward: &nbsp;</p>
-          <p class="link text-lg">{{ rewards[users.indexOf(user)] }}</p>
+          <p
+            class="uppercase text-lg font-bold"
+            :class="
+              ['text-zinc-900', 'text-amber-300'][users.indexOf(user) - 1]
+            "
+          >
+            reward: &nbsp;
+          </p>
+          <p
+            class="link text-lg"
+            :class="
+              ['text-zinc-900', 'text-amber-300'][users.indexOf(user) - 1]
+            "
+          >
+            {{ rewards[users.indexOf(user)] }}
+          </p>
         </div>
       </div>
     </div>

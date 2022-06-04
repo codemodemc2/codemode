@@ -6,7 +6,7 @@
   >
     <div class="flex flex-row gap-1 text-sm items-center">
       <p class="text-sm font-light">Posted by:</p>
-      <div class="flex flex-row gap-[0.1rem] items-center text-brand-dark">
+      <div class="flex flex-row gap-[0.2rem] items-center text-brand-dark">
         <UserCircleIcon
           v-if="!i.created_by.profile_image"
           class="h-6 stroke-1"

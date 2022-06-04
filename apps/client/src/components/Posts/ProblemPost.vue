@@ -44,8 +44,7 @@
         class="font-semibold 2xl:text-2xl xl:text-xl md:text-lg text-lg text-gray-800"
       >
         {{ post.title }}
-        <span
-          class="bg-brand-light  p-1 text-brand-dark rounded-lg text-sm"
+        <span class="bg-brand-light p-1 text-brand-dark rounded-lg text-sm"
           >PROBLEM</span
         >
       </p>
@@ -82,10 +81,9 @@
             {{ formatDate(post.created_at) }}
           </p>
         </div>
-        <div class="flex flex-row gap-1 items-center">
-          <DocumentTextIcon class="w-7 h-7 text-brand-secondary stroke-1" />
-          <p class="font-regular text-sm mr-1 text-gray-700">Ideas:</p>
-          <p class="link mr-4 font-medium text-sm">{{ post.idea_count }}</p>
+        <div class="flex flex-row gap-1 p-1 items-center bg-yellow-200 rounded-lg"> 
+          <LightBulbIcon class="w-6 h-6 text-yellow-900 stroke-1" />
+          <p class="font-medium text-sm text-yellow-900 mr-2">{{ post.idea_count }}</p>
         </div>
       </div>
     </div>
@@ -96,8 +94,8 @@
 import { ThumbUpIcon as LikedIcon } from "@heroicons/vue/solid";
 import {
   ThumbUpIcon as NotLikedIcon,
-  DocumentTextIcon,
-	UserCircleIcon
+  LightBulbIcon,
+  UserCircleIcon,
 } from "@heroicons/vue/outline";
 import { onMounted, ref } from "vue";
 import { TransitionRoot } from "@headlessui/vue";

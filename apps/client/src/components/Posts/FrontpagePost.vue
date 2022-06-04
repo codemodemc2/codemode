@@ -4,10 +4,10 @@
       <div v-if="post.prize_image" class="relative">
         <img
           :src="post.prize_image"
-          class="object-cover max-h-52 w-full border border-gray-200 rounded-t-lg"
+          class="object-cover aspect-[3/1] w-full border border-gray-200 rounded-t-lg"
         />
         <div
-          class="absolute h-10 backdrop-blur-sm bottom-5 left-5 bg-brand-dark text-brand-light rounded-lg flex items-center px-5"
+          class="absolute h-10 backdrop-blur-sm bottom-5 left-5 bg-yellow-200 text-yellow-900 rounded-lg flex items-center px-5"
         >
           <p class="font-medium uppercase">Win {{ post.prize }}</p>
         </div>

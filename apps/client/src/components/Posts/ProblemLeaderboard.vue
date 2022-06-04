@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="topIdeas"
+    v-if="topIdeas && topIdeas.length > 0"
     class="flex flex-col h-max justify-center items-center pt-5"
   >
     <div class="flex flex-col justify-center items-center">
@@ -12,15 +12,19 @@
         v-for="idea in topIdeas"
         :key="idea._id"
         :to="{ name: 'idea', params: { id: idea._id } }"
-        class="border border-gray-200 rounded-lg px-4 w-full flex flex-col py-4 justify-between"
+        class="border border-gray-200 rounded-lg px-4 w-full flex flex-col py-4 justify-between gap-2"
       >
         <div class="flex flex-row gap-1 text-sm">
-          <div class="flex flex-row gap-[0.1rem] text-brand-dark">
+          <div class="flex flex-row gap-[0.2rem] text-brand-dark">
             <UserCircleIcon
               v-if="!idea.created_by.profile_image"
               class="h-6 stroke-1"
             />
-            <img v-else :src="idea.created_by.profile_image" class="rounded-full h-6 border border-brand-dark" />
+            <img
+              v-else
+              :src="idea.created_by.profile_image"
+              class="rounded-full h-6 border border-brand-dark"
+            />
 
             {{ idea.created_by.username }}
           </div>
@@ -36,6 +40,12 @@
           <p class="font-medium">{{ idea.title }}</p>
         </div>
       </router-link>
+    </div>
+  </div>
+  <div v-else>
+    <div class="text-center text-brand-dark font-medium">
+      <p class="">There are no ideas for this problem yet.</p>
+      <p>So the leaderboard is empty</p>
     </div>
   </div>
 </template>
