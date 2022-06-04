@@ -61,15 +61,17 @@
       </div>
       <div class="sticky hidden lg:flex flex-col h-min col-span-2 gap-4">
         <div
-          class="shadow-md shadow-yellow-300 border border-yellow-300 rounded-xl flex flex-col bg-yellow-300"
+          class="rounded-xl flex flex-col bg-gradient-to-tl from-yellow-200 to-yellow-300 border border-yellow-300 shadow shadow-yellow-300"
         >
           <div
-            class="bg-yellow-300 rounded-t-xl flex flex-col items-center text-center justify-center py-5"
+            class="bg-transparent rounded-t-xl flex flex-col items-center text-center justify-center py-5"
           >
             <p class="text-xl font-medium text-yellow-900">
               Solve this problem and win:
             </p>
-            <p class="text-2xl font-bold text-yellow-900">{{ problem.prize }}</p>
+            <p class="text-2xl font-bold text-yellow-900">
+              {{ problem.prize }}
+            </p>
           </div>
           <img
             :src="problem.prize_image"
