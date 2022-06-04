@@ -77,14 +77,14 @@
           <div
             class="flex flex-row gap-2 2xl:text-xl xl:text-lg md:text-md -my-4"
           >
-            <p class="text-brand-dark font-bold">Prize:</p>
-            <p v-if="post.prize.length > 0" class="link">
+            <p class="text-yellow-500 font-bold">Prize:</p>
+            <p v-if="post.prize.length > 0" class="text-yellow-500">
               {{ post.prize }}
               <span class="font-normal text-base text-gray-700"
                 >+ 100 shop points</span
               >
             </p>
-            <p v-else class="link">100 shop points</p>
+            <p v-else class="text-yellow-500">100 shop points</p>
           </div>
         </div>
         <hr />
