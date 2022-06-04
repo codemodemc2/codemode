@@ -72,3 +72,24 @@ export const getUser = async (id) => {
 		throw error;
 	}
 };
+
+export const getUserIdeas = async (id) => {
+	try {
+		const response = await axios.get('/user/ideas', { params: { id } });
+		return response;
+	} catch (error) {
+		console.log(error);
+		throw error;
+	}
+};
+
+export const getUserComments = async (id) => {
+	try {
+		const response = await axios.get('/user/comments', { params: { id } });
+		return response;
+	} catch (error) {
+		console.log(error);
+		throw error;
+	}
+};
+

@@ -179,6 +179,7 @@ const router = createRouter({
 						{
 							path: "ideas",
 							name: "userIdeas",
+							props: true,
 							component: () => import("@/views/Profiles/UserIdeasView.vue"),
 						},
 						{

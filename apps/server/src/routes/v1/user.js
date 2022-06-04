@@ -27,6 +27,34 @@ module.exports = (router) => {
 		}
 	});
 
+	router.get('/user/ideas', requireAuthenticated, async (req, res, next) => {
+		const id = req.query.id;
+		try {
+			let user = await User.findOne({ 'account.company_id': req.user.account.company_id, _id: id }).select('-password');
+			if (!user) next({ status: 404, message: 'User with that ID does not exist' });
+
+			let ideas = await Idea.find({ created_by: id });
+
+
+			for (let idea of ideas) {
+				idea.liked = idea.likes.includes(req.user._id);
+				idea.like_count = idea.likes.length;
+
+				idea.likes = undefined;
+
+				let comment_count = await Comment.countDocuments({ parent: idea._id });
+				idea.comment_count = comment_count;
+			}
+
+			res.status(200).send({
+				ideas
+			});
+
+		} catch (error) {
+			console.log(error);
+			return res.status(500).send({ message: error });
+		}
+	});
 
 	return router;
 };

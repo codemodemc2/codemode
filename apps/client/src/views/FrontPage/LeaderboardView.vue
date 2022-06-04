@@ -82,9 +82,16 @@
           class="relative py-3 self-center flex flex-col justify-center items-center bg-gradient-to-tl from-amber-200 to-amber-300 rounded-b-lg"
         >
           <p class="uppercase text-2xl font-bold text-amber-700">reward</p>
-          <p class="link text-2xl text-amber-900">
-            {{ rewards[users.indexOf(user)] }}
-          </p>
+          <div class="flex">
+            <p class="link text-2xl text-amber-900">
+              {{ rewards[users.indexOf(user)] }}
+            </p>
+            <img
+              v-tippy="{ content: 'Shop coins' }"
+              src="/images/idea-coin.png"
+              class="h-8"
+            />
+          </div>
         </div>
         <div
           v-else
@@ -112,6 +119,11 @@
           >
             {{ rewards[users.indexOf(user)] }}
           </p>
+          <img
+            v-tippy="{ content: 'Shop coins' }"
+            src="/images/idea-coin.png"
+            class="h-8"
+          />
         </div>
       </div>
     </div>
@@ -132,7 +144,7 @@ let images = ref([
   "/images/laurelbronze.png",
 ]);
 
-let rewards = ref(["500 shop points", "250 shop points", "100 shop points"]);
+let rewards = ref(["500", "250", "100"]);
 
 let users = ref([]);
 (async () => {
