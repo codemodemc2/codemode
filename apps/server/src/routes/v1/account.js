@@ -127,7 +127,6 @@ module.exports = (router) => {
 		async (req, res) => {
 			const { first_name, last_name } = req.body;
 
-			console.log(req.body)
 			try {
 				let user = await User.findOne({
 					email: Mongoose.sanitizeFilter(req.user.email),
@@ -136,7 +135,6 @@ module.exports = (router) => {
 					return res.status(400).send({ message: "username_change_fail" });
 				user.first_name = first_name;
 				user.last_name = last_name;
-				console.log(user)
 				await user.save();
 				return res.send({
 					message: "Successfully changed first & last name",
