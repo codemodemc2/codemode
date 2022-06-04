@@ -39,9 +39,9 @@ export const changeProfileImage = async (profile_image) => {
 	}
 };
 
-export const changeFirstLastName = async (fist_name, last_name) => {
+export const changeFirstLastName = async (first_name, last_name) => {
 	try {
-		const response = await axios.post('/account/change-first-last-name', { fist_name, last_name });
+		const response = await axios.post('/account/change-first-last-name', { first_name, last_name });
 		return response.data;
 	} catch (error) {
 		console.log(error);
