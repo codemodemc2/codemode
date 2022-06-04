@@ -16,7 +16,7 @@
       <div v-if="show" class="lg:col-span-4 gap-7 flex flex-col pb-20">
         <ProblemPost :post="problem" class="bg-white" />
         <div
-          class="border border-gray-200 rounded-lg h-full p-5 flex flex-col gap-1 h-min bg-white"
+          class="border border-gray-200 rounded-lg p-5 flex flex-col gap-1 h-min bg-white"
         >
           <div
             v-if="problem.idea_count < 1"
@@ -52,7 +52,7 @@
               />
             </router-link>
             <div class="flex flex-col gap-2 pt-4">
-              <div v-for="idea in problem.ideas">
+              <div v-for="idea in problem.ideas" :key="idea._id">
                 <IdeaListing :idea="idea" />
               </div>
             </div>
@@ -61,22 +61,20 @@
       </div>
       <div class="sticky hidden lg:flex flex-col h-min col-span-2 gap-4">
         <div
-          class="border-brand-primary border rounded-xl px-5 py-6 flex flex-col bg-white"
+          class="shadow-md shadow-yellow-300 border border-yellow-300 rounded-xl flex flex-col bg-yellow-300"
         >
-          <p class="text-brand-dark text-xl font-semibold text-center">
-            Solve this problem and win
-          </p>
-          <div v-if="problem.prize">
-            <p class="text-brand-primary text-2xl font-semibold text-center">
-              {{ problem.prize }}
+          <div
+            class="bg-yellow-300 rounded-t-xl flex flex-col items-center text-center justify-center py-5"
+          >
+            <p class="text-xl font-medium text-yellow-900">
+              Solve this problem and win:
             </p>
-            <p class="text-center">+ 100 shop points</p>
+            <p class="text-2xl font-bold text-yellow-900">{{ problem.prize }}</p>
           </div>
-          <div v-else>
-            <p class="text-brand-primary text-2xl font-semibold text-center">
-              100 shop points
-            </p>
-          </div>
+          <img
+            :src="problem.prize_image"
+            class="object-cover aspect-[3/1] w-full rounded-xl"
+          />
         </div>
         <div
           v-if="problem.has_deadline"

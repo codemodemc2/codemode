@@ -4,12 +4,13 @@
       <div v-if="post.prize_image" class="relative">
         <img
           :src="post.prize_image"
-          class="object-cover aspect-[3/1] w-full border border-gray-200 rounded-t-lg"
+          class="object-cover aspect-[3/1] w-full rounded-t-lg shadow-md shadow-yellow-300 border-2 border-yellow-300 "
         />
         <div
-          class="absolute h-10 backdrop-blur-sm bottom-5 left-5 bg-yellow-200 text-yellow-900 rounded-lg flex items-center px-5"
+          class="absolute h-10 shadow-md shadow-yellow-500 border border-yellow-500 backdrop-blur-lg bottom-5 left-5 bg-yellow-300 text-yellow-800 font-bold rounded-lg flex items-center px-5 gap-2"
         >
-          <p class="font-medium uppercase">Win {{ post.prize }}</p>
+          <p class="font-bold">Solve & win:</p>
+          <p class="font-bold">{{ post.prize }}</p>
         </div>
       </div>
     </div>
@@ -117,10 +118,14 @@
               <span class="text-red-400">{{ timeLeft(post.deadline) }}</span>
             </p>
           </div>
-          <div class="flex flex-row gap-1 items-center">
-            <DocumentTextIcon class="w-7 h-7 text-brand-secondary stroke-1" />
-            <p class="font-regular text-sm mr-1 text-gray-700">Ideas:</p>
-            <p class="link mr-4 font-medium text-sm">{{ post.idea_count }}</p>
+          <div
+            v-tippy="{ content: `${post.idea_count} ideas` }"
+            class="flex flex-row gap-1 p-1 items-center bg-yellow-200 rounded-lg"
+          >
+            <LightBulbIcon class="w-6 h-6 text-yellow-900 stroke-1" />
+            <p class="font-medium text-sm text-yellow-900 mr-2">
+              {{ post.idea_count }}
+            </p>
           </div>
         </div>
       </div>
@@ -132,7 +137,7 @@
 import { ThumbUpIcon as LikedIcon } from "@heroicons/vue/solid";
 import {
   ThumbUpIcon as NotLikedIcon,
-  DocumentTextIcon,
+  LightBulbIcon,
   UserCircleIcon,
 } from "@heroicons/vue/outline";
 import { ref } from "vue";

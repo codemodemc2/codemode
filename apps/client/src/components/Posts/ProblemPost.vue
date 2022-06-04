@@ -81,7 +81,7 @@
             {{ formatDate(post.created_at) }}
           </p>
         </div>
-        <div class="flex flex-row gap-1 p-1 items-center bg-yellow-200 rounded-lg"> 
+        <div v-tippy="{content: `${post.idea_count} ideas`}" class="flex flex-row gap-1 p-1 items-center bg-yellow-200 rounded-lg"> 
           <LightBulbIcon class="w-6 h-6 text-yellow-900 stroke-1" />
           <p class="font-medium text-sm text-yellow-900 mr-2">{{ post.idea_count }}</p>
         </div>
