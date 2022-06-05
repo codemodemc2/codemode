@@ -9,10 +9,10 @@
             class="rounded-full h-20 w-20 border flex justify-center items-center border-brand-dark"
           >
             <UserIcon
-						v-if="!user.profile_image"
+              v-if="!user.profile_image"
               class="h-14 stroke-[0.4] fill-gray-200 stroke-brand-dark"
             />
-						<img v-else :src="user.profile_image" class="rounded-full h-20"/>
+            <img v-else :src="user.profile_image" class="rounded-full h-20" />
           </div>
           <div class="flex flex-col">
             <div class="flex flex-row gap-2 items-center">
@@ -46,15 +46,15 @@
           </div>
         </div>
         <div
-          class="bg-brand-dark border border-t-0 border-gray-200 h-10 rounded-b-2xl flex items-center px-10 justify-end"
+          class="bg-brand-extralight border border-t-0 border-gray-200 h-10 rounded-b-2xl flex items-center px-10 justify-end"
         >
-          <p class="text-brand-extralight font-medium text-sm underline">
+          <p class="text-brand-dark font-medium text-sm underline">
             See all achievements ->
           </p>
         </div>
       </div>
       <div class="mx-auto w-full flex flex-row gap-10 items-center">
-        <TabGroup class="rounded-lg shadow-md" @change="changeTab">
+        <TabGroup class="flex flex-col gap-5" as="div">
           <TabList class="flex flex-row font-medium text-brand-dark">
             <Tab v-slot="{ selected }" as="div" class="outline-none">
               <div
@@ -81,10 +81,13 @@
               </div>
             </Tab>
           </TabList>
+          <TabPanels
+            class="bg-white max-w-4xl w-screen rounded-2xl border border-gray-200"
+          >
+            <TabPanel as="div"><UserIdeasView :id="id" /></TabPanel>
+            <TabPanel as="div"><UserCommentsView :id="id" /></TabPanel>
+          </TabPanels>
         </TabGroup>
-      </div>
-      <div class="bg-white max-w-4xl w-screen rounded-2xl p-10 border border-gray-200">
-				<router-view></router-view>
       </div>
     </div>
   </div>
@@ -92,32 +95,15 @@
 <script setup>
 import { getUser } from "@/helpers/api/user";
 import { ref } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { useRoute } from "vue-router";
 import { UserIcon } from "@heroicons/vue/outline";
-import { TabGroup, TabList, Tab } from "@headlessui/vue";
+import { TabGroup, TabList, Tab, TabPanels, TabPanel } from "@headlessui/vue";
+import UserIdeasView from "@/views/Profiles/UserIdeasView.vue";
+import UserCommentsView from "@/views/Profiles/UserCommentsView.vue";
 
 let route = useRoute();
-let router = useRouter();
 let user = ref({});
 let id = route.params.id;
-
-let changeTab = (index) => {
-  if (index == 0) {
-    router.push({
-      name: "userIdeas",
-      params: {
-        id: id,
-      },
-    });
-  } else {
-    router.push({
-      name: "userComments",
-      params: {
-        id: id,
-      },
-    });
-  }
-};
 
 (async () => {
   let res = await getUser(id);
