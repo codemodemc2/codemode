@@ -174,20 +174,6 @@ const router = createRouter({
 					path: "/user/:id",
 					name: "UserProfile",
 					component: () => import("@/views/Profiles/UserProfileView.vue"),
-					redirect: { name: "userIdeas" },
-					children: [
-						{
-							path: "ideas",
-							name: "userIdeas",
-							props: true,
-							component: () => import("@/views/Profiles/UserIdeasView.vue"),
-						},
-						{
-							path: "comments",
-							name: "userComments",
-							component: () => import("@/views/Profiles/UserCommentsView.vue"),
-						},
-					],
 				},
 			],
 		},
