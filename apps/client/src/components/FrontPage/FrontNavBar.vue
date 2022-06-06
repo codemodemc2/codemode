@@ -18,7 +18,7 @@
         >
           <router-link
             :to="{ path: '/' }"
-            class="flex-shrink-0 flex items-center"
+            class="flex-shrink-0 flex flex-col items-center"
           >
             <div class="flex flex-row items-center justify-center text-xl">
               <p
@@ -28,15 +28,18 @@
               </p>
               <p class="font-bold text-gray-800">Mode</p>
             </div>
-            <div class="flex flex-row items-center justify-center text-sm">
-              <p 
-              >&nbsp;powered by&nbsp;</p>
-              <p
-                class="bg-gradient-to-r from-brand-primary to-brand-dark bg-clip-text font-extrabold text-transparent"
-              >
-                Idea
-              </p>
-              <p class="font-bold text-gray-800">Storm</p>
+            <div
+              class="flex flex-row items-center justify-center text-xs gap-1 -mt-1"
+            >
+              <p class="font-medium">powered by</p>
+              <div class="flex">
+                <p
+                  class="bg-gradient-to-r from-brand-primary to-brand-dark bg-clip-text font-extrabold text-transparent"
+                >
+                  Idea
+                </p>
+                <p class="font-bold text-gray-800">Storm</p>
+              </div>
             </div>
           </router-link>
           <div
@@ -67,8 +70,8 @@
             class="primary-button flex flex-row gap-2 items-center justify-center text-sm"
             @click="$router.push({ path: '/new-problem' })"
           >
-            New problem
             <PencilIcon class="w-5 h-5 text-white link" />
+            New problem
           </button>
           <!-- Notification dropdown -->
           <Menu as="div" class="ml-3 relative">
@@ -167,8 +170,15 @@
                 class="bg-white outline-none border-sky-500 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
               >
                 <span class="sr-only">Open user menu</span>
-                <UserIcon v-if="!userStore.user_data.profile_image" class="w-6 h-6 m-1 text-sky-700"></UserIcon>
-                <img v-else :src="userStore.user_data.profile_image" class="h-8 rounded-full" />
+                <UserIcon
+                  v-if="!userStore.user_data.profile_image"
+                  class="w-6 h-6 m-1 text-sky-700"
+                ></UserIcon>
+                <img
+                  v-else
+                  :src="userStore.user_data.profile_image"
+                  class="h-8 rounded-full"
+                />
               </MenuButton>
             </div>
             <transition

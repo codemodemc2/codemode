@@ -68,7 +68,7 @@
             />
             <img v-else :src="user.profile_image" class="h-14 rounded-full" />
           </div>
-          <p class="font-bold text-gray-800 text-center flex-wrap">
+          <p class="font-bold text-gray-800 text-left flex-wrap">
             {{ user.first_name }} {{ user.last_name }}
           </p>
           <p class="space-x-1">
