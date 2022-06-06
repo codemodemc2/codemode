@@ -50,3 +50,21 @@ i ispunite ju sa sljedećim podatcima
 VITE_BASE_URL=http://localhost:8080/v1/
 ```
 
+
+# Upalite docker
+
+```bash
+docker compose up
+```
+
+# Instalirajte potrebne pakete
+
+```bash
+yarn
+```
+
+# Pokrenite stranicu
+
+```bash
+yarn dav
+```
