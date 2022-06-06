@@ -60,7 +60,7 @@
           <div class="relative p-3">
             <img
               :src="images[users.indexOf(user)]"
-              class="absolute h-50 top-0.5 left-0 bg-none"
+              class="absolute h-50 top-[0.4rem] left-0 bg-none"
             />
             <UserIcon
               v-if="!user.profile_image"
