@@ -2,7 +2,7 @@
 <template>
   <Disclosure v-slot="{ open }" as="nav" class="bg-white">
     <div class="max-w-full xl mx-auto px-2 sm:px-6 lg:px-16 z-50">
-      <div class="relative flex items-center justify-between h-16">
+      <div class="relative flex items-center justify-between h-20">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
           <!-- Mobile menu button-->
           <DisclosureButton
@@ -18,15 +18,10 @@
         >
           <router-link
             :to="{ path: '/' }"
-            class="flex-shrink-0 flex flex-col items-center"
+            class="flex-shrink-0 flex flex-col items-center gap-2"
           >
             <div class="flex flex-row items-center justify-center text-xl">
-              <p
-                class="bg-gradient-to-r from-brand-primary to-brand-dark bg-clip-text font-extrabold text-transparent"
-              >
-                Code
-              </p>
-              <p class="font-bold text-gray-800">Mode</p>
+							<img src="/images/ub-logo.svg" class="h-10">
             </div>
             <div
               class="flex flex-row items-center justify-center text-xs gap-1 -mt-1"
@@ -70,8 +65,8 @@
             class="primary-button flex flex-row gap-2 items-center justify-center text-sm"
             @click="$router.push({ path: '/new-problem' })"
           >
-            <PencilIcon class="w-5 h-5 text-white link" />
             New problem
+            <PencilIcon class="w-5 h-5 text-white link" />
           </button>
           <!-- Notification dropdown -->
           <Menu as="div" class="ml-3 relative">

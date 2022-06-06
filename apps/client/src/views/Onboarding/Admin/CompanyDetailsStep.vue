@@ -30,6 +30,35 @@
               />
               <label for="username" class="input-label">Company name</label>
             </div>
+            <div class="relative col-span-2 w-full">
+              <input
+                @change="onLogoChange"
+                id="logo"
+                type="file"
+                name="logo"
+                placeholder="Company logo"
+                class="form-input-style peer placeholder-transparent"
+                required
+              />
+              <label for="logo" class="input-label">Company logo</label>
+              <div class="absolute w-10 h-10 right-3 top-1">
+                <img v-if="logo" :src="logo" class="w-full h-full" />
+              </div>
+            </div>
+
+            <div class="relative col-span-2 w-full">
+              <input
+                @change="onBgChange"
+                type="file"
+                placeholder="Website background"
+                class="form-input-style peer placeholder-transparent"
+                required
+              />
+              <label class="input-label">Website background</label>
+              <div v-if="bg" class="form-input-style relative my-2">
+                <img :src="bg" class="object-cover aspect-[3/1] w-[33rem]" />
+              </div>
+            </div>
             <button class="submit-button mt-5">Continue -></button>
             <button
               class="link hover:underline"
@@ -60,6 +89,19 @@ adminOnboardingStore.currentStep = 3;
 let companyName = ref(
   adminOnboardingStore.steps[adminOnboardingStore.currentStep].data.companyName
 );
+
+let logo = ref();
+let bg = ref();
+
+let onLogoChange = (e) => {
+  const file = e.target.files[0];
+  logo.value = URL.createObjectURL(file);
+};
+
+let onBgChange = (e) => {
+  const file = e.target.files[0];
+  bg.value = URL.createObjectURL(file);
+};
 
 let onSubmit = () => {
   show.value = false;
