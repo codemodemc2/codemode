@@ -29,3 +29,4 @@ coverage
 *.sw?
 *.turbo
 .env
+redis-volume/dump.rdb

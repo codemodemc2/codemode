@@ -3,11 +3,9 @@
     <div class="w-screen sticky top-0 z-50">
       <NavigationBarVue />
     </div>
-    <div
-      class="absolute top-0 h-full z-0 w-full bg-fixed blur-[1px] filter"
-    >
-		<img src="/images/ub-bg.svg" class="w-full">
-		</div>
+    <div class="absolute top-0 h-full -z-50 w-full bg-fixed blur-[1px] filter">
+      <img src="/images/ub-bg.svg" class="w-full -z-50" />
+    </div>
     <router-view class="z-30 w-full"></router-view>
   </div>
 </template>
