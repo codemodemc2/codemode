@@ -132,6 +132,29 @@ const router = createRouter({
 					]
 				},
 				{
+					path: "settings",
+					meta: { title: "Settings" },
+					name: "DashboardSettingsView",
+					component: () => import("@/views/Dashboard/Settings/SettingsHomeView.vue"),
+					redirect: {
+						name: "DashboardSettingsGeneralView",
+					},
+					children: [
+						{
+							path: "general",
+							meta: { title: "General" },
+							name: "DashboardSettingsGeneralView",
+							component: () => import("@/views/Dashboard/Settings/GeneralView.vue"),
+						},
+						{
+							path: "colors",
+							meta: { title: "Site colors" },
+							name: "DashboardSettingsColorsView",
+							component: () => import("@/views/Dashboard/Settings/ColorsView.vue"),
+						},
+					],
+				},
+				{
 					path: "user/:userId",
 					meta: { title: "User details" },
 					name: "ManageUserView",

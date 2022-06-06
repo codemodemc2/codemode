@@ -56,10 +56,8 @@ import {
   LightBulbIcon,
   HomeIcon,
   CogIcon,
-  UserCircleIcon,
-  UserIcon,
-  LogoutIcon,
   QuestionMarkCircleIcon,
+	UsersIcon
 } from "@heroicons/vue/outline";
 const navigation = [
   [
@@ -71,7 +69,7 @@ const navigation = [
     {
       name: "Users",
       href: "/dashboard/users",
-      icon: UserIcon,
+      icon: UsersIcon,
     },
     {
       name: "Problems",

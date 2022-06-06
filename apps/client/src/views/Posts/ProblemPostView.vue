@@ -75,7 +75,7 @@
           </div>
           <img
             :src="problem.prize_image"
-            class="object-cover aspect-[3/1] w-full rounded-xl"
+            class="object-cover aspect-[3/1] w-full rounded-xl p-1"
           />
         </div>
         <div
