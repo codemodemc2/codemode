@@ -2,6 +2,10 @@
   <div>
     <div>
       <div v-if="post.prize_image" class="relative">
+        <router-link
+          :to="{ path: `/problem/${post._id}` }"
+          class="font-semibold 2xl:text-2xl xl:text-xl md:text-lg sm:text-sm text-sm text-gray-800 mb-[-1rem]"
+        >
         <img
           :src="post.prize_image"
           class="object-cover aspect-[3/1] w-full rounded-t-lg border-2 border-yellow-300 "
@@ -12,6 +16,7 @@
           <p class="font-bold">Solve & win:</p>
           <p class="font-bold">{{ post.prize }}</p>
         </div>
+        </router-link>
       </div>
     </div>
     <div
@@ -70,7 +75,9 @@
         <article
           class="line-clamp-5 prose text-xs xl:prose-lg md:prose-sm sm:prose-xs -mb-4"
         >
-          <div v-html="post.summary" />
+          <div class="leading-tight">
+            {{post.summary}}
+          </div>
         </article>
         <div v-if="!post.prize_image" class="flex flex-col gap-6">
           <hr />
@@ -99,7 +106,7 @@
               :src="post.created_by.profile_image"
               class="w-8 rounded-full mr-2 stroke-1"
             />
-            <p class="font-regular text-sm mr-1 text-gray-700">Posted by:</p>
+            <p class="font-regular text-sm: mr-1 text-gray-700">By:</p>
             <router-link
               :to="{ name: 'UserProfile', params: { id: post.created_by._id } }"
               class="link mr-4 font-medium text-sm"
