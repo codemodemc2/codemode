@@ -70,8 +70,8 @@
             class="primary-button flex flex-row gap-2 items-center justify-center text-sm"
             @click="$router.push({ path: '/new-problem' })"
           >
-            New problem
             <PencilIcon class="w-5 h-5 text-white link" />
+            New problem
           </button>
           <!-- Notification dropdown -->
           <Menu as="div" class="ml-3 relative">

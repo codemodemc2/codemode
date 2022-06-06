@@ -52,7 +52,7 @@
       <article
         class="prose text-xs xl:prose-md md:prose-sm sm:prose-xs xl:my-[-1.4rem] sm:my-[-1.2rem] my-[-1.1rem]"
       >
-        <div class="" v-html="post.content" />
+        <div class="pb-14" v-html="post.content" />
       </article>
       <hr />
       <div class="flex flex-row items-center justify-between">

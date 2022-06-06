@@ -60,7 +60,7 @@
           <div class="relative p-3">
             <img
               :src="images[users.indexOf(user)]"
-              class="absolute h-50 top-0.5 left-0 bg-none"
+              class="absolute h-50 top-[0.4rem] left-0 bg-none"
             />
             <UserIcon
               v-if="!user.profile_image"
@@ -68,7 +68,7 @@
             />
             <img v-else :src="user.profile_image" class="h-14 rounded-full" />
           </div>
-          <p class="font-bold text-gray-800 text-center flex-wrap">
+          <p class="font-bold text-gray-800 text-left flex-wrap">
             {{ user.first_name }} {{ user.last_name }}
           </p>
           <p class="space-x-1">
