@@ -29,7 +29,7 @@
               <p class="font-bold text-gray-800">Mode</p>
             </div>
             <div
-              class="flex flex-row items-center justify-center text-xs gap-1 -mt-1"
+              class="flex flex-row items-center justify-center text-xs gap-1 mt-1 "
             >
               <p class="font-medium">powered by</p>
               <div class="flex">
