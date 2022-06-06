@@ -66,5 +66,5 @@ yarn
 # Pokrenite stranicu
 
 ```bash
-yarn dav
+yarn dev
 ```
