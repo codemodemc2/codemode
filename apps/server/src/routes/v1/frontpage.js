@@ -7,7 +7,7 @@ module.exports = (router) => {
     let ideas = await Idea.find({});
 
     let users = await User.find({
-      company: req.user.account.company_id,
+      'account.company_id': req.user.account.company_id,
     }).select("-password");
 
     let comments = await Comment.find({ created_by: req.user._id });
