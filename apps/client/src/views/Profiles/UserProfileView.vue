@@ -46,9 +46,15 @@
           </div>
         </div>
         <div
-          class="bg-brand-extralight border border-t-0 border-gray-200 h-10 rounded-b-2xl flex items-center px-10 justify-end"
+          class="bg-brand-light border border-t-0 border-gray-200 h-14 rounded-b-2xl flex items-center px-10 justify-between"
         >
-          <p class="text-brand-dark font-medium text-sm underline">
+          <div class="flex flex-row gap-2">
+            <img src="/images/b-d-1.png" class="h-10" />
+            <img src="/images/b-g-1.png" class="h-10" />
+            <img src="/images/b-p-1.png" class="h-10" />
+            <img src="/images/b-s-1.png" class="h-10" />
+          </div>
+          <p class="text-brand-dark font-medium text-base underline">
             See all achievements ->
           </p>
         </div>
